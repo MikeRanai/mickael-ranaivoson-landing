@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Hero } from "@/components/Hero";
 import {
   ArrowRight,
@@ -36,7 +37,17 @@ const services = [
   },
 ];
 
-const ServiceCard = ({ icon, title, description, colSpan }) => (
+const ServiceCard = ({
+  icon,
+  title,
+  description,
+  colSpan,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  colSpan: string;
+}) => (
   <div
     className={`bg-gray-900/50 backdrop-blur-sm p-6 rounded-lg border border-white/10 flex flex-col space-y-4 ${colSpan}`}
   >
