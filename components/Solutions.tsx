@@ -79,9 +79,8 @@ export function Solutions() {
             <div className="mt-auto w-full flex justify-center items-center pt-6">
               <div className="w-full max-w-lg shadow-2xl">
                 <TechScreenshot3D 
-                    src="/images/dashboard-noutasso.png" 
+                    src="/images/desktop-dashboard-nout-asso.png" 
                     alt="Dashboard NoutAsso" 
-                    type="desktop"
                 />
               </div>
             </div>
@@ -103,9 +102,8 @@ export function Solutions() {
             <div className="flex-1 w-full flex justify-center items-center">
                 <div className="transform transition-transform duration-500 group-hover:scale-105">
                     <TechScreenshot3D 
-                        src="/images/mobile-noutasso.png" 
+                        src="/images/mobile-dashboard-nout-asso.png" 
                         alt="Application Mobile" 
-                        type="mobile"
                     />
                 </div>
             </div>

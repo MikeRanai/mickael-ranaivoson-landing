@@ -1,19 +1,21 @@
-import { SafariWindow } from "./safari-window";
-import { PhoneMockup } from "./phone-mockup";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface TechScreenshot3DProps {
   src: string;
   alt: string;
-  type: "desktop" | "mobile";
   className?: string;
 }
 
-export function TechScreenshot3D({ src, alt, type, className }: TechScreenshot3DProps) {
-  if (type === "desktop") {
-    return <SafariWindow src={src} alt={alt} className={className} />;
-  } else if (type === "mobile") {
-    return <PhoneMockup src={src} alt={alt} className={className} />;
-  }
-  return null;
+export function TechScreenshot3D({ src, alt, className }: TechScreenshot3DProps) {
+  return (
+    <div className={cn("relative aspect-video w-full", className)}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover rounded-xl shadow-lg"
+      />
+    </div>
+  );
 }
