@@ -1,0 +1,18 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")   // Pointe vers la version "Pooler"
+  directUrl = env("DIRECT_URL")     // Pointe vers la version "Directe"
+}
+
+// Modèle pour capturer les emails sur ta Landing Page
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
