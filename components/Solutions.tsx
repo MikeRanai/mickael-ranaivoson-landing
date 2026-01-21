@@ -81,6 +81,7 @@ export function Solutions() {
                 <TechScreenshot3D 
                     src="/images/desktop-dashboard-nout-asso.png" 
                     alt="Dashboard NoutAsso" 
+                    type="desktop"
                 />
               </div>
             </div>
@@ -104,6 +105,7 @@ export function Solutions() {
                     <TechScreenshot3D 
                         src="/images/mobile-dashboard-nout-asso.png" 
                         alt="Application Mobile" 
+                        type="mobile"
                     />
                 </div>
             </div>
