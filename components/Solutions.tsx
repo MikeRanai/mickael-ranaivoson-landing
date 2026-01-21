@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 // L'import fonctionnera maintenant que le fichier Étape 1 est créé
-import { TechScreenshot3D } from "@/components/ui/tech-screenshot-3d";
+import { TechScreenshot3D } from "./ui/tech-screenshot-3d";
 import { ShoppingBag, TrendingUp, ArrowRight, Zap, Lock, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
