@@ -4,8 +4,17 @@ import React from 'react';
 import Image from 'next/image';
 import { motion, Variants } from "framer-motion";
 
+interface Logo {
+  name: string;
+  color: string;
+  src?: string;
+  path?: React.ReactNode;
+  isImage: boolean;
+  className?: string;
+}
+
 // Liste des technologies avec leurs couleurs au survol et sources d'images
-const logos = [
+const logos: Logo[] = [
   {
     name: "Next.js",
     color: "hover:text-white",
