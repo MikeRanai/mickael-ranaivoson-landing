@@ -131,9 +131,9 @@ function Title() {
       variants={itemVariants}
       className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]"
     >
-      Développeur Fullstack
+      Je libère les entrepreneurs
       <br className="hidden sm:block" />
-      <span className="sm:hidden"> </span>& Expert{" "}
+      <span className="sm:hidden"> </span>de leur{" "}
       <span
         className="bg-clip-text text-transparent"
         style={{
@@ -141,7 +141,7 @@ function Title() {
             "linear-gradient(135deg, #ffffff 0%, #ffa800 50%, #ffb92e 100%)",
         }}
       >
-        Automatisation IA
+        paperasse digitale
       </span>
       .
     </motion.h1>
@@ -154,10 +154,10 @@ function Subtitle() {
       variants={itemVariants}
       className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
     >
-      Je transforme vos processus manuels en applications web performantes.
+      Fini les tableurs Excel qui plantent, les relances clients oubliées, les nuits blanches sur la compta.
       <span className="hidden sm:inline">
         {" "}
-        Design premium, sécurité absolue, technologie invisible.
+        Je crée des outils simples qui travaillent pour vous.
       </span>
     </motion.p>
   );
@@ -179,7 +179,7 @@ function CTAButtons() {
           hover:shadow-[0_0_40px_-5px_rgba(255,168,0,0.6)]
           hover:scale-105"
       >
-        Discuter de mon projet
+        Parlons de votre projet
         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
       </Link>
 
@@ -192,7 +192,7 @@ function CTAButtons() {
           hover:bg-white/10 hover:border-white/20 transition-all duration-300"
       >
         <Play className="w-4 h-4" />
-        Voir mes réalisations
+        Voir ce que j'ai fait
       </Link>
     </motion.div>
   );
@@ -205,20 +205,19 @@ function SocialProof() {
       className="pt-12 sm:pt-16 flex flex-col items-center gap-4"
     >
       <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wider font-medium">
-        Ils me font confiance
+        Entrepreneurs accompagnés à La Réunion
       </p>
       <div className="flex items-center gap-6 sm:gap-8 opacity-50">
-        {/* Placeholder logos - replace with actual logos */}
         <span className="text-slate-400 font-semibold text-sm sm:text-base">
-          NoutAsso
+          Associations
         </span>
         <span className="w-1 h-1 rounded-full bg-slate-600" />
         <span className="text-slate-400 font-semibold text-sm sm:text-base">
-          HCOuest
+          Clubs sportifs
         </span>
         <span className="w-1 h-1 rounded-full bg-slate-600" />
         <span className="text-slate-400 font-semibold text-sm sm:text-base">
-          +5 clients
+          TPE/PME
         </span>
       </div>
     </motion.div>

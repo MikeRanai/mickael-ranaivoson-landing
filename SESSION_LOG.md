@@ -47,6 +47,11 @@ This session focused on refining the visual polish of the Header and Hero sectio
     - Compacted the card layout by reducing padding (`p-12` -> `p-10`), font sizes (Title `text-5xl` -> `text-4xl`), and image container height (`h-100` -> `h-64` on mobile).
     - Applied similar sizing reductions to secondary project cards for visual consistency and a more professional look.
 
+### 8. Contact & Navigation Fixes
+- **Link Correction**: Fixed broken links in `Pricing.tsx` and `Hero.tsx`.
+    - Changed incorrect fragment/query order (`#contact?type=...`) to correct format (`?type=...#contact`) in Pricing buttons to ensure proper state initialization in the contact form.
+    - Simplified the "Parlons de votre projet" CTA in the Hero section to link directly to `#contact`, relying on the default state of the form.
+
 ## Session Summary (Jan 21, 2026)
 
 This session focused on scaffolding the initial landing page, creating core components, and iteratively refining the layout and responsiveness based on feedback.

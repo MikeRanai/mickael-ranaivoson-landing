@@ -30,10 +30,10 @@ export function Pricing() {
         {/* En-tête */}
         <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white">
-            Investissez dans votre <span className="text-[#ffa800]">Croissance</span>
+            Un investissement, <span className="text-[#ffa800]">pas une dépense</span>
           </h2>
           <p className="text-lg text-slate-400">
-            Des tarifs transparents. Rentabilisez votre investissement dès les premiers mois.
+            Combien vous coûtent vos heures perdues sur Excel chaque mois ? Probablement plus que mes tarifs.
           </p>
 
           {/* Toggle Kap Numérik */}
@@ -74,8 +74,8 @@ export function Pricing() {
           {/* OFFRE 1 : VITRINE */}
           <div className="relative p-8 rounded-3xl bg-slate-900/40 border border-white/5 flex flex-col hover:bg-slate-900/60 transition-colors">
             <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
-                <p className="text-slate-400 text-sm h-10">Votre carte de visite digitale professionnelle.</p>
+                <h3 className="text-xl font-bold text-white mb-2">Présence en ligne</h3>
+                <p className="text-slate-400 text-sm h-10">Pour que vos clients vous trouvent et vous fassent confiance.</p>
             </div>
             <div className="mb-8">
                 {isKapNumerik ? (
@@ -98,31 +98,31 @@ export function Pricing() {
             </div>
             <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Site Vitrine One-Page (Next.js)
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Un site pro qui inspire confiance
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Hébergement & Nom de domaine (1 an)
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Votre adresse web personnalisée (1 an)
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Optimisation SEO de base
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Visible sur Google dès le lancement
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-500">
-                    <X className="w-5 h-5 shrink-0" /> Gestion du dossier de subvention
+                    <X className="w-5 h-5 shrink-0" /> Accompagnement aide régionale
                 </li>
             </ul>
             <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 hover:text-white" asChild>
-                <Link href="#contact">Demander un devis</Link>
+                <Link href="?type=devis#contact">On en discute</Link>
             </Button>
           </div>
 
           {/* OFFRE 2 : GROWTH (La star) */}
           <div className="relative p-8 rounded-3xl bg-slate-900/80 border border-[#ffa800]/50 flex flex-col shadow-[0_0_40px_-10px_rgba(255,168,0,0.15)] transform md:-translate-y-4">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#ffa800] text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-                Le plus populaire
+                Le plus demandé
             </div>
             <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-2">Business & Automation</h3>
-                <p className="text-slate-400 text-sm h-10">L'outil complet pour automatiser votre activité et encaisser.</p>
+                <h3 className="text-xl font-bold text-white mb-2">Gain de temps</h3>
+                <p className="text-slate-400 text-sm h-10">Automatisez ce qui vous prend des heures. Récupérez vos soirées.</p>
             </div>
             <div className="mb-8">
                 {isKapNumerik ? (
@@ -145,51 +145,51 @@ export function Pricing() {
             </div>
             <ul className="space-y-4 mb-8 flex-1">
                 <li className="flex items-start gap-3 text-sm text-white font-medium">
-                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> ✨ Accompagnement Dossier Kap Numérik
+                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Je monte votre dossier Kap Numérik
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Site Multi-pages ou E-commerce
+                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Vendez et encaissez en ligne
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Dashboard Admin & Analytics
+                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Suivez votre activité en un coup d'oeil
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Intégration Paiement & CRM
+                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Fini les relances manuelles
                 </li>
                  <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Formation à l'utilisation (2h)
+                    <Check className="w-5 h-5 text-[#ffa800] shrink-0" /> Je vous forme à tout utiliser (2h)
                 </li>
             </ul>
             <Button className="w-full bg-[#ffa800] text-black hover:bg-[#ffb92e] font-bold shadow-lg shadow-[#ffa800]/20" asChild>
-                <Link href="#contact">Vérifier mon éligibilité</Link>
+                <Link href="?type=eligibilite#contact">Je suis éligible ?</Link>
             </Button>
           </div>
 
           {/* OFFRE 3 : SUR MESURE */}
           <div className="relative p-8 rounded-3xl bg-slate-900/40 border border-white/5 flex flex-col hover:bg-slate-900/60 transition-colors">
             <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-2">Custom / IA</h3>
-                <p className="text-slate-400 text-sm h-10">Architecture complexe pour besoins spécifiques.</p>
+                <h3 className="text-xl font-bold text-white mb-2">Sur-mesure</h3>
+                <p className="text-slate-400 text-sm h-10">Votre problème est unique ? Ma solution aussi.</p>
             </div>
             <div className="mb-8 flex items-baseline gap-1 h-22 pt-6"> {/* Hauteur fixe pour alignement */}
                 <span className="text-3xl font-bold text-white">Sur Devis</span>
             </div>
             <ul className="space-y-4 mb-8 flex-1">
                  <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> SaaS & App Métier complexe
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Un outil 100% adapté à votre métier
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Intégration IA (Claude/GPT)
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> L'IA qui travaille pour vous
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> API Dédiées & Base de données
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Connexion avec vos outils existants
                 </li>
                 <li className="flex items-start gap-3 text-sm text-slate-300">
-                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Maintenance Prioritaire
+                    <Check className="w-5 h-5 text-slate-500 shrink-0" /> Je reste disponible après livraison
                 </li>
             </ul>
             <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 hover:text-white" asChild>
-                <Link href="#contact">Discuter de mon projet</Link>
+                <Link href="?type=projet#contact">Expliquez-moi votre besoin</Link>
             </Button>
           </div>
 
