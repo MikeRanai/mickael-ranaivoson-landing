@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist_Mono, Oswald, Bebas_Neue } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/data";
-import { Header } from "@/components/layout";
+import { Header, Footer } from "@/components/layout";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -59,6 +59,7 @@ export default function RootLayout({
         >
           <Header />
           <main className="pt-20">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

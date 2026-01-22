@@ -68,7 +68,13 @@ function Logo() {
         priority
       />
       <div className="flex flex-col">
-        <span className="text-base sm:text-lg font-bold text-white tracking-tight leading-tight whitespace-nowrap font-sans">
+        <span 
+          className="text-base sm:text-lg font-bold tracking-tight leading-tight whitespace-nowrap font-sans bg-clip-text text-transparent"
+          style={{
+            backgroundImage:
+              "linear-gradient(135deg, #ffffff 0%, #ffa800 50%, #ffb92e 100%)",
+          }}
+        >
           MICKAEL RANAIVOSON
         </span>
         {/* <span className="text-xs sm:text-sm font-medium text-primary transition-colors duration-300 group-hover:text-[#ffb92e]">
