@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
     const result = ContactSchema.safeParse(body);
 
     if (!result.success) {
-      const errors = result.error.errors.map((e) => e.message).join(", ");
+      const errors = result.error.issues.map((e) => e.message).join(", ");
       return NextResponse.json(
         { error: `Données invalides: ${errors}` },
         { status: 400 }
