@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -20,12 +21,23 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2 space-y-6">
             <div className="flex items-center gap-3">
               {/* Logo ou Initiale */}
-              <div className="w-10 h-10 bg-[#ffa800]/10 rounded-xl flex items-center justify-center border border-[#ffa800]/20 text-[#ffa800] font-bold text-lg">
-                MR
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">
-                Mickaël Ranaivoson
-              </span>
+          <Image
+            src="/images/mr-logo-blanc.svg"
+            alt="Mickael Ranaivoson Logo"
+            width={60}
+            height={60}
+            className="w-12 h-12 sm:w-15 sm:h-15 transition-transform duration-300 group-hover:scale-105"
+            priority
+          />
+         <span 
+            className="text-base sm:text-lg font-bold tracking-tight leading-tight whitespace-nowrap font-sans bg-clip-text text-transparent"
+            style={{
+              backgroundImage:
+                "linear-gradient(135deg, #ffffff 0%, #ffa800 50%, #ffb92e 100%)",
+            }}
+        >
+            MICKAEL RANAIVOSON
+        </span>
             </div>
             <p className="text-slate-400 max-w-sm leading-relaxed">
               Expert en développement web et solutions digitales à La Réunion.
@@ -33,13 +45,13 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
-                <Link href="https://github.com/ton-github" target="_blank"><Github className="w-5 h-5" /></Link>
+                <Link href="https://github.com/MikeRanai/" target="_blank"><Github className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
-                <Link href="https://linkedin.com/in/ton-linkedin" target="_blank"><Linkedin className="w-5 h-5" /></Link>
+                <Link href="https://www.linkedin.com/in/mickael-ranaivoson/" target="_blank"><Linkedin className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
-                <Link href="mailto:contact@ton-email.re"><Mail className="w-5 h-5" /></Link>
+                <Link href="mailto:ranaimike@gmail.com"><Mail className="w-5 h-5" /></Link>
               </Button>
             </div>
           </div>

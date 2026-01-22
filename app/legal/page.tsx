@@ -31,13 +31,13 @@ export default function LegalPage() {
             
             <h3 className="text-xl font-semibold text-white">Éditeur du site</h3>
             <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Nom commercial :</strong> Mickaël Ranaivoson Digital Solutions</li>
+                <li><strong>Nom commercial :</strong> MR Digital Solutions</li>
                 <li><strong>Statut juridique :</strong> Entrepreneur Individuel (EI)</li>
                 <li><strong>Responsable éditorial :</strong> Mickaël Ranaivoson</li>
-                <li><strong>Siège social :</strong> Saint-Paul, 97460 La Réunion</li>
+                <li><strong>Siège social :</strong>4 rue Jacquot, Saint-Paul 97460 La Réunion</li>
                 <li><strong>SIRET :</strong> 902 063 197 00021</li>
-                <li><strong>Email :</strong> [Ton Email ICI]</li>
-                <li><strong>Téléphone :</strong> [Ton Numéro ICI]</li>
+                <li><strong>Email :</strong> ranaimike@gmai.com</li>
+                <li><strong>Téléphone :</strong> 0692342373</li>
             </ul>
 
             <h3 className="text-xl font-semibold text-white">Hébergement</h3>
