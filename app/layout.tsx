@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_CONFIG.title,
     description: SITE_CONFIG.subtitle,
-    url: "https://mickael-ranaivoson.vercel.app", // Ou l'URL de prod si connue
+    url: "https://mickaelranaivoson.fr", // Ou l'URL de prod si connue
     siteName: SITE_CONFIG.name,
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.subtitle,
     images: ["/images/site-illustration-mr.png"],
   },
-  metadataBase: new URL("https://mickael-ranaivoson.vercel.app"),
+  metadataBase: new URL("https://mickaelranaivoson.fr"),
 };
 
 export default function RootLayout({
