@@ -4,11 +4,12 @@ This document summarizes the development session and establishes key rules for f
 
 ## Session Summary (Jan 22, 2026)
 
-This session focused on refining the visual polish of the Header and Hero sections, including font updates, spacing adjustments, and component cleanup.
+This session focused on refining the visual polish of the Header and Hero sections, implementing a robust Tech Stack display, and updating brand assets.
 
 ### 1. Visual & Typography Updates
-- **Font Change**: Implemented `Bebas Neue` for the brand name "MICKAEL RANAIVOSON" in the Header to give it a distinct, bold look.
+- **Font Change**: Implemented `Bebas Neue` for the brand name "MICKAEL RANAIVOSON" in the Header to give it a distinct, bold look. Later reverted to `Inter` (font-sans) for better coherence with the overall design, ensuring correct responsive sizing (`text-base` mobile, `text-lg` desktop) and `whitespace-nowrap`.
 - **Iconography**: Updated the "Contact" CTA button to use a more modern `Smartphone` icon (filled) with black text for better contrast and style.
+- **Brand Assets**: Updated the favicon and Apple touch icon to a circular design with a dark background (`#020617`) using the white logo, improving visibility on browser tabs.
 
 ### 2. Header & Navigation Refinement
 - **Status Alert**: Configured the "Dispo pour projets" badge to be visible on Desktop but hidden on the mobile header bar (kept present in the mobile menu).
@@ -19,6 +20,14 @@ This session focused on refining the visual polish of the Header and Hero sectio
 - **Spacing**: Significantly reduced the top and bottom padding of the Hero section to minimize empty space and create a more compact, immediate visual impact on load.
     - Top padding reduced from `pt-32` to `pt-16`.
     - Bottom padding optimized for mobile (`pb-2`) while maintaining balance on desktop (`pb-20`).
+
+### 4. Tech Stack Component
+- **New Feature**: Implemented `components/layout/TechStack.tsx`, an infinite scrolling marquee showcasing the project's technology stack.
+- **Implementation Details**:
+    - Used `framer-motion` for the infinite scroll animation.
+    - Replaced initial inline SVGs with high-quality SVG files (`next/image`) for all logos (Next.js, React, TypeScript, Symfony, PostgreSQL, Tailwind, Prisma, Cloudflare, Claude AI, Resend).
+    - Applied CSS filters (`invert`) to dark logos (Next.js, Symfony, Prisma, Resend, Tailwind, Cloudflare) to ensure visibility on the dark section background.
+    - Integrated the component into `app/page.tsx` between the Hero and Solutions sections.
 
 ## Session Summary (Jan 21, 2026)
 
