@@ -1,20 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono, Oswald, Bebas_Neue } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/data";
-import { Navbar } from "@/components/Navbar";
+import { Header } from "@/components/layout";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  weight: "300",
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -32,8 +45,10 @@ export default function RootLayout({
       <body
         className={cn(
           "font-sans antialiased",
-          geistSans.variable,
-          geistMono.variable
+          inter.variable,
+          geistMono.variable,
+          oswald.variable,
+          bebasNeue.variable
         )}
       >
         <ThemeProvider
@@ -42,8 +57,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <main className="pt-[122px]">{children}</main>
+          <Header />
+          <main className="pt-20">{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -83,6 +83,8 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "monospace"],
+        oswald: ["var(--font-oswald)", "sans-serif"],
+        bebas: ["var(--font-bebas)", "sans-serif"],
       },
       letterSpacing: {
         tighter: "-0.05em",

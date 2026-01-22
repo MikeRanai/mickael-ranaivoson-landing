@@ -39,7 +39,7 @@ export function Navbar() {
               width={90}
               height={90}
               priority
-              // No className="h-10 w-auto" to allow width/height to take effect
+              className="h-8 w-auto sm:h-10" // Make logo responsive: smaller on mobile, slightly larger on sm screens, auto width
             />
           </Link>
 
@@ -71,9 +71,9 @@ export function Navbar() {
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: "calc(100vh - theme(spacing.16))" }} // Use calc to fill screen below header
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden fixed top-30.5 left-0 w-full z-40 bg-[#153d6e] overflow-hidden"
+            className="md:hidden fixed top-16 left-0 w-full z-40 bg-[#153d6e] overflow-hidden"
           >
             <motion.div
               variants={menuVariants}

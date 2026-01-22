@@ -1,95 +1,272 @@
-'use client'
+"use client";
 
-import { motion } from "framer-motion"
-import { HERO_CONTENT, SITE_CONFIG } from "@/lib/data" // On importe tes textes
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { ArrowRight, Github, Linkedin, Facebook } from "lucide-react"
+import { motion, Variants } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight, Play } from "lucide-react";
 
+// ===========================================
+// Animation Variants
+// ===========================================
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+};
+
+const blobVariants: Variants = {
+  animate: {
+    scale: [1, 1.15, 1],
+    opacity: [0.3, 0.5, 0.3],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const blobVariants2: Variants = {
+  animate: {
+    scale: [1.1, 1, 1.1],
+    opacity: [0.4, 0.3, 0.4],
+    transition: {
+      duration: 10,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const blobVariants3: Variants = {
+  animate: {
+    scale: [1, 1.2, 1],
+    opacity: [0.2, 0.4, 0.2],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+// ===========================================
+// Sub-components
+// ===========================================
+
+function AuroraBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Blob 1: Top-left Indigo */}
+      <motion.div
+        variants={blobVariants}
+        animate="animate"
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-indigo-600/20 blur-[120px]"
+      />
+
+      {/* Blob 2: Bottom-right Blue */}
+      <motion.div
+        variants={blobVariants2}
+        animate="animate"
+        className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-[120px]"
+      />
+
+      {/* Blob 3: Center/Top Gold (Brand Color) */}
+      <motion.div
+        variants={blobVariants3}
+        animate="animate"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-[#ffa800]/10 blur-[120px]"
+      />
+
+      {/* Grid Pattern Overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      {/* Radial gradient overlay for depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#020617_70%)]" />
+    </div>
+  );
+}
+
+function Badge() {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full
+        border border-[#ffa800]/30 bg-[#ffa800]/5 backdrop-blur-sm"
+    >
+      <span className="text-lg">✨</span>
+      <span className="text-xs sm:text-sm font-medium text-[#ffa800]">
+        Éligible Kap Numérik - Jusqu&apos;à 3200€ d&apos;aides
+      </span>
+    </motion.div>
+  );
+}
+
+function Title() {
+  return (
+    <motion.h1
+      variants={itemVariants}
+      className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]"
+    >
+      Développeur Fullstack
+      <br className="hidden sm:block" />
+      <span className="sm:hidden"> </span>& Expert{" "}
+      <span
+        className="bg-clip-text text-transparent"
+        style={{
+          backgroundImage:
+            "linear-gradient(135deg, #ffffff 0%, #ffa800 50%, #ffb92e 100%)",
+        }}
+      >
+        Automatisation IA
+      </span>
+      .
+    </motion.h1>
+  );
+}
+
+function Subtitle() {
+  return (
+    <motion.p
+      variants={itemVariants}
+      className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed"
+    >
+      Je transforme vos processus manuels en applications web performantes.
+      <span className="hidden sm:inline">
+        {" "}
+        Design premium, sécurité absolue, technologie invisible.
+      </span>
+    </motion.p>
+  );
+}
+
+function CTAButtons() {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+    >
+      {/* Primary CTA */}
+      <Link
+        href="#contact"
+        className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full
+          bg-[#ffa800] text-slate-950 font-bold text-sm sm:text-base
+          hover:bg-[#ffb92e] transition-all duration-300
+          shadow-[0_0_30px_-5px_rgba(255,168,0,0.4)]
+          hover:shadow-[0_0_40px_-5px_rgba(255,168,0,0.6)]
+          hover:scale-105"
+      >
+        Discuter de mon projet
+        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+      </Link>
+
+      {/* Secondary CTA */}
+      <Link
+        href="#realisations"
+        className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-full
+          border border-white/10 bg-white/5 backdrop-blur-sm
+          text-white font-medium text-sm sm:text-base
+          hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+      >
+        <Play className="w-4 h-4" />
+        Voir mes réalisations
+      </Link>
+    </motion.div>
+  );
+}
+
+function SocialProof() {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="pt-12 sm:pt-16 flex flex-col items-center gap-4"
+    >
+      <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wider font-medium">
+        Ils me font confiance
+      </p>
+      <div className="flex items-center gap-6 sm:gap-8 opacity-50">
+        {/* Placeholder logos - replace with actual logos */}
+        <span className="text-slate-400 font-semibold text-sm sm:text-base">
+          NoutAsso
+        </span>
+        <span className="w-1 h-1 rounded-full bg-slate-600" />
+        <span className="text-slate-400 font-semibold text-sm sm:text-base">
+          HCOuest
+        </span>
+        <span className="w-1 h-1 rounded-full bg-slate-600" />
+        <span className="text-slate-400 font-semibold text-sm sm:text-base">
+          +5 clients
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+// ===========================================
+// Main Hero Component
+// ===========================================
 export function Hero() {
   return (
-    <section className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-[#153d6e] text-white px-6 py-8 md:py-16">
-      
-      {/* Fond animé subtil (Optionnel, effet de glow) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-125 bg-blue-500/20 blur-[120px] rounded-full pointer-events-none" />
+    <section className="relative min-h-screen w-full flex justify-center bg-slate-950 overflow-hidden">
+      {/* Aurora Background Effect */}
+      <AuroraBackground />
 
-      <div className="relative z-10 max-w-4xl w-full text-center space-y-8">
-        
-        {/* Badge "Nouvelle Version" */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-sm font-medium text-blue-100"
-        >
-          <span>{HERO_CONTENT.badge}</span>
-        </motion.div>
+      {/* Main Content */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-2 sm:pt-24 sm:pb-20 text-center"
+      >
+        {/* Badge */}
+        <div className="mb-6 sm:mb-8">
+          <Badge />
+        </div>
 
-        {/* Gros Titre + Slogan */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-4"
-        >
-          <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-gray-400">
-            {HERO_CONTENT.title}
-          </h1>
-          <h2 className="text-xl md:text-2xl font-semibold text-[#ffa800]">
-            {SITE_CONFIG.subtitle}
-          </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            {HERO_CONTENT.slogan}
-          </p>
-        </motion.div>
+        {/* Title */}
+        <div className="mb-6">
+          <Title />
+        </div>
 
-        {/* Boutons d'action (Mobile First = Stack vertical, Desktop = Ligne) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
-        >
-          <Button 
-            asChild 
-            size="lg" 
-            className="w-full sm:w-auto bg-[#ffa800] hover:bg-[#ffb92e] text-[#153d6e] font-bold rounded-full text-lg h-12 px-8"
-          >
-            <Link href={`mailto:${SITE_CONFIG.email}`}>
-              {HERO_CONTENT.cta_primary} <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+        {/* Subtitle */}
+        <div className="mb-8 sm:mb-10">
+          <Subtitle />
+        </div>
 
-          <Button 
-            asChild 
-            variant="outline" 
-            size="lg" 
-            className="w-full sm:w-auto border-white/20 text-black hover:bg-white/10 rounded-full text-lg h-12 px-8 backdrop-blur-sm"
-          >
-            <Link href="#portfolio" className="text-white">
-              {HERO_CONTENT.cta_secondary}
-            </Link>
-          </Button>
-        </motion.div>
+        {/* CTA Buttons */}
+        <CTAButtons />
 
-        {/* Liens Sociaux */}
-        <motion.div 
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ duration: 0.5, delay: 0.4 }}
-           className="flex gap-6 justify-center pt-8 opacity-70"
-        >
-          <Link href={SITE_CONFIG.socials.github} target="_blank" className="hover:text-[#ffa800] transition-colors">
-            <Github className="h-6 w-6" />
-          </Link>
-          <Link href={SITE_CONFIG.socials.linkedin} target="_blank" className="hover:text-[#ffa800] transition-colors">
-            <Linkedin className="h-6 w-6" />
-          </Link>
-          <Link href={SITE_CONFIG.socials.facebook} target="_blank" className="hover:text-[#ffa800] transition-colors">
-            <Facebook className="h-6 w-6" />
-          </Link>
-        </motion.div>
-      </div>
+        {/* Social Proof */}
+        <SocialProof />
+      </motion.div>
+
+      {/* Bottom Gradient Fade (optional, for smooth transition to next section) */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none" />
     </section>
-  )
+  );
 }
+
+export default Hero;

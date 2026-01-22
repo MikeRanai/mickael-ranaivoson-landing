@@ -101,7 +101,7 @@ export function Solutions() {
 
             {/* Zone Mobile centrée */}
             <div className="flex-1 w-full flex justify-center items-center">
-                <div className="transform transition-transform duration-500 group-hover:scale-105">
+                <div className="w-full transform transition-transform duration-500 group-hover:scale-105">
                     <TechScreenshot3D 
                         src="/images/mobile-dashboard-nout-asso.png" 
                         alt="Application Mobile" 
