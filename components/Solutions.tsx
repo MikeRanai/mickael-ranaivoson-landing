@@ -40,10 +40,10 @@ export function Solutions() {
         {/* Titre */}
         <div className="text-center space-y-6 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-            Des Solutions, <span className="text-slate-500">Pas Juste du Code</span>
+            Vos problèmes, <span className="text-slate-500">mes solutions</span>
           </h2>
           <p className="text-lg text-slate-400">
-            Une approche stratégique. Je construis des outils robustes qui transforment vos processus.
+            Vous n'avez pas besoin d'un site web. Vous avez besoin de clients, de temps libre, de sérénité. Je m'occupe du reste.
           </p>
         </div>
 
@@ -57,21 +57,21 @@ export function Solutions() {
         >
 
           {/* CARTE 1 : SaaS / App Métier (Grande carte) */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="md:col-span-2 relative overflow-hidden rounded-3xl bg-slate-900 border border-white/5 p-8 flex flex-col group hover:border-amber-500/30 transition-colors"
           >
             <div className="relative z-10 mb-8 max-w-lg">
               <span className="inline-flex items-center gap-2 bg-amber-500/10 text-amber-500 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-amber-500/20">
-                <Zap className="w-3 h-3" /> Expertise Phare
+                <Zap className="w-3 h-3" /> Le plus demandé
               </span>
-              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Applications Métiers & Automatisation</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">Arrêtez de tout faire à la main</h3>
               <p className="text-slate-400 text-base leading-relaxed">
-                Ne perdez plus de temps sur Excel. Des tableaux de bord sur-mesure pour piloter votre activité.
+                Adhésions, factures, relances, rapports... Tout ce qui vous prend des heures peut être automatisé. Vous pilotez, l'outil travaille.
               </p>
               <div className="flex gap-4 mt-4 text-sm text-slate-500">
-                  <span className="flex items-center gap-1"><Lock className="w-4 h-4 text-amber-500" /> Sécurisé</span>
-                  <span className="flex items-center gap-1"><BarChart3 className="w-4 h-4 text-amber-500" /> Temps réel</span>
+                  <span className="flex items-center gap-1"><Lock className="w-4 h-4 text-amber-500" /> Vos données protégées</span>
+                  <span className="flex items-center gap-1"><BarChart3 className="w-4 h-4 text-amber-500" /> Résultats en temps réel</span>
               </div>
             </div>
 
@@ -88,14 +88,14 @@ export function Solutions() {
           </motion.div>
 
           {/* CARTE 2 : Mobile First (Haute) */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="md:col-span-1 md:row-span-2 relative overflow-hidden rounded-3xl bg-slate-900 border border-white/5 p-8 flex flex-col items-center text-center group hover:border-amber-500/30 transition-colors"
           >
             <div className="relative z-10 mb-8">
-              <h3 className="text-xl font-bold mb-2 text-white">100% Mobile First</h3>
+              <h3 className="text-xl font-bold mb-2 text-white">Gérez tout depuis votre téléphone</h3>
               <p className="text-slate-400 text-sm">
-                Vos outils dans votre poche. Accessible partout.
+                Sur le terrain, en déplacement, le soir chez vous. Votre activité vous suit partout.
               </p>
             </div>
 
@@ -112,32 +112,32 @@ export function Solutions() {
           </motion.div>
 
           {/* CARTE 3 : E-Commerce */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="md:col-span-1 min-h-60 relative overflow-hidden rounded-3xl bg-slate-900 border border-white/5 p-6 hover:bg-slate-800 transition-colors group hover:border-amber-500/30"
           >
             <div className="h-10 w-10 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 border border-amber-500/20">
               <ShoppingBag className="text-amber-500 h-5 w-5" />
             </div>
-            <h3 className="text-lg font-bold mb-2 text-white">Sites E-commerce</h3>
+            <h3 className="text-lg font-bold mb-2 text-white">Vendez en ligne, encaissez direct</h3>
             <p className="text-slate-400 text-sm">
-              Tunnels de vente optimisés pour la conversion.
+              Plus besoin de courir après les virements. Vos clients paient en ligne, vous recevez l'argent.
             </p>
           </motion.div>
 
           {/* CARTE 4 : SEO */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="md:col-span-1 min-h-60 relative overflow-hidden rounded-3xl bg-slate-900 border border-white/5 p-6 hover:bg-slate-800 transition-colors group hover:border-amber-500/30"
           >
              <div className="h-10 w-10 bg-blue-500/10 rounded-xl flex items-center justify-center mb-4 border border-blue-500/20">
               <TrendingUp className="text-blue-500 h-5 w-5" />
             </div>
-            <h3 className="text-lg font-bold mb-2 text-white">Visibilité SEO</h3>
+            <h3 className="text-lg font-bold mb-2 text-white">Faites-vous trouver sur Google</h3>
             <p className="text-slate-400 text-sm mb-4">
-              Positionnez-vous devant vos concurrents sur Google.
+              Vos clients vous cherchent. Encore faut-il qu'ils vous trouvent avant vos concurrents.
             </p>
-            <Link href="#contact" className="text-amber-500 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+            <Link href="/seo" className="text-amber-500 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
                 En savoir plus <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

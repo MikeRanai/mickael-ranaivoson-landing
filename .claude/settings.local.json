@@ -4,7 +4,11 @@
       "Bash(npm run build)",
       "Bash(npx next build)",
       "Bash(timeout 20 npm run dev)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm install:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm ls:*)",
+      "Bash(python:*)"
     ]
   }
 }

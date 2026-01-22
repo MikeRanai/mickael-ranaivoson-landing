@@ -40,8 +40,8 @@ export function Footer() {
         </span>
             </div>
             <p className="text-slate-400 max-w-sm leading-relaxed">
-              Expert en développement web et solutions digitales à La Réunion.
-              Je transforme vos idées en outils performants, sécurisés et rentables.
+              Je crée des outils qui vous font gagner du temps et de l'argent.
+              Basé à La Réunion, disponible pour vos projets.
             </p>
             <div className="flex gap-4">
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
@@ -60,9 +60,10 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-white font-bold text-lg">Navigation</h4>
             <ul className="space-y-2">
-              <li><Link href="#solutions" className="text-slate-400 hover:text-[#ffa800] transition-colors">Solutions</Link></li>
-              <li><Link href="#realisations" className="text-slate-400 hover:text-[#ffa800] transition-colors">Réalisations</Link></li>
-              <li><Link href="#tarifs" className="text-slate-400 hover:text-[#ffa800] transition-colors">Tarifs & Aides</Link></li>
+              <li><Link href="#solutions" className="text-slate-400 hover:text-[#ffa800] transition-colors">Ce que je fais</Link></li>
+              <li><Link href="#realisations" className="text-slate-400 hover:text-[#ffa800] transition-colors">Mes projets</Link></li>
+              <li><Link href="#apropos" className="text-slate-400 hover:text-[#ffa800] transition-colors">Qui suis-je</Link></li>
+              <li><Link href="#tarifs" className="text-slate-400 hover:text-[#ffa800] transition-colors">Tarifs</Link></li>
               <li><Link href="#contact" className="text-slate-400 hover:text-[#ffa800] transition-colors">Contact</Link></li>
             </ul>
           </div>

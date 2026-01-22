@@ -1,6 +1,3 @@
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-
 export const metadata = {
   title: "Mentions Légales & CGV - Mickaël Ranaivoson",
   description: "Informations légales, Conditions Générales de Vente et Politique de Confidentialité.",
@@ -9,12 +6,7 @@ export const metadata = {
 export default function LegalPage() {
   return (
     <div className="bg-slate-950 min-h-screen text-slate-300">
-        {/* On réutilise le Header pour la navigation */}
-        <div className="relative z-50">
-             <Header />
-        </div>
-     
-      <main className="container mx-auto px-6 py-32 max-w-4xl space-y-16">
+      <main className="container mx-auto px-6 py-12 max-w-4xl space-y-16">
         
         <div className="space-y-4 border-b border-white/10 pb-8">
             <h1 className="text-4xl font-bold text-white">Informations Légales</h1>

@@ -16,10 +16,10 @@ import {
 // Navigation Data
 // ===========================================
 const navLinks = [
-  { href: "#solutions", label: "Solutions" },
-  { href: "#realisations", label: "Réalisations" },
+  { href: "#solutions", label: "Ce que je fais" },
+  { href: "#realisations", label: "Mes projets" },
+  { href: "#apropos", label: "Qui suis-je" },
   { href: "#tarifs", label: "Tarifs" },
-  { href: "#blog", label: "Blog" },
 ];
 
 // ===========================================
@@ -115,7 +115,7 @@ function CTAButton({ className = "" }: { className?: string }) {
         ${className}`}
     >
       <Smartphone className="w-4 h-4 fill-current" />
-      <span>Réserver un appel</span>
+      <span>On en parle ?</span>
     </Link>
   );
 }
@@ -276,7 +276,7 @@ function MobileMenu({
                     shadow-[0_0_25px_-5px_rgba(255,168,0,0.4)]"
                 >
                   <Smartphone className="w-5 h-5 fill-current" />
-                  Réserver un appel
+                  On en parle ?
                 </Link>
               </motion.div>
             </motion.nav>
