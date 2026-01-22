@@ -4,10 +4,11 @@ This document summarizes the development session and establishes key rules for f
 
 ## Session Summary (Jan 22, 2026)
 
-This session focused on refining the visual polish of the Header and Hero sections, implementing a robust Tech Stack display, and updating brand assets.
+This session focused on refining the visual polish of the Header and Hero sections, implementing a robust Tech Stack display, adding a Pricing section, and creating a Footer.
 
 ### 1. Visual & Typography Updates
 - **Font Change**: Implemented `Bebas Neue` for the brand name "MICKAEL RANAIVOSON" in the Header to give it a distinct, bold look. Later reverted to `Inter` (font-sans) for better coherence with the overall design, ensuring correct responsive sizing (`text-base` mobile, `text-lg` desktop) and `whitespace-nowrap`.
+- **Text Gradient**: Applied a `bg-clip-text` gold gradient to the brand name in the Header, matching the "Automatisation IA" style in the Hero section for a consistent premium feel.
 - **Iconography**: Updated the "Contact" CTA button to use a more modern `Smartphone` icon (filled) with black text for better contrast and style.
 - **Brand Assets**: Updated the favicon and Apple touch icon to a circular design with a dark background (`#020617`) using the white logo, improving visibility on browser tabs.
 
@@ -28,6 +29,16 @@ This session focused on refining the visual polish of the Header and Hero sectio
     - Replaced initial inline SVGs with high-quality SVG files (`next/image`) for all logos (Next.js, React, TypeScript, Symfony, PostgreSQL, Tailwind, Prisma, Cloudflare, Claude AI, Resend).
     - Applied CSS filters (`invert`) to dark logos (Next.js, Symfony, Prisma, Resend, Tailwind, Cloudflare) to ensure visibility on the dark section background.
     - Integrated the component into `app/page.tsx` between the Hero and Solutions sections.
+
+### 5. Pricing Section
+- **New Feature**: Implemented `components/layout/Pricing.tsx` to display three tiered service packages (Starter, Pro, Custom/IA).
+- **Styling**: Used glassmorphism effects (`bg-slate-900/40`, `backdrop-blur`) and borders to seamlessly integrate with the dark theme.
+- **Integration**: Added the section to `app/page.tsx` following the Solutions section.
+
+### 6. Footer Implementation
+- **New Component**: Created `components/layout/Footer.tsx` with a 4-column responsive layout including brand info, navigation links, contact details, and legal links.
+- **Refinement**: Renamed from `Footertsx` to `Footer.tsx` and fixed Tailwind class warnings (`w-[500px]` -> `w-125`, `h-[300px]` -> `h-75`).
+- **Integration**: Added to `app/layout.tsx` to appear globally on all pages.
 
 ## Session Summary (Jan 21, 2026)
 

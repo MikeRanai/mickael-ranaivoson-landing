@@ -112,8 +112,6 @@ export default function LegalPage() {
         </section>
 
       </main>
-
-      <Footer />
     </div>
   );
 }
