@@ -33,6 +33,29 @@ const bebasNeue = Bebas_Neue({
 export const metadata: Metadata = {
   title: SITE_CONFIG.title,
   description: SITE_CONFIG.subtitle,
+  openGraph: {
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.subtitle,
+    url: "https://mickael-ranaivoson.vercel.app", // Ou l'URL de prod si connue
+    siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: "/images/site-illustration-mr.png",
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.title,
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.subtitle,
+    images: ["/images/site-illustration-mr.png"],
+  },
+  metadataBase: new URL("https://mickael-ranaivoson.vercel.app"),
 };
 
 export default function RootLayout({
