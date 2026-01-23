@@ -80,9 +80,9 @@ export function Pricing() {
             <div className="mb-8">
                 {isKapNumerik ? (
                     <div className="space-y-1">
-                        <span className="text-sm text-slate-500 line-through block">2 200€ HT</span>
+                        <span className="text-sm text-slate-500 line-through block">1 600€ HT</span>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-bold text-white">{calculatePrice(2200)}€</span>
+                            <span className="text-4xl font-bold text-white">{calculatePrice(1600)}€</span>
                             <span className="text-sm text-slate-400">/ projet</span>
                         </div>
                          <span className="inline-block px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-xs rounded border border-emerald-500/20 mt-2">
@@ -91,7 +91,7 @@ export function Pricing() {
                     </div>
                 ) : (
                     <div className="flex items-baseline gap-1">
-                        <span className="text-4xl font-bold text-white">2 200€</span>
+                        <span className="text-4xl font-bold text-white">1 600€</span>
                         <span className="text-sm text-slate-400">HT</span>
                     </div>
                 )}
@@ -127,18 +127,18 @@ export function Pricing() {
             <div className="mb-8">
                 {isKapNumerik ? (
                     <div className="space-y-1">
-                        <span className="text-sm text-slate-500 line-through block">3 800€ HT</span>
+                        <span className="text-sm text-slate-500 line-through block">3 200€ HT</span>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-5xl font-bold text-[#ffa800]">{calculatePrice(3800)}€</span>
+                            <span className="text-5xl font-bold text-[#ffa800]">{calculatePrice(3200)}€</span>
                             <span className="text-sm text-slate-400">/ projet</span>
                         </div>
                         <span className="inline-block px-2 py-0.5 bg-[#ffa800]/10 text-[#ffa800] text-xs rounded border border-[#ffa800]/20 mt-2">
-                            Aide Max (3200€) Déduite
+                            Aide Kap Numérik déduite
                         </span>
                     </div>
                 ) : (
                     <div className="flex items-baseline gap-1">
-                        <span className="text-5xl font-bold text-[#ffa800]">3 800€</span>
+                        <span className="text-5xl font-bold text-[#ffa800]">3 200€</span>
                         <span className="text-sm text-slate-400">HT</span>
                     </div>
                 )}

@@ -205,9 +205,9 @@ function SocialProof() {
       className="pt-12 sm:pt-16 flex flex-col items-center gap-4"
     >
       <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wider font-medium">
-        Entrepreneurs accompagnés à La Réunion
+        Structures accompagnées à La Réunion
       </p>
-      <div className="flex items-center gap-6 sm:gap-8 opacity-50">
+      <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 sm:gap-8 opacity-50 px-4">
         <span className="text-slate-400 font-semibold text-sm sm:text-base">
           Associations
         </span>
@@ -218,6 +218,10 @@ function SocialProof() {
         <span className="w-1 h-1 rounded-full bg-slate-600" />
         <span className="text-slate-400 font-semibold text-sm sm:text-base">
           TPE/PME
+        </span>
+        <span className="w-1 h-1 rounded-full bg-slate-600" />
+        <span className="text-slate-400 font-semibold text-sm sm:text-base">
+          Indépendants
         </span>
       </div>
     </motion.div>
