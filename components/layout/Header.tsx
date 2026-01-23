@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Smartphone } from "lucide-react";
+import { Menu, X, MessageSquare } from "lucide-react";
 import {
   motion,
   AnimatePresence,
@@ -108,13 +108,13 @@ function CTAButton({ className = "" }: { className?: string }) {
     <Link
       href="#contact"
       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
-        bg-primary text-slate-950 font-bold text-sm
+        bg-[#ffa800] text-slate-950 font-bold text-sm
         hover:bg-[#ffb92e] transition-all duration-300
         shadow-[0_0_20px_-5px_rgba(255,168,0,0.3)]
         hover:shadow-[0_0_30px_-5px_rgba(255,168,0,0.5)]
         ${className}`}
     >
-      <Smartphone className="w-4 h-4 fill-current" />
+      <MessageSquare className="w-4 h-4 fill-current" />
       <span>On en parle ?</span>
     </Link>
   );
@@ -271,11 +271,11 @@ function MobileMenu({
                   href="#contact"
                   onClick={onClose}
                   className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl
-                    bg-primary text-slate-950 font-bold text-lg
+                    bg-[#ffa800] text-slate-950 font-bold text-lg
                     hover:bg-[#ffb92e] transition-all duration-300
                     shadow-[0_0_25px_-5px_rgba(255,168,0,0.4)]"
                 >
-                  <Smartphone className="w-5 h-5 fill-current" />
+                  <MessageSquare className="w-5 h-5 fill-current" />
                   On en parle ?
                 </Link>
               </motion.div>

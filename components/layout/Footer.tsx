@@ -76,6 +76,10 @@ export function Footer() {
                 <MapPin className="w-4 h-4 text-[#ffa800]" />
                 <span>Saint-Paul, La Réunion</span>
               </li>
+              <li className="flex items-center gap-3 text-slate-400">
+                 <span className="w-4 h-4 flex items-center justify-center text-[#ffa800] font-bold text-xs">📞</span>
+                 <a href="tel:+262692342373" className="hover:text-white transition-colors">+262 692 34 23 73</a>
+              </li>
               <li className="text-slate-400 text-sm">
                 SIRET : 902 063 197 00021
               </li>
