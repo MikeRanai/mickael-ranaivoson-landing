@@ -45,13 +45,13 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
-                <Link href="https://github.com/MikeRanai/" target="_blank"><Github className="w-5 h-5" /></Link>
+                <Link href="https://github.com/MikeRanai/" target="_blank" aria-label="Voir mon profil GitHub"><Github className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
-                <Link href="https://www.linkedin.com/in/mickael-ranaivoson/" target="_blank"><Linkedin className="w-5 h-5" /></Link>
+                <Link href="https://www.linkedin.com/in/mickael-ranaivoson/" target="_blank" aria-label="Voir mon profil LinkedIn"><Linkedin className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
-                <Link href="mailto:ranaimike@gmail.com"><Mail className="w-5 h-5" /></Link>
+                <Link href="mailto:ranaimike@gmail.com" aria-label="Envoyer un email"><Mail className="w-5 h-5" /></Link>
               </Button>
             </div>
           </div>

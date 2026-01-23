@@ -355,6 +355,7 @@ export function Contact() {
               <button
                 key={type}
                 onClick={() => handleTypeChange(type)}
+                aria-label={type === "projet" ? "Formulaire Projet" : type === "devis" ? "Formulaire Devis" : type === "eligibilite" ? "Formulaire Éligibilité" : "Formulaire Audit SEO"}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all
                   ${isActive
                     ? `${colorClasses[typeConfig.color].bg} ${colorClasses[typeConfig.color].border} ${colorClasses[typeConfig.color].text} border`

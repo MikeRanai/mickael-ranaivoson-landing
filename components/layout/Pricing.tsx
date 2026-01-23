@@ -41,7 +41,10 @@ export function Pricing() {
             <div className="flex items-center gap-4 bg-slate-900/80 p-2 pr-6 rounded-full border border-white/10 backdrop-blur-sm">
                 <button 
                     onClick={() => setIsKapNumerik(!isKapNumerik)}
-                    className={`relative w-14 h-8 rounded-full transition-colors duration-300 focus:outline-none ${isKapNumerik ? 'bg-[#ffa800]' : 'bg-slate-700'}`}
+                    aria-label={isKapNumerik ? "Désactiver la simulation Kap Numérik" : "Activer la simulation Kap Numérik"}
+                    aria-pressed={isKapNumerik}
+                    type="button"
+                    className={`relative w-14 h-8 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#ffa800] focus:ring-offset-2 focus:ring-offset-slate-900 ${isKapNumerik ? 'bg-[#ffa800]' : 'bg-slate-700'}`}
                 >
                     <div className={`absolute top-1 left-1 bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 ${isKapNumerik ? 'translate-x-6' : 'translate-x-0'}`} />
                 </button>
