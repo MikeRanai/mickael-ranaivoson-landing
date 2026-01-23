@@ -55,7 +55,11 @@ export const metadata: Metadata = {
     description: SITE_CONFIG.subtitle,
     images: ["/images/site-illustration-mr.png"],
   },
-  metadataBase: new URL("https://mickaelranaivoson.fr"),
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://mickaelranaivoson.fr"
+  ),
 };
 
 export default function RootLayout({

@@ -2,6 +2,32 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jan 23, 2026)
+
+This session focused on adapting the content for better inclusivity, redesigning the personal brand image, and aligning the pricing strategy with the Reunion Island local market and the Kap Numérik grant.
+
+### 1. Inclusivity & Terminology
+- **Terminology Update**: Replaced "Entrepreneurs" with **"Structures"** in the Hero section's social proof. "Structures" better represents the diversity of clients, including Associations, Sports Clubs, and TPE/PME.
+- **Client Base Expansion**: Added **"Indépendants"** to the list of accompanied entities to fully cover the freelancer/solo-entrepreneur market.
+- **Responsive List**: Updated the social proof list with `flex-wrap` and adjusted spacing to ensure it looks clean and stays centered on mobile devices.
+
+### 2. Profile Image & Personal Branding
+- **Redesigned About Section Photo**: Transformed the static profile picture into a multi-layered, interactive component.
+    - **Background Glow**: Added a subtle, animating `bg-linear-to-tr` gradient glow (Amber/Violet/Blue) behind the photo.
+    - **Decorative Layering**: Implemented an offset, semi-transparent border that rotates and scales up on hover, creating depth.
+    - **Interactive Image**: The main image now features a smooth scale-up effect (`group-hover:scale-110`) and a subtle dark gradient overlay.
+    - **Glassmorphism Badge**: Rebuilt the location badge with a `backdrop-blur-md` background, pulsing amber light effect on the Map icon, and added a "DISPONIBLE" status indicator for better professional conversion.
+
+### 3. Pricing Strategy (Local Market Alignment)
+- **Price Adjustment**: Lowered the price points to be more competitive and psychologically effective for the local market in La Réunion.
+    - **Vitrine Package**: Reduced from 2200€ HT to **1600€ HT**. (Client cost after 80% aid: ~320€).
+    - **Gain de temps Package**: Reduced from 3800€ HT to **3200€ HT**, perfectly matching the maximum Kap Numérik grant ceiling. (Client cost after aid: ~640€).
+- **Aid Simulation Labels**: Simplified the labels for aid deduction (e.g., "Aide Kap Numérik déduite") to be more accurate and less confusing regarding the 3200€ maximum cap.
+
+### 4. Technical Improvements & Standards
+- **Tailwind CSS Canonical Classes**: Updated gradient classes from the legacy `bg-gradient-to-*` to the canonical `bg-linear-to-*` syntax in the `About` component to align with modern Tailwind standards and resolve linter suggestions.
+- **Git Workflow**: Staged, committed, and pushed all changes with detailed descriptive messages.
+
 ## Session Summary (Jan 22, 2026)
 
 This session focused on refining the visual polish of the Header and Hero sections, implementing a robust Tech Stack display, adding a Pricing section, creating a Footer, and improving the "Realizations" section design.
