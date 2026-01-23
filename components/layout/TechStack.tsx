@@ -123,6 +123,7 @@ export function TechStack() {
                                     src={logo.src!} 
                                     alt={logo.name}
                                     fill
+                                    sizes="32px"
                                     className={`object-contain ${logo.className || ''}`}
                                 />
                             </div>

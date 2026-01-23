@@ -77,21 +77,21 @@ function AuroraBackground() {
       <motion.div
         variants={blobVariants}
         animate="animate"
-        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-indigo-600/20 blur-[120px]"
+        className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-indigo-600/20 blur-[60px] md:blur-[120px] will-change-transform"
       />
 
       {/* Blob 2: Bottom-right Blue */}
       <motion.div
         variants={blobVariants2}
         animate="animate"
-        className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-[120px]"
+        className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-blue-600/20 blur-[60px] md:blur-[120px] will-change-transform"
       />
 
       {/* Blob 3: Center/Top Gold (Brand Color) */}
       <motion.div
         variants={blobVariants3}
         animate="animate"
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-[#ffa800]/10 blur-[120px]"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-[#ffa800]/10 blur-[60px] md:blur-[120px] will-change-transform"
       />
 
       {/* Grid Pattern Overlay */}
