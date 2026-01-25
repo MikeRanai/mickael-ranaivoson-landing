@@ -135,3 +135,25 @@ To maintain a high-quality, robust, and maintainable codebase, all future develo
 
 ### 4. Centralized Configuration
 - Continue using `lib/data.ts` for site-wide text, links, and configuration. Do not hardcode repeated strings or data directly in components.
+
+### 5. Accessibility (A11y) First
+- **Accessible Names**: All interactive elements (buttons, links) **must** have an accessible name.
+    - If a button contains only an icon, use `aria-label="Description of action"`.
+    - If a link contains only an image/icon, use `aria-label="Where this link goes"`.
+- **State Indication**: Use `aria-pressed`, `aria-expanded`, or `aria-selected` for toggle buttons and interactive components to communicate state to screen readers.
+- **Form Labels**: Ensure all form inputs have associated labels or `aria-label` attributes.
+
+### 6. Performance Optimization
+- **Image Optimization**:
+    - Always specify `sizes` prop for `next/image` to allow the browser to select the correct image size.
+    - Use `priority` for Above-the-Fold (LCP) images.
+    - Avoid `fill` without `sizes` unless the image is truly full-screen.
+- **Animation Performance**:
+    - For complex animations (blobs, gradients, large moving elements), use `will-change-transform` to promote layers.
+    - Reduce animation complexity (e.g., blur radius) on mobile devices using responsive utility classes (e.g., `blur-[60px] md:blur-[120px]`).
+- **Missing Assets**: Ensure all referenced assets exist to prevent 404 errors which block the main thread.
+
+### 7. Technical SEO Standards
+- **Metadata**: Ensure `metadataBase` is dynamic (`process.env.VERCEL_URL`) to support social previews on all environments.
+- **Sitemap & Robots**: Maintain `sitemap.ts` and `robots.ts` to guide crawlers.
+- **Semantic HTML**: Use proper heading hierarchy (`h1` -> `h2` -> `h3`), `<nav>`, `<main>`, `<footer>` tags to help search engines understand the page structure.

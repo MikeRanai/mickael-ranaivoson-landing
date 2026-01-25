@@ -63,7 +63,7 @@ export function Realizations() {
 
                     <div className="flex items-center gap-4">
                         <Button asChild className="bg-white text-black hover:bg-slate-200 font-bold rounded-full px-8">
-                            <Link href="https://noutasso.re" target="_blank">
+                            <Link href="https://noutasso.fr" target="_blank">
                                 Voir le site <ArrowRight className="ml-2 w-4 h-4" />
                             </Link>
                         </Button>
