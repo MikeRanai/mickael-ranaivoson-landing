@@ -16,10 +16,10 @@ import {
 // Navigation Data
 // ===========================================
 const navLinks = [
-  { href: "#solutions", label: "Ce que je fais" },
-  { href: "#realisations", label: "Mes projets" },
-  { href: "#apropos", label: "Qui suis-je" },
-  { href: "#tarifs", label: "Tarifs" },
+  { href: "/#solutions", label: "Ce que je fais" },
+  { href: "/#realisations", label: "Mes projets" },
+  { href: "/#apropos", label: "Qui suis-je" },
+  { href: "/#tarifs", label: "Tarifs" },
 ];
 
 // ===========================================
@@ -106,7 +106,7 @@ function StatusBadge({ className = "" }: { className?: string }) {
 function CTAButton({ className = "" }: { className?: string }) {
   return (
     <Link
-      href="#contact"
+      href="/#contact"
       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
         bg-[#ffa800] text-slate-950 font-bold text-sm
         hover:bg-[#ffb92e] transition-all duration-300
@@ -268,7 +268,7 @@ function MobileMenu({
               {/* CTA Button in Mobile */}
               <motion.div variants={itemVariants} className="pt-4">
                 <Link
-                  href="#contact"
+                  href="/#contact"
                   onClick={onClose}
                   className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl
                     bg-[#ffa800] text-slate-950 font-bold text-lg

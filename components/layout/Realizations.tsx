@@ -93,7 +93,7 @@ export function Realizations() {
                  <div className="relative h-48 w-full bg-slate-800 overflow-hidden">
                      {/* Mets une autre image ici */}
                      <Image 
-                        src="/images/site-illustration-mr.png" 
+                        src="/images/site-illustration-hco.png" 
                         alt="Site Vitrine"
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
