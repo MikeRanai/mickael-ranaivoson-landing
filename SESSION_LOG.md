@@ -2,6 +2,20 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jan 25, 2026)
+
+This session focused on fixing critical SEO issues (Open Graph metadata) and correcting navigation behaviors across the site.
+
+### 1. Navigation & Routing Fixes
+- **Absolute Path Navigation**: Fixed a navigation issue where the menu links (e.g., `#solutions`) in the `Header` component were relative, causing them to fail when clicked from non-root pages like `/seo`.
+    - **Resolution**: Updated all navigation links in `Header.tsx` (desktop nav, mobile menu, CTA buttons) to use absolute paths with anchors (e.g., `/#solutions`), ensuring they always redirect correctly to the main page's sections.
+
+### 2. SEO & Social Sharing (Open Graph)
+- **Metadata Base URL**: Set `metadataBase` in `app/layout.tsx` to `https://www.mickaelranaivoson.fr` to resolve issues with relative image URLs in Open Graph tags.
+- **Enhanced Description**: Expanded the site meta description to ~200 characters, incorporating high-value keywords like "Développeur Web Réunion", "Next.js", "SaaS", and "Kap Numérik" for better indexing and click-through rates.
+- **Next.js File-Based Metadata**: Removed manual `openGraph: { images: [...] }` configuration in favor of Next.js's native file-based Metadata API.
+    - *Action*: The user was instructed to place `opengraph-image.png` in the `app/` directory for automatic generation.
+
 ## Session Summary (Jan 23, 2026)
 
 This session focused on adapting the content for better inclusivity, redesigning the personal brand image, and aligning the pricing strategy with the Reunion Island local market and the Kap Numérik grant.

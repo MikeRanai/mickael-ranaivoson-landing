@@ -31,35 +31,28 @@ const bebasNeue = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: SITE_CONFIG.title,
-  description: SITE_CONFIG.subtitle,
+  metadataBase: new URL("https://www.mickaelranaivoson.fr"),
+  title: {
+    default: SITE_CONFIG.title,
+    template: `%s | ${SITE_CONFIG.name}`,
+  },
+  description:
+    "Développeur Web à La Réunion, spécialisé en Next.js et SaaS. Mickael Ranaivoson crée des applications performantes et modernes. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
   openGraph: {
     title: SITE_CONFIG.title,
-    description: SITE_CONFIG.subtitle,
-    url: "https://mickaelranaivoson.fr", // Ou l'URL de prod si connue
+    description:
+      "Développeur Web à La Réunion, spécialisé en Next.js et SaaS. Mickael Ranaivoson crée des applications performantes et modernes. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
+    url: "https://www.mickaelranaivoson.fr",
     siteName: SITE_CONFIG.name,
-    images: [
-      {
-        url: "/images/site-illustration-mr.png",
-        width: 1200,
-        height: 630,
-        alt: SITE_CONFIG.title,
-      },
-    ],
     locale: "fr_FR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_CONFIG.title,
-    description: SITE_CONFIG.subtitle,
-    images: ["/images/site-illustration-mr.png"],
+    description:
+      "Développeur Web à La Réunion, spécialisé en Next.js et SaaS. Mickael Ranaivoson crée des applications performantes et modernes. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
   },
-  metadataBase: new URL(
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "https://mickaelranaivoson.fr"
-  ),
 };
 
 export default function RootLayout({
