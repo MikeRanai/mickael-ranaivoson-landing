@@ -300,11 +300,11 @@ export function Header() {
         initial={{ y: 0 }}
         animate={{ y: isHidden ? "-100%" : "0%" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
           ${
             isScrolled
-              ? "bg-slate-950/70 backdrop-blur-md border-b border-white/5"
-              : "bg-transparent"
+              ? "bg-slate-950/80 backdrop-blur-md border-b border-white/10 py-3"
+              : "bg-transparent border-b border-transparent py-5"
           }`}
       >
         <div className="container mx-auto px-4 sm:px-6">
