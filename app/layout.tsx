@@ -30,28 +30,40 @@ const bebasNeue = Bebas_Neue({
   weight: "400",
 });
 
+// =============================================================================
+// METADATA CONFIGURATION (Fixed for Facebook/Social Sharing)
+// =============================================================================
 export const metadata: Metadata = {
+  // CRITICAL: Forces absolute URLs for OG images, resolving Facebook Debugger issues.
   metadataBase: new URL("https://www.mickaelranaivoson.fr"),
+  
   title: {
     default: SITE_CONFIG.title,
     template: `%s | ${SITE_CONFIG.name}`,
   },
-  description:
-    "Développeur Web à La Réunion, spécialisé en Next.js et SaaS. Mickael Ranaivoson crée des applications performantes et modernes. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
+  
+  description: 
+    "Mickael Ranaivoson : Développeur Web à La Réunion. Création de Site Web, solutions SaaS et applications Next.js. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
+
   openGraph: {
     title: SITE_CONFIG.title,
-    description:
-      "Développeur Web à La Réunion, spécialisé en Next.js et SaaS. Mickael Ranaivoson crée des applications performantes et modernes. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
+    description: "Expert Next.js à La Réunion. Solutions SaaS et transformation digitale avec Kap Numérik.",
     url: "https://www.mickaelranaivoson.fr",
     siteName: SITE_CONFIG.name,
     locale: "fr_FR",
     type: "website",
+    // NOTE: opengraph-image.png is auto-detected by Next.js in the /app folder.
   },
+
   twitter: {
     card: "summary_large_image",
     title: SITE_CONFIG.title,
-    description:
-      "Développeur Web à La Réunion, spécialisé en Next.js et SaaS. Mickael Ranaivoson crée des applications performantes et modernes. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
+    description: "Développeur Web & SaaS à La Réunion - Expert Kap Numérik.",
+  },
+
+  // Alternative languages if needed in the future
+  alternates: {
+    canonical: "/",
   },
 };
 
