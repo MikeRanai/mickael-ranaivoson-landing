@@ -73,12 +73,12 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button 
-            size="lg" 
-            className="bg-[#ffa800] text-black hover:bg-[#ffb92e] text-lg px-8 font-bold h-14 rounded-full shadow-[0_0_20px_rgba(255,168,0,0.3)] transition-all hover:scale-105" 
+          <Button
+            size="lg"
+            className="bg-[#ffa800] text-black hover:bg-[#ffb92e] text-lg px-8 font-bold h-14 rounded-full shadow-[0_0_20px_rgba(255,168,0,0.3)] transition-all hover:scale-105"
             asChild
           >
-            <Link href="#contact">
+            <Link href="/liberer-mon-potentiel">
               Libérer mon potentiel <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
