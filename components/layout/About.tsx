@@ -7,7 +7,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 
 export function About() {
   return (
-    <section id="apropos" className="py-24 bg-slate-900/50 relative overflow-hidden">
+    <section id="apropos" className="py-24 bg-slate-950 relative overflow-hidden">
 
       {/* Fond décoratif */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

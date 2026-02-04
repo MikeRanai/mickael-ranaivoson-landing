@@ -331,8 +331,8 @@ export function Contact() {
     <section id="contact" className="py-24 bg-slate-950 relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 blur-3xl rounded-full" />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-600/10 blur-3xl rounded-full -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 blur-3xl rounded-full translate-y-1/2" />
       </div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
