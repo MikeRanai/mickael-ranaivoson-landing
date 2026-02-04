@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { SectionHeader } from "@/components/ui/section-header";
 import {
   Send,
   User,
@@ -336,13 +337,14 @@ export function Contact() {
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            On en <span className="text-[#ffa800]">discute ?</span>
-          </h2>
-          <p className="text-slate-400 max-w-xl mx-auto">
-            Pas de formulaire à rallonge. Dites-moi ce qui vous bloque, je vous réponds sous 24h.
-          </p>
+        <div className="mb-12">
+          <SectionHeader
+            label="Contact"
+            title="On en"
+            highlight="discute ?"
+            highlightColor="gold"
+            subtitle="Pas de formulaire à rallonge. Dites-moi ce qui vous bloque, je vous réponds sous 24h."
+          />
         </div>
 
         {/* Type Selector */}

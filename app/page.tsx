@@ -5,6 +5,7 @@ import { Pricing } from "@/components/layout/Pricing";
 import { Realizations } from "@/components/layout/Realizations";
 import { Contact } from "@/components/layout/Contact";
 import { About } from "@/components/layout/About";
+import { SectionDivider } from "@/components/ui/section-divider";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -13,9 +14,13 @@ export default function Home() {
       <Hero />
       <TechStack />
       <Solutions />
+      <SectionDivider />
       <Realizations />
+      <SectionDivider />
       <About />
+      <SectionDivider />
       <Pricing />
+      <SectionDivider />
       <Suspense fallback={null}>
         <Contact />
       </Suspense>

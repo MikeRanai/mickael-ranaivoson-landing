@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, Rocket, TrendingUp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export function Realizations() {
   return (
@@ -16,16 +17,15 @@ export function Realizations() {
         
         {/* Titre Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-              Réalisations <br/>
-              <span className="text-slate-500">marquantes.</span>
-            </h2>
-            <p className="text-lg text-slate-400">
-              Des projets conçus pour performer. Pas juste pour faire joli.
-            </p>
-          </div>
-          <Button variant="outline" className="hidden md:flex border-white/10 hover:bg-white/5 text-white gap-2">
+          <SectionHeader
+            label="Portfolio"
+            title="Réalisations"
+            highlight="marquantes."
+            highlightColor="muted"
+            subtitle="Des projets conçus pour performer. Pas juste pour faire joli."
+            align="left"
+          />
+          <Button variant="outline" className="hidden md:flex border-white/10 hover:bg-white/5 text-white gap-2 shrink-0">
             Voir tous les projets <ArrowRight className="w-4 h-4" />
           </Button>
         </div>

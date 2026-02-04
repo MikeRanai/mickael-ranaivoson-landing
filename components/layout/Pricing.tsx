@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Check, HelpCircle, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/ui/section-header";
 import Link from "next/link";
 
 export function Pricing() {
@@ -29,12 +30,13 @@ export function Pricing() {
         
         {/* En-tête */}
         <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-white">
-            Un investissement, <span className="text-[#ffa800]">pas une dépense</span>
-          </h2>
-          <p className="text-lg text-slate-400">
-            Combien vous coûtent vos heures perdues sur Excel chaque mois ? Probablement plus que mes tarifs.
-          </p>
+          <SectionHeader
+            label="Tarifs"
+            title="Un investissement,"
+            highlight="pas une dépense."
+            highlightColor="gold"
+            subtitle="Combien vous coûtent vos heures perdues sur Excel chaque mois ? Probablement plus que mes tarifs."
+          />
 
           {/* Toggle Kap Numérik */}
           <div className="flex flex-col items-center gap-3 mt-8">

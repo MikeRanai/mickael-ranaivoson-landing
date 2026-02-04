@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Coffee, Heart, Lightbulb } from "lucide-react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export function About() {
   return (
@@ -14,6 +15,16 @@ export function About() {
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
+        {/* Header Section */}
+        <div className="mb-16">
+          <SectionHeader
+            label="À propos"
+            title="L'humain"
+            highlight="derrière l'écran."
+            highlightColor="gold"
+          />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Photo */}
@@ -70,12 +81,9 @@ export function About() {
             className="space-y-6"
           >
             <div>
-              <span className="text-[#ffa800] font-medium text-sm uppercase tracking-wider">
-                L'humain derrière l'écran
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
                 Je suis Mickaël, et je déteste voir des gens galérer.
-              </h2>
+              </h3>
             </div>
 
             <div className="space-y-4 text-slate-400 leading-relaxed">

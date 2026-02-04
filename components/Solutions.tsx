@@ -1,8 +1,8 @@
 'use client'
 
 import { motion, Variants } from "framer-motion";
-// L'import fonctionnera maintenant que le fichier Étape 1 est créé
 import { TechScreenshot3D } from "./ui/tech-screenshot-3d";
+import { SectionHeader } from "./ui/section-header";
 import { ShoppingBag, TrendingUp, ArrowRight, Zap, Lock, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -38,14 +38,13 @@ export function Solutions() {
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         
         {/* Titre */}
-        <div className="text-center space-y-6 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
-            Vos problèmes, <span className="text-slate-500">mes solutions</span>
-          </h2>
-          <p className="text-lg text-slate-400">
-            Vous n'avez pas besoin d'un site web. Vous avez besoin de clients, de temps libre, de sérénité. Je m'occupe du reste.
-          </p>
-        </div>
+        <SectionHeader
+          label="Solutions"
+          title="Vos problèmes,"
+          highlight="mes solutions."
+          highlightColor="muted"
+          subtitle="Vous n'avez pas besoin d'un site web. Vous avez besoin de clients, de temps libre, de sérénité. Je m'occupe du reste."
+        />
 
         {/* Grille Bento */}
         <motion.div
