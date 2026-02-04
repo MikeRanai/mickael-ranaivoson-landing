@@ -8,7 +8,7 @@ interface SectionDividerProps {
 
 export function SectionDivider({ className = "" }: SectionDividerProps) {
   return (
-    <div className={`relative py-8 ${className}`}>
+    <div className={`relative py-12 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 ${className}`}>
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
         whileInView={{ scaleX: 1, opacity: 1 }}

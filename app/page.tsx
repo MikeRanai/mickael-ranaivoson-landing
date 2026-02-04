@@ -10,7 +10,7 @@ import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-full overflow-x-hidden flex flex-col bg-[#153d6e]">
+    <main className="min-h-screen w-full overflow-x-hidden flex flex-col bg-slate-950">
       <Hero />
       <TechStack />
       <Solutions />
