@@ -166,7 +166,7 @@ export function Pricing() {
                 </li>
             </ul>
             <Button className="w-full bg-[#ffa800] text-black hover:bg-[#ffb92e] font-bold shadow-lg shadow-[#ffa800]/20" asChild>
-                <Link href="?type=eligibilite#contact">Je suis éligible ?</Link>
+                <Link href="/aides-digitales-reunion">Je suis éligible ?</Link>
             </Button>
           </div>
 
@@ -203,9 +203,11 @@ export function Pricing() {
         {/* Note de bas de page rassurante */}
         <div className="mt-12 text-center">
             <p className="text-slate-500 text-sm max-w-2xl mx-auto">
-                <span className="text-[#ffa800]">*</span> Le dispositif Kap Numérik est une aide régionale soumise à éligibilité. 
-                Je vous accompagne dans le montage du dossier, mais l'accord final dépend de la Région Réunion. 
-                Le paiement se fait généralement en deux temps (acompte client puis remboursement).
+                <span className="text-[#ffa800]">*</span> Le dispositif Kap Numérik est une aide régionale soumise à éligibilité.
+                Je vous accompagne dans le montage du dossier, mais l&apos;accord final dépend de la Région Réunion.{" "}
+                <Link href="/aides-digitales-reunion" className="text-[#ffa800] hover:underline">
+                    En savoir plus sur le Kap Numérik →
+                </Link>
             </p>
         </div>
 

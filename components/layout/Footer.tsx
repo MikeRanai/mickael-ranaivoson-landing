@@ -65,6 +65,7 @@ export function Footer() {
               <li><Link href="#apropos" className="text-slate-400 hover:text-[#ffa800] transition-colors">Qui suis-je</Link></li>
               <li><Link href="#tarifs" className="text-slate-400 hover:text-[#ffa800] transition-colors">Tarifs</Link></li>
               <li><Link href="#contact" className="text-slate-400 hover:text-[#ffa800] transition-colors">Contact</Link></li>
+              <li><Link href="/aides-digitales-reunion" className="text-slate-400 hover:text-[#ffa800] transition-colors">Aides &amp; Financements</Link></li>
             </ul>
           </div>
 
