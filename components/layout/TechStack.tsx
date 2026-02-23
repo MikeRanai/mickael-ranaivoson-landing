@@ -22,12 +22,6 @@ const logos: Logo[] = [
     isImage: true
   },
   {
-    name: "React",
-    color: "hover:text-[#61DAFB]",
-    src: "/images/logos-dependances/React_Logo_SVG.svg",
-    isImage: true
-  },
-  {
     name: "TypeScript",
     color: "hover:text-[#3178C6]",
     src: "/images/logos-dependances/Typescript.svg",
@@ -67,15 +61,14 @@ const logos: Logo[] = [
   {
     name: "Claude AI",
     color: "hover:text-[#D97757]",
-    src: "/images/logos-dependances/Claude_AI_logo.svg",
+    src: "/images/logos-dependances/claude-logo-symbol-28055.svg",
     isImage: true
   },
   {
     name: "Resend",
     color: "hover:text-white",
-    src: "/images/logos-dependances/resend-wordmark-black.svg",
-    isImage: true,
-    className: "invert"
+    src: "/images/logos-dependances/resend-icon-white.svg",
+    isImage: true
   }
 ];
 
