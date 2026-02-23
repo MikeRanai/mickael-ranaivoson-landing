@@ -18,70 +18,64 @@ const logos: Logo[] = [
   {
     name: "Next.js",
     color: "hover:text-white",
-    src: "/images/Next.js_wordmark.svg",
-    isImage: true,
-    className: "invert" // Next.js logo is usually black, so invert for dark mode
+    src: "/images/logos-dependances/next_js_logo.svg",
+    isImage: true
   },
   {
     name: "React",
     color: "hover:text-[#61DAFB]",
-    src: "/images/React_Logo_SVG.svg",
+    src: "/images/logos-dependances/React_Logo_SVG.svg",
     isImage: true
   },
   {
     name: "TypeScript",
     color: "hover:text-[#3178C6]",
-    src: "/images/Typescript.svg",
+    src: "/images/logos-dependances/Typescript.svg",
     isImage: true
   },
   {
     name: "Symfony",
     color: "hover:text-white",
-    src: "/images/Symfony2.svg",
+    src: "/images/logos-dependances/Cib-symfony_(CoreUI_Icons_v1.0.0).svg",
     isImage: true,
-    className: "invert" // Symfony logo is usually black text
+    className: "invert"
   },
   {
     name: "PostgreSQL",
     color: "hover:text-[#336791]",
-    src: "/images/Postgresql_elephant.svg",
+    src: "/images/logos-dependances/Postgresql_elephant.svg",
     isImage: true
   },
   {
     name: "Tailwind",
     color: "hover:text-[#38BDF8]",
-    src: "/images/Tailwind_CSS_logo_with_dark_text.svg",
-    isImage: true,
-    className: "invert" // Invert to make dark text visible on dark bg
+    src: "/images/logos-dependances/Tailwind_CSS_Logo.svg",
+    isImage: true
   },
   {
     name: "Prisma",
-    color: "hover:text-white",
-    src: "/images/prisma-2.svg",
-    isImage: true,
-    className: "invert"
+    color: "hover:text-[#4DB6AC]",
+    src: "/images/logos-dependances/prisma-orm.svg",
+    isImage: true
   },
   {
     name: "Cloudflare",
     color: "hover:text-[#F38020]",
-    src: "/images/Cloudflare_Logo.svg",
-    isImage: true,
-    // Cloudflare logo usually has black text, so invert for dark mode.
-    // If the icon color shifts (orange -> blue), it's a tradeoff for text visibility without a specific dark-mode logo.
-    className: "invert" 
+    src: "/images/logos-dependances/cloudflare_logo.svg",
+    isImage: true
   },
   {
     name: "Claude AI",
     color: "hover:text-[#D97757]",
-    src: "/images/Claude_AI_logo.svg",
+    src: "/images/logos-dependances/Claude_AI_logo.svg",
     isImage: true
   },
   {
     name: "Resend",
     color: "hover:text-white",
-    src: "/images/resend-wordmark-black.svg",
+    src: "/images/logos-dependances/resend-wordmark-black.svg",
     isImage: true,
-    className: "invert" // Resend black wordmark needs inversion
+    className: "invert"
   }
 ];
 
@@ -118,19 +112,19 @@ export function TechStack() {
                         className={`group flex items-center gap-3 text-slate-600 transition-colors duration-300 cursor-default ${logo.color}`}
                     >
                         {logo.isImage ? (
-                            <div className="relative w-8 h-8 transition-transform duration-300 group-hover:scale-110">
-                                <Image 
-                                    src={logo.src!} 
+                            <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+                                <Image
+                                    src={logo.src!}
                                     alt={logo.name}
                                     fill
-                                    sizes="32px"
+                                    sizes="40px"
                                     className={`object-contain ${logo.className || ''}`}
                                 />
                             </div>
                         ) : (
                             <svg 
-                                viewBox="0 0 24 24" 
-                                className="w-8 h-8 fill-current transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                                viewBox="0 0 24 24"
+                                className="w-10 h-10 fill-current transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                             >
                                 {logo.path}
                             </svg>
