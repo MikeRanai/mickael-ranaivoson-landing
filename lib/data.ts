@@ -6,7 +6,8 @@ export const SITE_CONFIG = {
   socials: {
     github: "https://github.com/MikeRanai/",
     linkedin: "https://www.linkedin.com/in/mickael-ranaivoson",
-    facebook: "https://www.facebook.com/mickaelranaivoson.fr"
+    facebook: "https://www.facebook.com/mickaelranaivoson.fr",
+    malt: "https://www.malt.fr/profile/mickaelranaivoson"
   },
 };
 

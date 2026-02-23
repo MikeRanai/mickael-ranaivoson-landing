@@ -51,6 +51,13 @@ export function Footer() {
                 <Link href="https://www.linkedin.com/in/mickael-ranaivoson/" target="_blank" aria-label="Voir mon profil LinkedIn"><Linkedin className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
+                <Link href="https://www.malt.fr/profile/mickaelranaivoson" target="_blank" aria-label="Voir mon profil Malt">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.94 17.737a1.764 1.764 0 0 1-2.41.647l-4.08-2.356a.353.353 0 0 1 0-.611l4.08-2.356a1.764 1.764 0 0 1 2.41.647 1.764 1.764 0 0 1 0 1.764l-.001.001a1.764 1.764 0 0 1 .001 2.264zm-2.41-5.381L10.45 9.999a.353.353 0 0 1 0-.611l4.08-2.356a1.764 1.764 0 0 1 2.41.647 1.764 1.764 0 0 1-.647 2.41l-.001.001a1.764 1.764 0 0 1 .647 2.41 1.764 1.764 0 0 1-2.41.647l.001-.791zM7.06 6.263a1.764 1.764 0 0 1 2.41-.647l4.08 2.356a.353.353 0 0 1 0 .611L9.47 10.94a1.764 1.764 0 0 1-2.41-.647 1.764 1.764 0 0 1 0-1.764 1.764 1.764 0 0 1 0-2.266z"/>
+                  </svg>
+                </Link>
+              </Button>
+              <Button variant="ghost" size="icon" className="hover:text-[#ffa800] hover:bg-[#ffa800]/10" asChild>
                 <Link href="mailto:ranaimike@gmail.com" aria-label="Envoyer un email"><Mail className="w-5 h-5" /></Link>
               </Button>
             </div>
