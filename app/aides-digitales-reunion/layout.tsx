@@ -23,10 +23,37 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Accueil",
+      item: "https://www.mickaelranaivoson.fr",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Kap Numérik - Aides digitales",
+      item: "https://www.mickaelranaivoson.fr/aides-digitales-reunion",
+    },
+  ],
+};
+
 export default function AidesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

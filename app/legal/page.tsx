@@ -1,6 +1,20 @@
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Mentions Légales & CGV - Mickaël Ranaivoson",
-  description: "Informations légales, Conditions Générales de Vente et Politique de Confidentialité.",
+  description:
+    "Informations légales, Conditions Générales de Vente et Politique de Confidentialité de Mickaël Ranaivoson, développeur web à La Réunion.",
+  openGraph: {
+    title: "Mentions Légales & CGV - Mickaël Ranaivoson",
+    description:
+      "Informations légales, CGV et Politique de Confidentialité.",
+    url: "/legal",
+    type: "website",
+    locale: "fr_FR",
+  },
+  alternates: {
+    canonical: "/legal",
+  },
 };
 
 export default function LegalPage() {
@@ -28,7 +42,7 @@ export default function LegalPage() {
                 <li><strong>Responsable éditorial :</strong> Mickaël Ranaivoson</li>
                 <li><strong>Siège social :</strong>4 rue Jacquot, Saint-Paul 97460 La Réunion</li>
                 <li><strong>SIRET :</strong> 902 063 197 00021</li>
-                <li><strong>Email :</strong> ranaimike@gmai.com</li>
+                <li><strong>Email :</strong> ranaimike@gmail.com</li>
                 <li><strong>Téléphone :</strong> 0692342373</li>
             </ul>
 

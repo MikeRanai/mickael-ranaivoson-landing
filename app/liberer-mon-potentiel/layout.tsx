@@ -16,6 +16,28 @@ export const metadata: Metadata = {
     description:
       "Automatisez vos tâches répétitives. Retrouvez vos soirées. Développez votre activité.",
   },
+  alternates: {
+    canonical: "/liberer-mon-potentiel",
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Accueil",
+      item: "https://www.mickaelranaivoson.fr",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Libérer mon potentiel",
+      item: "https://www.mickaelranaivoson.fr/liberer-mon-potentiel",
+    },
+  ],
 };
 
 export default function LibererMonPotentielLayout({
@@ -23,5 +45,13 @@ export default function LibererMonPotentielLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {children}
+    </>
+  );
 }
