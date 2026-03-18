@@ -86,7 +86,7 @@ export function Realizations() {
 
 
         {/* --- GRID PROJETS SECONDAIRES --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* PROJET 2 */}
             <div className="group relative rounded-3xl overflow-hidden bg-slate-900/50 border border-white/5 hover:border-blue-500/30 transition-all duration-500 flex flex-col">
@@ -114,7 +114,32 @@ export function Realizations() {
                  </div>
             </div>
 
-            {/* PROJET 3 (Placeholder ou autre) */}
+            {/* PROJET 3 : Association Culture Afro */}
+            <div className="group relative rounded-3xl overflow-hidden bg-slate-900/50 border border-white/5 hover:border-rose-500/30 transition-all duration-500 flex flex-col">
+                 <div className="relative h-48 w-full bg-slate-800 overflow-hidden">
+                     <Image
+                        src="/images/benevoles.webp"
+                        alt="Association Culture Afro"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    />
+                     <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors" />
+                 </div>
+                 <div className="p-6 flex-1 flex flex-col">
+                    <div className="mb-4">
+                        <span className="text-rose-400 font-mono text-xs uppercase tracking-widest">Site Vitrine</span>
+                    </div>
+                    <h4 className="text-xl font-bold text-white mb-3">Association Culture Afro</h4>
+                    <p className="text-slate-400 text-sm mb-4 flex-1">
+                        Site vitrine pour une association réunionnaise passionnée qui accompagne les femmes à comprendre, entretenir et aimer leurs cheveux texturés en toute autonomie.
+                    </p>
+                    <Link href="https://www.assocultureafro.fr/" target="_blank" className="inline-flex items-center text-white font-medium hover:text-rose-400 transition-colors">
+                        Voir le site <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                 </div>
+            </div>
+
+            {/* PROJET 4 (Placeholder ou autre) */}
             <div className="group relative rounded-3xl overflow-hidden bg-slate-900/50 border border-white/5 hover:border-emerald-500/30 transition-all duration-500 flex flex-col">
                  <div className="relative h-48 w-full bg-slate-800 overflow-hidden flex items-center justify-center">
                      <div className="text-slate-600 font-mono text-lg">Projet Confidentiel</div>
