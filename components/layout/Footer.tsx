@@ -2,11 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/login")) {
+    return null;
+  }
 
   return (
     <footer className="bg-slate-950 border-t border-white/5 pt-16 pb-8 relative overflow-hidden">

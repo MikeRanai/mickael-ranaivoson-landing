@@ -1,7 +1,17 @@
 import { MetadataRoute } from "next";
+import { getPublishedPosts } from "@/actions/blog-public.actions";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.mickaelranaivoson.fr";
+const baseUrl = "https://www.mickaelranaivoson.fr";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getPublishedPosts();
+
+  const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${baseUrl}/blog/${p.slug}`,
+    lastModified: p.publishedAt ?? p.createdAt ?? new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
   return [
     {
@@ -9,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/seo`,
@@ -28,5 +44,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.5,
     },
+    ...postEntries,
   ];
 }

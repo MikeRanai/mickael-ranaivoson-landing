@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, MessageSquare } from "lucide-react";
 import {
   motion,
@@ -20,6 +21,7 @@ const navLinks = [
   { href: "/#realisations", label: "Mes projets" },
   { href: "/#apropos", label: "Qui suis-je" },
   { href: "/#tarifs", label: "Tarifs" },
+  { href: "/blog", label: "Blog" },
 ];
 
 // ===========================================
@@ -293,6 +295,11 @@ function MobileMenu({
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isHidden, isScrolled } = useSmartHeader();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/login")) {
+    return null;
+  }
 
   return (
     <>

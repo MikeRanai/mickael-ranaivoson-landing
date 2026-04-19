@@ -2,6 +2,51 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Apr 19, 2026)
+
+This session focused on integrating a fully administrable blog module into the landing page, based on `blog-module-template.md`.
+
+### 1. Database & Authentication
+- **Prisma Schema**: Added `Post` and `User` models alongside the existing `Subscriber`. The `Post` model includes title, slug, content (sanitized HTML), excerpt, metaDescription, tag, coverImage, published flag, and timestamps with indexes on `[published, publishedAt]` and `slug`.
+- **NextAuth v5**: Implemented credentials-based authentication with bcrypt-hashed passwords, JWT sessions (8h max age), and a route handler at `/api/auth/[...nextauth]`.
+- **Route Protection**: Used `proxy.ts` (Next 16 convention, replaces deprecated `middleware.ts`) to gate `/dashboard/*` behind auth, redirecting unauthenticated users to `/login`.
+- **Admin Seeding Script**: Added `scripts/create-admin.mjs` (`npm run create-admin`) to create/upsert the single admin user with bcrypt hashing (rounds: 12).
+
+### 2. Public Blog
+- **Routes**: Created `/blog` (list with client-side search + tag filters) and `/blog/[slug]` (article page with sanitized HTML, JSON-LD `BlogPosting`, share buttons, related posts).
+- **Components**: `BlogGrid`, `ArticleCard`, `ArticleContent`, `ShareButtons` — all matching the existing Deep Slate & Gold design system (`#ffa800`, `slate-950`, glassmorphism).
+- **SEO**: Per-article `generateMetadata` (canonical, OG, Twitter), dynamic `opengraph-image.tsx` (1200×630 with gradient + post title), and JSON-LD with author/publisher schema.
+- **Discovery**: RSS feed at `/feed.xml` (last 30 published posts, escaped XML), sitemap dynamically includes all published posts, and a "Blog" link added to the Header navigation (desktop + mobile menu).
+
+### 3. Admin Dashboard
+- **Layout**: Sidebar layout at `/dashboard/*` with auth guard (server-side check + redirect), logout via Server Action, hidden public Header/Footer (added pathname check in both components).
+- **CRUD**: `/dashboard/blog` (table with publish toggle and delete), `/dashboard/blog/new` (creation), `/dashboard/blog/[id]` (edition).
+- **Form**: `PostForm` uses React Hook Form + Zod validation, auto-slugify from title, character counters for excerpt/metaDescription, separate cards for Publication / Cover Image / SEO.
+- **Rich Text Editor**: Full TipTap v3 implementation (`RichTextEditor.tsx`) with toolbar: bold/italic/underline/strike, H2/H3, lists/quote/code/HR, text alignment, links, images (Cloudinary upload widget when configured, else URL prompt), YouTube embeds, undo/redo, character & word count.
+- **Image Upload**: `ImageUpload` component using `next-cloudinary` (`CldUploadWidget`) with graceful fallback to a URL input when Cloudinary env vars are missing.
+
+### 4. Security
+- **XSS Protection**: `sanitizeContent()` strips `<script>`, `<style>`, inline event handlers, and `javascript:`/non-image `data:` URIs before any `dangerouslySetInnerHTML`.
+- **Authorization**: Every mutation in `actions/blog.actions.ts` calls `requireAdmin()` before touching the DB.
+- **Slug Validation**: Zod schema enforces `^[a-z0-9-]+$` to prevent path injection.
+- **Robots**: `/login` and `/dashboard/*` flagged `noindex, nofollow`.
+
+### 5. Dependencies Added
+- **Auth**: `next-auth@beta`, `bcryptjs`, `@types/bcryptjs`
+- **Forms**: `react-hook-form`, `@hookform/resolvers`, `zod`
+- **Editor**: `@tiptap/react`, `@tiptap/pm`, `@tiptap/starter-kit`, `@tiptap/extension-image`, `@tiptap/extension-link`, `@tiptap/extension-underline`, `@tiptap/extension-text-align`, `@tiptap/extension-youtube`, `@tiptap/extension-character-count`
+- **Upload**: `next-cloudinary`
+- **Typography**: `@tailwindcss/typography` (added as `@plugin` in `globals.css` for the prose article rendering)
+
+### 6. Required Env Vars
+- `AUTH_SECRET` (generated via `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`)
+- `NEXTAUTH_URL` (`http://localhost:3000` in dev, full domain in prod)
+- `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` and `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` (optional — falls back to URL input)
+
+### 7. Type-Safety Notes
+- Zod v4 `.default()` on schemas creates input/output type mismatch with React Hook Form's resolver. Resolution: removed `.default()` calls from the Post schema and rely on RHF's `defaultValues` instead.
+- TipTap v3 + Next 16 requires `immediatelyRender: false` on `useEditor` to avoid SSR hydration issues.
+
 ## Session Summary (Jan 25, 2026)
 
 This session focused on fixing critical SEO issues (Open Graph metadata) and correcting navigation behaviors across the site.

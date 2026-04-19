@@ -8,7 +8,29 @@
       "Bash(npm install:*)",
       "Bash(npm audit:*)",
       "Bash(npm ls:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: add section headers and dividers for visual breaks\n\n- Create reusable SectionHeader component with animated badge and unified typography\n- Create SectionDivider component with gold diamond accent\n- Apply consistent section headers across Solutions, Realizations, About, Pricing, Contact\n- Add visual dividers between major sections\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push)",
+      "Bash(git commit:*)",
+      "Bash(cd:*)",
+      "Bash(find:*)",
+      "Bash(npx prisma *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"GET / : %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"GET /blog : %{http_code}\\\\n\" http://localhost:3000/blog)",
+      "Bash(curl -s -o /dev/null -w \"GET /login : %{http_code}\\\\n\" http://localhost:3000/login)",
+      "Bash(curl -s -o /dev/null -w \"GET /dashboard/blog : %{http_code}\\\\n\" http://localhost:3000/dashboard/blog)",
+      "Bash(curl -s -o /dev/null -w \"GET /feed.xml : %{http_code}\\\\n\" http://localhost:3000/feed.xml)",
+      "Bash(curl -s -o /dev/null -w \"GET /dashboard/blog \\(proxy\\) : %{http_code}\\\\n\" http://localhost:3000/dashboard/blog)",
+      "Bash(curl -s -o /dev/null -w \"GET /dashboard/blog \\(anon\\) : %{http_code}\\\\n\" http://localhost:3000/dashboard/blog)",
+      "Bash(curl -s -o /dev/null -w \"GET /sitemap.xml : %{http_code}\\\\n\" http://localhost:3000/sitemap.xml)",
+      "Bash(curl -s -o /dev/null -w \"GET /blog/non-existant : %{http_code}\\\\n\" http://localhost:3000/blog/non-existant)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/blog/non-existant)",
+      "Bash(curl -sv http://localhost:3000/blog/non-existant)",
+      "Bash(curl -s -o /dev/null -w \"GET /blog/non-existant retry : %{http_code}\\\\n\" http://localhost:3000/blog/non-existant)",
+      "Bash(curl -s http://localhost:3000/blog/non-existant)",
+      "Bash(node *)"
     ]
   }
 }
