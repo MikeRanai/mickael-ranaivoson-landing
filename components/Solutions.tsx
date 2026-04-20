@@ -101,13 +101,18 @@ export function Solutions() {
             {/* Zone Mobile centrée */}
             <div className="flex-1 w-full flex justify-center items-center">
                 <div className="w-full transform transition-transform duration-500 group-hover:scale-105">
-                    <TechScreenshot3D 
-                        src="/images/mobile-dashboard-nout-asso.png" 
-                        alt="Application Mobile" 
+                    <TechScreenshot3D
+                        src="/images/mobile-dashboard-nout-asso.png"
+                        alt="Application Mobile"
                         type="mobile"
                     />
                 </div>
             </div>
+
+            {/* CTA homogène avec les autres cartes */}
+            <Link href="?type=projet#contact" className="mt-6 text-amber-500 text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                Voir un exemple <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
 
           {/* CARTE 3 : E-Commerce */}
@@ -119,9 +124,12 @@ export function Solutions() {
               <ShoppingBag className="text-amber-500 h-5 w-5" />
             </div>
             <h3 className="text-lg font-bold mb-2 text-white">Vendez en ligne, encaissez direct</h3>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-400 text-sm mb-4">
               Plus besoin de courir après les virements. Vos clients paient en ligne, vous recevez l'argent.
             </p>
+            <Link href="?type=devis#contact" className="text-amber-500 text-sm font-medium flex items-center gap-1 hover:gap-2 transition-all">
+                Vendre en ligne <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
 
           {/* CARTE 4 : SEO */}

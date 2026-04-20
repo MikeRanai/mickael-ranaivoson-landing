@@ -42,12 +42,12 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_CONFIG.name}`,
   },
   
-  description: 
-    "Mickael Ranaivoson : Développeur Web à La Réunion. Création de Site Web, solutions SaaS et applications Next.js. Expert éligible au dispositif Kap Numérik pour votre transformation digitale.",
+  description:
+    "Développeur web freelance à La Réunion (974). Je crée des sites internet rapides et des outils d'automatisation sur-mesure pour artisans, TPE et associations. Gagnez du temps. Accompagnement aide Kap Numérik (réouverture 2026).",
 
   openGraph: {
     title: SITE_CONFIG.title,
-    description: "Expert Next.js à La Réunion. Solutions SaaS et transformation digitale avec Kap Numérik.",
+    description: "Sites web et automatisations sur-mesure à La Réunion. Récupérez du temps pour ce qui compte vraiment.",
     url: "https://www.mickaelranaivoson.fr",
     siteName: SITE_CONFIG.name,
     locale: "fr_FR",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: SITE_CONFIG.title,
-    description: "Développeur Web & SaaS à La Réunion - Expert Kap Numérik.",
+    description: "Sites web et automatisations sur-mesure à La Réunion (974).",
   },
 
   // Alternative languages if needed in the future

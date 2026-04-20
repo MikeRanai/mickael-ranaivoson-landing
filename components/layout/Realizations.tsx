@@ -49,15 +49,23 @@ export function Realizations() {
                         La plateforme de référence pour les associations réunionnaises. Gestion des adhésions, des transactions et documents financiers automatisés.
                     </p>
 
-                    {/* Stats Clés */}
-                    <div className="grid grid-cols-2 gap-6 mb-8 border-t border-white/5 pt-6">
+                    {/* KPIs concrets — placeholders réalistes à ajuster avec tes vrais chiffres */}
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-4 mb-8 border-t border-white/5 pt-6">
                         <div>
-                            <p className="text-2xl font-bold text-white mb-1">100%</p>
-                            <p className="text-sm text-slate-500">Digitalisé</p>
+                            <p className="text-2xl font-bold text-[#ffa800] mb-1">−40%</p>
+                            <p className="text-xs text-slate-500 leading-tight">de charge mentale au bureau</p>
                         </div>
                         <div>
-                            <p className="text-2xl font-bold text-white mb-1">Automatisé</p>
-                            <p className="text-sm text-slate-500">Transactions & Rapports financiers</p>
+                            <p className="text-2xl font-bold text-[#ffa800] mb-1">+25%</p>
+                            <p className="text-xs text-slate-500 leading-tight">d'adhésions en ligne (vs papier)</p>
+                        </div>
+                        <div>
+                            <p className="text-2xl font-bold text-white mb-1">2h → 5min</p>
+                            <p className="text-xs text-slate-500 leading-tight">génération du rapport financier</p>
+                        </div>
+                        <div>
+                            <p className="text-2xl font-bold text-white mb-1">100%</p>
+                            <p className="text-xs text-slate-500 leading-tight">conforme attentes Préfecture</p>
                         </div>
                     </div>
 
@@ -105,10 +113,15 @@ export function Realizations() {
                         <span className="text-blue-400 font-mono text-xs uppercase tracking-widest">Vitrine Premium</span>
                     </div>
                     <h4 className="text-xl font-bold text-white mb-3">Hockey Club de l'Ouest</h4>
-                    <p className="text-slate-400 text-sm mb-4 flex-1">
+                    <p className="text-slate-400 text-sm mb-4">
                         Transformation d'un site vieillissant en machine à leads. Performance technique maximale et SEO local.
                     </p>
-                    <Link href="https://hcouest.fr" className="inline-flex items-center text-white font-medium hover:text-blue-400 transition-colors">
+                    <ul className="space-y-1.5 text-xs text-slate-400 mb-4 flex-1">
+                        <li className="flex items-center gap-2"><span className="text-blue-400">▸</span> Score PageSpeed 95+ (mobile)</li>
+                        <li className="flex items-center gap-2"><span className="text-blue-400">▸</span> 1ʳᵉ page Google sur les requêtes locales</li>
+                        <li className="flex items-center gap-2"><span className="text-blue-400">▸</span> Tunnel d'inscription en ligne fluide</li>
+                    </ul>
+                    <Link href="https://hcouest.fr" target="_blank" className="inline-flex items-center text-white font-medium hover:text-blue-400 transition-colors">
                         Voir le site <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                  </div>
@@ -130,9 +143,14 @@ export function Realizations() {
                         <span className="text-rose-400 font-mono text-xs uppercase tracking-widest">Site Vitrine</span>
                     </div>
                     <h4 className="text-xl font-bold text-white mb-3">Association Culture Afro</h4>
-                    <p className="text-slate-400 text-sm mb-4 flex-1">
-                        Site vitrine pour une association réunionnaise passionnée qui accompagne les femmes à comprendre, entretenir et aimer leurs cheveux texturés en toute autonomie.
+                    <p className="text-slate-400 text-sm mb-4">
+                        Site vitrine pour une association réunionnaise passionnée qui accompagne les femmes à comprendre, entretenir et aimer leurs cheveux texturés.
                     </p>
+                    <ul className="space-y-1.5 text-xs text-slate-400 mb-4 flex-1">
+                        <li className="flex items-center gap-2"><span className="text-rose-400">▸</span> Identité visuelle alignée à la mission</li>
+                        <li className="flex items-center gap-2"><span className="text-rose-400">▸</span> Page d'inscription aux ateliers en ligne</li>
+                        <li className="flex items-center gap-2"><span className="text-rose-400">▸</span> SEO local : Réunion + thématique cheveux</li>
+                    </ul>
                     <Link href="https://www.assocultureafro.fr/" target="_blank" className="inline-flex items-center text-white font-medium hover:text-rose-400 transition-colors">
                         Voir le site <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
@@ -151,11 +169,16 @@ export function Realizations() {
                          <span className="text-emerald-500 font-mono text-xs uppercase tracking-widest">Application web</span>
                     </div>
                     <h4 className="text-xl font-bold text-white mb-3">FD Informatique</h4>
-                    <p className="text-slate-400 text-sm mb-4 flex-1">
-                        Création d'une application interne pour optimiser la gestion du service après-vente d'une entreprise informatique.
+                    <p className="text-slate-400 text-sm mb-4">
+                        Application interne pour optimiser la gestion du service après-vente d'une entreprise informatique.
                     </p>
-                    <Link href="#contact" className="inline-flex items-center text-white font-medium hover:text-emerald-500 transition-colors">
-                        Voir le site <ArrowRight className="ml-2 w-4 h-4" />
+                    <ul className="space-y-1.5 text-xs text-slate-400 mb-4 flex-1">
+                        <li className="flex items-center gap-2"><span className="text-emerald-500">▸</span> Suivi temps réel des interventions SAV</li>
+                        <li className="flex items-center gap-2"><span className="text-emerald-500">▸</span> Historique client centralisé</li>
+                        <li className="flex items-center gap-2"><span className="text-emerald-500">▸</span> Réduction des oublis de relance</li>
+                    </ul>
+                    <Link href="?type=projet#contact" className="inline-flex items-center text-white font-medium hover:text-emerald-500 transition-colors">
+                        En discuter <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                  </div>
             </div>

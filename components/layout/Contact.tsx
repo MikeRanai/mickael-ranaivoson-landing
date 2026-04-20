@@ -40,13 +40,13 @@ const formTypes = {
     submitText: "Recevoir mon estimation",
   },
   eligibilite: {
-    title: "Vous êtes éligible à l'aide Kap Numérik ?",
-    subtitle: "Je vérifie gratuitement si vous pouvez récupérer jusqu'à 3200€ sur votre projet.",
+    title: "Préparer mon dossier Kap Numérik 2026",
+    subtitle: "Le dispositif rouvre prochainement. On prépare votre pré-dossier ensemble pour passer en priorité.",
     icon: HelpCircle,
     color: "emerald",
     fields: ["name", "email", "phone", "company", "siret", "message"],
     messagePlaceholder: "Quelle est l'activité de votre entreprise ? Quel projet avez-vous en tête ?",
-    submitText: "Vérifier mon éligibilité",
+    submitText: "Préparer mon dossier",
   },
   audit: {
     title: "Votre site est-il performant ?",
@@ -368,7 +368,7 @@ export function Contact() {
                 <span className="hidden sm:inline">
                   {type === "projet" && "Projet"}
                   {type === "devis" && "Devis"}
-                  {type === "eligibilite" && "Éligibilité"}
+                  {type === "eligibilite" && "Dossier Kap 2026"}
                   {type === "audit" && "Audit SEO"}
                 </span>
               </button>

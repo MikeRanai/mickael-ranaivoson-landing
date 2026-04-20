@@ -1,8 +1,10 @@
 import { Hero } from "@/components/Hero";
 import { Solutions } from "@/components/Solutions";
 import { TechStack } from "@/components/layout/TechStack";
+import { TechBenefits } from "@/components/layout/TechBenefits";
 import { Pricing } from "@/components/layout/Pricing";
 import { Realizations } from "@/components/layout/Realizations";
+import { Testimonials } from "@/components/layout/Testimonials";
 import { Contact } from "@/components/layout/Contact";
 import { About } from "@/components/layout/About";
 import { SectionDivider } from "@/components/ui/section-divider";
@@ -18,7 +20,7 @@ const jsonLd = {
       url: "https://www.mickaelranaivoson.fr",
       logo: "https://www.mickaelranaivoson.fr/images/logo.png",
       description:
-        "Développeur Web à La Réunion. Création de sites web, solutions SaaS et applications Next.js. Expert éligible au dispositif Kap Numérik.",
+        "Développeur web freelance à Saint-Paul (974). Création de sites, SaaS et automatisations métier pour artisans, commerçants et associations réunionnaises. Accompagnement aides numériques régionales.",
       telephone: "+262692342373",
       email: "ranaimike@gmail.com",
       address: {
@@ -38,6 +40,22 @@ const jsonLd = {
         "@type": "Place",
         name: "La Réunion",
       },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "09:00",
+          closes: "18:00",
+        },
+      ],
+      makesOffer: [
+        { "@type": "Offer", name: "Création site internet 974" },
+        { "@type": "Offer", name: "Automatisation TPE / Association" },
+        {
+          "@type": "Offer",
+          name: "Accompagnement aides numériques régionales (Kap Numérik)",
+        },
+      ],
       priceRange: "€€",
       sameAs: [
         "https://github.com/MikeRanai/",
@@ -61,13 +79,14 @@ const jsonLd = {
         "@id": "https://www.mickaelranaivoson.fr/#business",
       },
       knowsAbout: [
+        "Développement web La Réunion",
+        "Automatisation métier TPE",
+        "Création site internet 974",
+        "Outils sur-mesure pour associations",
+        "SEO local Réunion",
         "Next.js",
-        "React",
+        "Prisma",
         "TypeScript",
-        "Tailwind CSS",
-        "SEO Technique",
-        "Développement Web",
-        "SaaS",
       ],
     },
     {
@@ -95,6 +114,12 @@ export default function Home() {
       <Solutions />
       <SectionDivider />
       <Realizations />
+      <SectionDivider />
+      {/* Server component — ne s'affiche que si au moins 1 témoignage publié en DB */}
+      <Testimonials />
+      <SectionDivider />
+      {/* Déplacé après Portfolio + Témoignages : on rassure techniquement APRÈS avoir prouvé le bénéfice */}
+      <TechBenefits />
       <SectionDivider />
       <About />
       <SectionDivider />

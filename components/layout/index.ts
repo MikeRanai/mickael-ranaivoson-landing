@@ -2,5 +2,8 @@ export { Header } from "./Header";
 export { Footer } from "./Footer";
 export { Pricing } from "./Pricing";
 export { TechStack } from "./TechStack";
+export { TechBenefits } from "./TechBenefits";
+export { Testimonials } from "./Testimonials";
+export { Realizations } from "./Realizations";
 export { Contact } from "./Contact";
 export { About } from "./About";
