@@ -10,13 +10,30 @@ export function slugify(text: string): string {
 }
 
 export function sanitizeContent(html: string): string {
-  return html
+  const sanitized = html
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
     .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
     .replace(/\s+on\w+="[^"]*"/g, "")
     .replace(/\s+on\w+='[^']*'/g, "")
     .replace(/javascript:/gi, "")
     .replace(/data:(?!image\/)/gi, "");
+  return optimizeInlineCloudinaryImages(sanitized, 1200);
+}
+
+function optimizeInlineCloudinaryImages(html: string, width: number): string {
+  return html.replace(
+    /<img\b([^>]*?)\ssrc=(["'])([^"']+)\2([^>]*)>/gi,
+    (match, before: string, quote: string, url: string, after: string) => {
+      if (!url.includes("res.cloudinary.com") || !url.includes("/upload/")) {
+        return match;
+      }
+      const alreadyOptimized = /\/upload\/[^/]*(?:f_auto|q_auto|w_\d+)/.test(url);
+      const optimized = alreadyOptimized
+        ? url
+        : url.replace("/upload/", `/upload/f_auto,q_auto,w_${width}/`);
+      return `<img${before} src=${quote}${optimized}${quote}${after}>`;
+    }
+  );
 }
 
 export function stripHtml(html: string): string {
