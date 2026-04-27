@@ -4,11 +4,12 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
-import { Loader2, Save } from "lucide-react";
+import { Eye, Loader2, Save } from "lucide-react";
 import { createPost, updatePost } from "@/actions/blog.actions";
 import { POST_TAGS, slugify } from "@/lib/blog-utils";
 import RichTextEditor from "./RichTextEditor";
 import ImageUpload from "./ImageUpload";
+import ArticlePreview from "./ArticlePreview";
 
 const postSchema = z.object({
   title: z.string().min(1, "Le titre est obligatoire").max(200),
@@ -30,6 +31,7 @@ type ExistingPost = PostFormValues & { id: string };
 
 export default function PostForm({ post }: { post?: ExistingPost }) {
   const [error, setError] = useState<string | null>(null);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   const {
     register,
@@ -55,6 +57,7 @@ export default function PostForm({ post }: { post?: ExistingPost }) {
   const metaDesc = watch("metaDescription") ?? "";
   const excerpt = watch("excerpt") ?? "";
   const slug = watch("slug");
+  const previewData = watch();
 
   const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!post) setValue("slug", slugify(e.target.value));
@@ -74,6 +77,18 @@ export default function PostForm({ post }: { post?: ExistingPost }) {
   };
 
   return (
+    <>
+    <ArticlePreview
+      open={previewOpen}
+      onClose={() => setPreviewOpen(false)}
+      data={{
+        title: previewData.title,
+        content: previewData.content,
+        excerpt: previewData.excerpt,
+        tag: previewData.tag,
+        coverImage: previewData.coverImage,
+      }}
+    />
     <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2 space-y-5">
         <Field label="Titre" error={errors.title?.message}>
@@ -140,6 +155,17 @@ export default function PostForm({ post }: { post?: ExistingPost }) {
             {post ? "Mettre à jour" : "Créer l'article"}
           </button>
 
+          <button
+            type="button"
+            onClick={() => setPreviewOpen(true)}
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5
+              rounded-lg border border-white/10 bg-slate-900/70 text-slate-200
+              hover:border-[#ffa800]/50 hover:text-[#ffa800] transition-colors"
+          >
+            <Eye className="w-4 h-4" />
+            Aperçu
+          </button>
+
           {error && (
             <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
               {error}
@@ -193,6 +219,7 @@ export default function PostForm({ post }: { post?: ExistingPost }) {
         </div>
       </aside>
     </form>
+    </>
   );
 }
 

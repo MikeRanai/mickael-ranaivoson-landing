@@ -63,12 +63,20 @@ export default function ImageUpload({
       ) : (
         <div
           className="aspect-[16/9] rounded-xl border-2 border-dashed border-white/10
-            flex flex-col items-center justify-center text-slate-500 bg-slate-900/40"
+            flex flex-col items-center justify-center text-slate-500 bg-slate-900/40 px-4 text-center"
         >
           <ImageIcon className="w-10 h-10 mb-2 opacity-50" />
           <p className="text-sm">Aucune image sélectionnée</p>
+          <p className="text-xs mt-1 text-slate-600">
+            Recommandé : 1600 × 900 px (16:9)
+          </p>
         </div>
       )}
+
+      <p className="text-xs text-slate-500 leading-relaxed">
+        Format conseillé : <span className="text-slate-300">1600 × 900 px</span> (ratio 16:9),
+        JPG ou WebP, &lt; 500 Ko. Sera aussi utilisée pour le partage social (OpenGraph 1200 × 630).
+      </p>
 
       <CldUploadWidget
         uploadPreset={uploadPreset}
