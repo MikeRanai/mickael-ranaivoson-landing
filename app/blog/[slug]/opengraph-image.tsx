@@ -5,6 +5,11 @@ export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+function ogCoverUrl(url: string): string {
+  if (!url.includes("res.cloudinary.com") || !url.includes("/upload/")) return url;
+  return url.replace("/upload/", "/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_auto/");
+}
+
 export default async function OgImage({
   params,
 }: {
@@ -12,8 +17,33 @@ export default async function OgImage({
 }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  const title = post?.title ?? "Blog";
 
+  if (post?.coverImage) {
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            height: "100%",
+            position: "relative",
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={ogCoverUrl(post.coverImage)}
+            alt=""
+            width={size.width}
+            height={size.height}
+            style={{ objectFit: "cover", width: "100%", height: "100%" }}
+          />
+        </div>
+      ),
+      size
+    );
+  }
+
+  const title = post?.title ?? "Blog";
   return new ImageResponse(
     (
       <div
