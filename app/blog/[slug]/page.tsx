@@ -42,13 +42,11 @@ export async function generateMetadata({
       url: `/blog/${post.slug}`,
       publishedTime: post.publishedAt?.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
-      images: post.coverImage ? [{ url: post.coverImage, width: 1200, height: 630 }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description,
-      images: post.coverImage ? [post.coverImage] : undefined,
     },
   };
 }
