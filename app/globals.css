@@ -333,3 +333,75 @@
     box-shadow: 0 0 30px -10px rgba(255, 168, 0, 0.2);
   }
 }
+
+/* ============================================
+   TipTap editor — tables & utilities
+   ============================================ */
+.tiptap-editor table,
+.prose .tiptap-table,
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  table-layout: fixed;
+}
+
+.tiptap-editor th,
+.tiptap-editor td,
+.prose .tiptap-table th,
+.prose .tiptap-table td,
+.prose table th,
+.prose table td {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 0.85rem;
+  vertical-align: top;
+  position: relative;
+  color: #cbd5e1;
+}
+
+.tiptap-editor th,
+.prose .tiptap-table th,
+.prose table th {
+  background-color: rgba(255, 168, 0, 0.08);
+  color: #ffb92e;
+  font-weight: 600;
+  text-align: left;
+}
+
+.tiptap-editor tr:nth-child(even) td,
+.prose .tiptap-table tr:nth-child(even) td,
+.prose table tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Active cell highlight inside the editor */
+.tiptap-editor .selectedCell:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 168, 0, 0.12);
+  pointer-events: none;
+}
+
+/* Column resize handle */
+.tiptap-editor .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: rgba(255, 168, 0, 0.7);
+  pointer-events: none;
+}
+
+.tiptap-editor.resize-cursor {
+  cursor: col-resize;
+}
+
+.tiptap-editor .tableWrapper {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}

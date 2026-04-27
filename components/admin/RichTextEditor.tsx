@@ -1,6 +1,7 @@
 "use client";
 
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
+import { BubbleMenu } from "@tiptap/react/menus";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
@@ -8,6 +9,7 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Youtube from "@tiptap/extension-youtube";
 import CharacterCount from "@tiptap/extension-character-count";
+import { Table, TableRow, TableHeader, TableCell } from "@tiptap/extension-table";
 import {
   Bold,
   Italic,
@@ -28,6 +30,15 @@ import {
   Image as ImageIcon,
   Youtube as YoutubeIcon,
   Minus,
+  Table as TableIcon,
+  Rows3,
+  Columns3,
+  Trash2,
+  ArrowLeftToLine,
+  ArrowRightToLine,
+  ArrowUpToLine,
+  ArrowDownToLine,
+  TableProperties,
 } from "lucide-react";
 import { useEffect } from "react";
 import { CldUploadWidget } from "next-cloudinary";
@@ -54,13 +65,20 @@ export default function RichTextEditor({
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Youtube.configure({ controls: true, nocookie: true, width: 720, height: 405 }),
       CharacterCount,
+      Table.configure({
+        resizable: true,
+        HTMLAttributes: { class: "tiptap-table" },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     content: value,
     immediatelyRender: false,
     editorProps: {
       attributes: {
         class:
-          "prose prose-invert prose-lg max-w-none min-h-[400px] p-6 focus:outline-none " +
+          "tiptap-editor prose prose-invert prose-lg max-w-none min-h-[400px] p-6 focus:outline-none " +
           "prose-headings:text-white prose-p:text-slate-200 prose-a:text-[#ffa800] " +
           "prose-strong:text-white prose-code:text-[#ffb92e] " +
           "prose-blockquote:border-l-[#ffa800] prose-blockquote:text-slate-300",
@@ -80,12 +98,178 @@ export default function RichTextEditor({
   return (
     <div className="rounded-xl border border-white/10 bg-slate-900/60 overflow-hidden">
       <Toolbar editor={editor} />
+      <BubbleMenu
+        editor={editor}
+        options={{ placement: "top", offset: 8 }}
+        shouldShow={({ editor, from, to }) => {
+          if (from === to) return false;
+          if (editor.isActive("image")) return false;
+          if (editor.isActive("youtube")) return false;
+          return true;
+        }}
+        className="flex items-center gap-0.5 rounded-lg border border-white/10 bg-slate-950/95 backdrop-blur-md shadow-2xl shadow-black/50 p-1"
+      >
+        <SelectionMenu editor={editor} />
+      </BubbleMenu>
+      <BubbleMenu
+        editor={editor}
+        pluginKey="tableBubbleMenu"
+        options={{ placement: "bottom", offset: 8 }}
+        shouldShow={({ editor }) => editor.isActive("table")}
+        className="flex items-center gap-0.5 rounded-lg border border-white/10 bg-slate-950/95 backdrop-blur-md shadow-2xl shadow-black/50 p-1"
+      >
+        <TableMenu editor={editor} />
+      </BubbleMenu>
       <EditorContent editor={editor} />
       <div className="px-4 py-2 border-t border-white/5 text-xs text-slate-500 flex justify-between">
         <span>{editor.storage.characterCount.words()} mots</span>
         <span>{editor.storage.characterCount.characters()} caractères</span>
       </div>
     </div>
+  );
+}
+
+function SelectionMenu({ editor }: { editor: Editor }) {
+  const setLink = () => {
+    const prev = editor.getAttributes("link").href ?? "";
+    const url = window.prompt("URL du lien :", prev);
+    if (url === null) return;
+    if (url === "") {
+      editor.chain().focus().unsetLink().run();
+      return;
+    }
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  };
+
+  return (
+    <>
+      <ToolbarButton
+        active={editor.isActive("bold")}
+        onClick={() => editor.chain().focus().toggleBold().run()}
+        label="Gras"
+        size="sm"
+      >
+        <Bold className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        active={editor.isActive("italic")}
+        onClick={() => editor.chain().focus().toggleItalic().run()}
+        label="Italique"
+        size="sm"
+      >
+        <Italic className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        active={editor.isActive("underline")}
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        label="Souligné"
+        size="sm"
+      >
+        <UnderlineIcon className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        active={editor.isActive("strike")}
+        onClick={() => editor.chain().focus().toggleStrike().run()}
+        label="Barré"
+        size="sm"
+      >
+        <Strikethrough className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <Divider />
+      <ToolbarButton
+        active={editor.isActive("heading", { level: 2 })}
+        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        label="Titre 2"
+        size="sm"
+      >
+        <Heading2 className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        active={editor.isActive("heading", { level: 3 })}
+        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+        label="Titre 3"
+        size="sm"
+      >
+        <Heading3 className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <Divider />
+      <ToolbarButton active={editor.isActive("link")} onClick={setLink} label="Lien" size="sm">
+        <LinkIcon className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        active={editor.isActive("code")}
+        onClick={() => editor.chain().focus().toggleCode().run()}
+        label="Code en ligne"
+        size="sm"
+      >
+        <Code className="w-3.5 h-3.5" />
+      </ToolbarButton>
+    </>
+  );
+}
+
+function TableMenu({ editor }: { editor: Editor }) {
+  return (
+    <>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().addColumnBefore().run()}
+        label="Colonne avant"
+        size="sm"
+      >
+        <ArrowLeftToLine className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().addColumnAfter().run()}
+        label="Colonne après"
+        size="sm"
+      >
+        <ArrowRightToLine className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().deleteColumn().run()}
+        label="Supprimer colonne"
+        size="sm"
+      >
+        <Columns3 className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <Divider />
+      <ToolbarButton
+        onClick={() => editor.chain().focus().addRowBefore().run()}
+        label="Ligne avant"
+        size="sm"
+      >
+        <ArrowUpToLine className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().addRowAfter().run()}
+        label="Ligne après"
+        size="sm"
+      >
+        <ArrowDownToLine className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().deleteRow().run()}
+        label="Supprimer ligne"
+        size="sm"
+      >
+        <Rows3 className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <Divider />
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleHeaderRow().run()}
+        label="Basculer en-tête"
+        size="sm"
+      >
+        <TableProperties className="w-3.5 h-3.5" />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().deleteTable().run()}
+        label="Supprimer le tableau"
+        size="sm"
+      >
+        <Trash2 className="w-3.5 h-3.5" />
+      </ToolbarButton>
+    </>
   );
 }
 
@@ -111,6 +295,14 @@ function Toolbar({ editor }: { editor: Editor }) {
     const url = window.prompt("URL de l'image :");
     if (!url) return;
     editor.chain().focus().setImage({ src: url }).run();
+  };
+
+  const insertTable = () => {
+    editor
+      .chain()
+      .focus()
+      .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+      .run();
   };
 
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -258,6 +450,14 @@ function Toolbar({ editor }: { editor: Editor }) {
         <YoutubeIcon className="w-4 h-4" />
       </ToolbarButton>
 
+      <ToolbarButton
+        onClick={insertTable}
+        label="Insérer un tableau (3×3)"
+        active={editor.isActive("table")}
+      >
+        <TableIcon className="w-4 h-4" />
+      </ToolbarButton>
+
       <Divider />
 
       <ToolbarButton
@@ -284,13 +484,16 @@ function ToolbarButton({
   active,
   disabled,
   label,
+  size = "md",
 }: {
   children: React.ReactNode;
   onClick: () => void;
   active?: boolean;
   disabled?: boolean;
   label: string;
+  size?: "sm" | "md";
 }) {
+  const sizeClass = size === "sm" ? "w-7 h-7" : "w-8 h-8";
   return (
     <button
       type="button"
@@ -298,7 +501,7 @@ function ToolbarButton({
       disabled={disabled}
       aria-label={label}
       title={label}
-      className={`w-8 h-8 inline-flex items-center justify-center rounded-md transition-colors
+      className={`${sizeClass} inline-flex items-center justify-center rounded-md transition-colors
         ${
           active
             ? "bg-[#ffa800] text-slate-950"
