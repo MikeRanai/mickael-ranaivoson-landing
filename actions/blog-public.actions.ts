@@ -1,8 +1,6 @@
-import { unstable_noStore as noStore } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 export async function getPublishedPosts(options?: { limit?: number; tag?: string }) {
-  noStore();
   return prisma.post.findMany({
     where: {
       published: true,
@@ -25,14 +23,12 @@ export async function getPublishedPosts(options?: { limit?: number; tag?: string
 }
 
 export async function getPostBySlug(slug: string) {
-  noStore();
   return prisma.post.findFirst({
     where: { slug, published: true },
   });
 }
 
 export async function getRelatedPosts(currentSlug: string, tag: string, limit = 3) {
-  noStore();
   return prisma.post.findMany({
     where: {
       published: true,
