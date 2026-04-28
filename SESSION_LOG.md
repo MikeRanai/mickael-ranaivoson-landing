@@ -2,6 +2,25 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Apr 28, 2026)
+
+Diagnosed two reported issues — Facebook OG image not displaying and missing favicon in Google search results — and fixed the favicon side.
+
+### 1. Facebook OG image (no code change)
+Inspected the live HTML served to `facebookexternalhit/1.1` and confirmed all OG meta tags are correct (`og:image`, `og:image:width=1200`, `og:image:height=630`, `og:image:type=image/png`, absolute URL via `metadataBase`). The `app/opengraph-image.png` itself is served 200 OK at 1200×630, 181 KB. Conclusion: code is fine, the issue is Facebook's scraper cache holding a stale snapshot from before the recent OG fixes (commits `0a65fca`, `a38cfb1`). Resolution path: re-collect via the Sharing Debugger.
+
+### 2. Google favicon (commit `366720f`)
+Two real bugs uncovered by inspecting the production HTML:
+- **`app/apple-icon.svg` was 404'ing in production.** Next.js App Router's icon convention only auto-detects `apple-icon.{jpg,jpeg,png}` — the `.svg` variant is silently ignored, so no `<link rel="apple-touch-icon">` was emitted at all.
+- **Only an SVG favicon was exposed.** Google does technically support SVG favicons but indexes them poorly, especially when the source has a complex path on a large viewBox (here `viewBox="0 0 8334 8334"` with the MR + Réunion path) — rasterization to 16×16 in the SERP comes out illegible and Google often skips it.
+
+**Fix**:
+- Added `app/icon.png` (512×512) alongside the existing `icon.svg` so Next.js emits both `<link rel="icon" type="image/png" sizes="512x512">` and the SVG variant. Google's indexer now has a clean raster to pick from.
+- Replaced `app/apple-icon.svg` with `app/apple-icon.png` (180×180) so the apple-touch-icon route resolves correctly.
+- Added `scripts/generate-icons.mjs` to regenerate both PNGs from `app/icon.svg` via `sharp` (uses `density: 96, limitInputPixels: false` because the SVG's 8334×8334 viewBox blows past sharp's default pixel limit otherwise).
+
+Build output now includes `/icon.png`, `/icon.svg`, `/apple-icon.png` as static routes; `/apple-icon.svg` is gone.
+
 ## Session Summary (Apr 19, 2026)
 
 This session focused on integrating a fully administrable blog module into the landing page, based on `blog-module-template.md`.
