@@ -52,13 +52,28 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     locale: "fr_FR",
     type: "website",
-    // NOTE: opengraph-image.png is auto-detected by Next.js in the /app folder.
+    images: [
+      {
+        url: "/opengraph-image.png",
+        secureUrl: "https://www.mickaelranaivoson.fr/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "Mickaël Ranaivoson — Développeur web freelance à La Réunion (974)",
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
     title: SITE_CONFIG.title,
     description: "Sites web et automatisations sur-mesure à La Réunion (974).",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        alt: "Mickaël Ranaivoson — Développeur web freelance à La Réunion (974)",
+      },
+    ],
   },
 
   // Alternative languages if needed in the future
