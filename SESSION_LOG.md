@@ -4,12 +4,20 @@ This document summarizes the development session and establishes key rules for f
 
 ## Session Summary (Apr 28, 2026)
 
-Diagnosed two reported issues — Facebook OG image not displaying and missing favicon in Google search results — and fixed the favicon side.
+Diagnosed two reported issues — Facebook OG cover not displaying and missing favicon in Google search results — and fixed both, plus tightened the home OG metadata.
 
-### 1. Facebook OG image (no code change)
-Inspected the live HTML served to `facebookexternalhit/1.1` and confirmed all OG meta tags are correct (`og:image`, `og:image:width=1200`, `og:image:height=630`, `og:image:type=image/png`, absolute URL via `metadataBase`). The `app/opengraph-image.png` itself is served 200 OK at 1200×630, 181 KB. Conclusion: code is fine, the issue is Facebook's scraper cache holding a stale snapshot from before the recent OG fixes (commits `0a65fca`, `a38cfb1`). Resolution path: re-collect via the Sharing Debugger.
+### 1. Facebook OG cover — blog post specific (commit `6b2bc52`)
+Initial audit on the home page found everything technically conforming (correct og:image, dimensions, type, absolute URL via `metadataBase`, image served 200 OK at 1200×630, 181 KB). When the user pointed at the actual URL being shared — a blog post — two real bugs surfaced:
 
-### 2. Google favicon (commit `366720f`)
+- **No description tags emitted at all.** `app/blog/[slug]/page.tsx` was building the description as `post.metaDescription ?? post.excerpt ?? generateExcerpt(post.content, 160)`. Nullish coalescing keeps empty strings, and TipTap-saved posts often have `metaDescription = ""` rather than null — so description fell through as `""` and Next.js omitted `<meta name="description">`, `og:description`, and `twitter:description` entirely. Meta's scraper frequently refuses to render an image preview when `og:description` is missing. Fix: switch `??` to `||` (also done on the JSON-LD description on the same file).
+- **OG image bloated to ~980 KB / 2.7 s download.** `opengraph-image.tsx` was running the Cloudinary cover through `@vercel/og`'s `ImageResponse`, which decodes and re-encodes as unoptimized PNG. With FB's scrape budget around 5–7 s for HTML + image, this was dancing on the edge. Replaced the cover branch with a fetch+stream of the same image through Cloudinary's pipeline (`f_jpg,q_auto:good,w_1200,h_630,c_fill,g_auto`) — drops to ~106 KB JPEG served in <300 ms. `contentType` is now `image/jpeg`. Fallback gradient `ImageResponse` (for posts with no cover) stays.
+
+Confirmed working in the Sharing Debugger after the fix landed. **Lesson learned**: a stale Debugger result was misleading at first — the user's pasted URL had been silently truncated to `…-2026-l/`, scraping a 404 page that inherited the home OG. Always check the "URL recherchée" field in the Debugger output matches what was meant to be tested.
+
+### 2. Home OG defensive hardening (commit `7b08d0b`)
+Added `og:image:alt`, `og:image:secure_url`, and `twitter:image:alt` to `app/layout.tsx`. Discovered while implementing that **defining `openGraph.images` in metadata does NOT override Next.js' file-based detection of `app/opengraph-image.png` for og:* tags** (it does for twitter:*, asymmetrically). To take back control of the og:image declaration, moved `app/opengraph-image.png` → `public/opengraph-image.png`. The public URL `/opengraph-image.png` is unchanged; only the auto-detection is disabled. The home OG image now carries the alt text and explicit `secure_url` as intended.
+
+### 3. Google favicon (commit `366720f`)
 Two real bugs uncovered by inspecting the production HTML:
 - **`app/apple-icon.svg` was 404'ing in production.** Next.js App Router's icon convention only auto-detects `apple-icon.{jpg,jpeg,png}` — the `.svg` variant is silently ignored, so no `<link rel="apple-touch-icon">` was emitted at all.
 - **Only an SVG favicon was exposed.** Google does technically support SVG favicons but indexes them poorly, especially when the source has a complex path on a large viewBox (here `viewBox="0 0 8334 8334"` with the MR + Réunion path) — rasterization to 16×16 in the SERP comes out illegible and Google often skips it.
