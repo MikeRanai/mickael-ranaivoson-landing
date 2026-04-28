@@ -29,7 +29,7 @@ export async function generateMetadata({
   if (!post) return { title: "Article introuvable" };
 
   const description =
-    post.metaDescription ?? post.excerpt ?? generateExcerpt(post.content, 160);
+    post.metaDescription || post.excerpt || generateExcerpt(post.content, 160);
 
   return {
     title: post.title,
@@ -67,7 +67,7 @@ export default async function ArticlePage({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.metaDescription ?? post.excerpt ?? generateExcerpt(post.content, 160),
+    description: post.metaDescription || post.excerpt || generateExcerpt(post.content, 160),
     datePublished: post.publishedAt?.toISOString() ?? post.createdAt.toISOString(),
     dateModified: post.updatedAt.toISOString(),
     image: post.coverImage ?? `${BASE_URL}/opengraph-image.png`,

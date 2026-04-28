@@ -3,11 +3,14 @@ import { getPostBySlug } from "@/actions/blog-public.actions";
 
 export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+export const contentType = "image/jpeg";
 
 function ogCoverUrl(url: string): string {
   if (!url.includes("res.cloudinary.com") || !url.includes("/upload/")) return url;
-  return url.replace("/upload/", "/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_auto/");
+  return url.replace(
+    "/upload/",
+    "/upload/f_jpg,q_auto:good,w_1200,h_630,c_fill,g_auto/"
+  );
 }
 
 export default async function OgImage({
@@ -19,28 +22,19 @@ export default async function OgImage({
   const post = await getPostBySlug(slug);
 
   if (post?.coverImage) {
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            height: "100%",
-            position: "relative",
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={ogCoverUrl(post.coverImage)}
-            alt=""
-            width={size.width}
-            height={size.height}
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
-          />
-        </div>
-      ),
-      size
-    );
+    const upstream = await fetch(ogCoverUrl(post.coverImage), {
+      cache: "force-cache",
+    });
+    if (upstream.ok && upstream.body) {
+      return new Response(upstream.body, {
+        status: 200,
+        headers: {
+          "Content-Type": upstream.headers.get("Content-Type") ?? "image/jpeg",
+          "Cache-Control":
+            "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+        },
+      });
+    }
   }
 
   const title = post?.title ?? "Blog";
