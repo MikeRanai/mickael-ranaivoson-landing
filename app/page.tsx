@@ -7,6 +7,7 @@ import { Realizations } from "@/components/layout/Realizations";
 import { Testimonials } from "@/components/layout/Testimonials";
 import { Contact } from "@/components/layout/Contact";
 import { About } from "@/components/layout/About";
+import { LatestPosts } from "@/components/layout/LatestPosts";
 import { SectionDivider } from "@/components/ui/section-divider";
 import { Suspense } from "react";
 
@@ -122,6 +123,9 @@ export default function Home() {
       <TechBenefits />
       <SectionDivider />
       <About />
+      <SectionDivider />
+      {/* Server component — ne s'affiche que si au moins 1 article publié */}
+      <LatestPosts />
       <SectionDivider />
       <Pricing />
       <SectionDivider />
