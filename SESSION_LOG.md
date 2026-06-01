@@ -2,6 +2,30 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jun 1, 2026)
+
+Extended the dashboard to make more of the landing administrable, ran a conversion pass on the funnel, hardened auth recovery, and added bot protection to the public forms. Recurring theme: **proportionality** — build CRUD only where content changes often + has a regular structure; leave bespoke/rarely-changing sections in code.
+
+### 1. Portfolio administrable (commit `17defa2`)
+New `Project` Prisma model (`featured`, `accentColor`, `bullets String[]`, `kpis Json`, `displayOrder`, `published`…), pushed to Neon via `prisma db push`. Cloned the Testimonial CRUD shape end-to-end: `actions/project.actions.ts` (requireAdmin CRUD + public `getPublishedProjects`), `ProjectForm` (with a `useFieldArray` for KPIs, bullets one-per-line, Cloudinary `ImageUpload`) + `ProjectsTable`, dashboard pages, and a "Projets" sidebar link. `Realizations.tsx` was rewritten from hardcoded JSX into an async server component reading the DB — **faithfully reproducing the bespoke design** (featured card + KPI grid, accent-colored grid cards, "Projet confidentiel" placeholder when no image). Accent colors use a static class lookup map (Tailwind can't JIT dynamic class names). `scripts/seed-projects.mjs` seeded the 4 historical projects so nothing was lost.
+
+**Design decision (kept for future):** Solutions (bento), Pricing, and About stay hardcoded. They're bespoke, layout-is-content, and change rarely — a generic CMS would wreck them for no real gain. Only the illustrations in Solutions are static files; swapping them = replace file + redeploy.
+
+### 2. Conversion pass — hero + early social proof (commits `39ef2b9`, `6ca0afe`, `656e585`)
+- **Hero** (`Hero.tsx`): swapped the headline to a pain-led, on-brand line — "Arrêtez de perdre vos soirées sur la paperasse." — with a tightened subtitle naming the audience (TPE, artisans, associations 974), plus a discreet trust strip under the CTAs (Saint-Paul 974 · Devis gratuit · Éligible Kap Numérik). Note: the live hero copy lives **inline in `Hero.tsx`**, not in `lib/data.ts`. The stale `HERO_CONTENT` constant there was dead code (nothing imported it) and was removed.
+- **ClientProof** (`components/layout/ClientProof.tsx`): a "Ils m'ont fait confiance" strip placed right after the hero (before the tech marquee), reading published projects from the DB — business-audience proof vs the dev-oriented `TechStack`. Returns `null` under 2 clients.
+- **Audit finding (content, not code):** 0 testimonials in DB → the single biggest credibility gap. Tooling is ready; the admin just needs to publish 1-3. Also flagged that the NoutAsso KPIs were originally annotated as placeholders — must be verified as real.
+
+### 3. Auth recovery — magic link + change password (commits `8bf00df`, `94677a1`)
+Root-cause fix for "I forget my password sometimes" without removing the password. Added a `magic-token` Credentials provider in `auth.ts` and a `LoginToken` model (SHA-256-hashed token, 15-min TTL, single-use). `/login` gained a sober "Mot de passe oublié ?" disclosure → emails a one-time link (anti-enumeration generic message, max 5/5min). `/login/verify` uses a **confirm button** so an email scanner's GET prefetch can't burn the single-use token. Email reuses the existing nodemailer/Gmail transport. Added `/dashboard/account` (`changePasswordAction`) — **no current password required** (the authenticated session is the gate), so the admin can set a memorable password right after a magic-link login.
+
+### 4. Anti-bot on public forms (commits `20661bb`, `006b645`)
+Two layers on Contact + Kap Numérik (login left clean by design):
+- **Honeypot** (free, zero-friction): hidden `company_url` field; if filled, the API returns a fake success without processing.
+- **Cloudflare Turnstile** (Cloudflare already in the stack): `TurnstileWidget` (explicit render, dark theme, auto-refresh) + `lib/turnstile.ts > verifyTurnstile()` server-side after the honeypot. Degrades gracefully when `TURNSTILE_SECRET_KEY` is unset. Noted the in-memory rate-limit is weak on serverless (per-instance, ephemeral) — a real limiter would need Upstash/Redis (deferred).
+
+**Lesson:** Neon cold-start (~8 s wake) made `next build` fail 3× with rotating Prisma errors across different pages — environmental, not code. Warm the DB then rebuild (or Redeploy on Vercel). Documented in `CLAUDE.md` Gotchas.
+
 ## Session Summary (Apr 28, 2026)
 
 Diagnosed two reported issues — Facebook OG cover not displaying and missing favicon in Google search results — and fixed both, plus tightened the home OG metadata.

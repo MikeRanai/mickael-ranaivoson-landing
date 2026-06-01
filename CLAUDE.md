@@ -4,7 +4,7 @@ Concise, durable knowledge for working in this repo. Chronological session notes
 
 ## What this is
 
-Next.js 16 landing site + admin-managed blog for Mickaël Ranaivoson (freelance dev, La Réunion). Single-admin CMS, French UI, dark "Deep Slate & Gold" design system (`#ffa800` on `slate-950`).
+Next.js 16 landing site + admin-managed content for Mickaël Ranaivoson (freelance dev, La Réunion). Single-admin CMS covering **blog, portfolio (projects), testimonials**, French UI, dark "Deep Slate & Gold" design system (`#ffa800` on `slate-950`). The landing sections `Realizations` (portfolio) and `Testimonials` are DB-driven and render nothing when empty; bespoke sections (`Solutions` bento, `Pricing`, `About`) stay hardcoded by design.
 
 ## Stack
 
@@ -32,23 +32,31 @@ Build runs Prisma generate first because Vercel needs it (see commit `f4b3d5e`).
 ```
 app/
   blog/                 public blog (list, [slug], opengraph-image.tsx)
-  dashboard/            admin (blog, testimonials) — gated
+  dashboard/            admin (blog, projects, testimonials, account) — gated
+  login/                sign-in + "magic-link request" disclosure; login/verify confirms a link
   api/                  auth, contact, kap-lead
   globals.css           Tailwind + design tokens + tiptap table styles
 actions/
-  blog.actions.ts       admin mutations (use server, requireAdmin)
-  blog-public.actions.ts  public reads (NO noStore, see Gotchas)
+  blog.actions.ts       blog mutations (use server, requireAdmin)
+  blog-public.actions.ts  public blog reads (NO noStore, see Gotchas)
+  project.actions.ts    portfolio CRUD + getPublishedProjects (public read)
+  testimonial.actions.ts testimonials CRUD + getPublishedTestimonials (public read)
+  auth.actions.ts       login, logout, requestLoginLinkAction, verifyMagicLinkAction
+  account.actions.ts    changePasswordAction (authenticated, no current pw required)
 components/
-  admin/                RichTextEditor, PostForm, ImageUpload, ArticlePreview, …
+  admin/                RichTextEditor, PostForm, ProjectForm, ProjectsTable, TestimonialForm, ChangePasswordForm, ImageUpload, …
   blog/                 ArticleContent, ArticleCard, ShareButtons, BlogGrid
-  layout/               Footer, Header (both hide on /dashboard, /login)
+  layout/               Realizations + ClientProof (DB-driven), Testimonials, Pricing, About, Contact, Footer/Header (hide on /dashboard, /login)
+  ui/                   TurnstileWidget (explicit-render Cloudflare widget), …
 lib/
   data.ts               SITE_CONFIG.socials = source of truth for social links
   blog-utils.ts         slugify, sanitizeContent, optimizeCloudinaryUrl, POST_TAGS
+  auth-tokens.ts        magic-link token gen + SHA-256 hash (shared by auth.ts + actions)
+  turnstile.ts          server-side Turnstile verification (graceful if key absent)
   prisma.ts
 prisma/
-  schema.prisma         Post, User, Testimonial, Subscriber
-auth.ts, auth.config.ts NextAuth config (gates only /dashboard)
+  schema.prisma         Post, User, Testimonial, Subscriber, Project, LoginToken, KapNumerikLead
+auth.ts, auth.config.ts NextAuth config (gates only /dashboard; "credentials" + "magic-token" providers)
 next.config.ts          security headers + images.remotePatterns (Cloudinary)
 ```
 
@@ -58,7 +66,8 @@ No `middleware.ts` at root — NextAuth's auth handler is the only middleware (s
 
 - **Language**: All user-facing strings in French. Code/identifiers in English.
 - **Design tokens**: gold `#ffa800` / `#ffb92e`, dark `slate-950` / `slate-900`. Buttons use `text-slate-950` on gold. Glass surfaces: `bg-slate-900/60 border border-white/10`.
-- **Server actions**: every admin mutation calls `requireAdmin()` first, then `revalidatePath('/blog', '/blog/<slug>', '/', '/sitemap.xml', '/feed.xml', '/dashboard/blog')` via `revalidateAll(slug)`.
+- **Server actions**: every admin mutation calls `requireAdmin()` first, then revalidates. Blog uses `revalidateAll(slug)` → `revalidatePath('/blog', '/blog/<slug>', '/', '/sitemap.xml', '/feed.xml', '/dashboard/blog')`. Portfolio (`project.actions.ts`) and testimonials (`testimonial.actions.ts`) mirror the pattern with their own `revalidateAll()` hitting `/` + their dashboard path (`/dashboard/projects`, `/dashboard/testimonials`).
+- **New admin section pattern**: portfolio/testimonials/account were all cloned from the same shape — `actions/*.actions.ts` (requireAdmin CRUD + a public `getPublished*`), `components/admin/*Form.tsx` + `*Table.tsx`, `app/dashboard/<section>/{page,new,[id]}.tsx`, a sidebar link in `dashboard/layout.tsx`, and a DB-driven `layout/` component that returns `null` when empty. Reuse it for any new editable section.
 - **Prose styles** are inline in `ArticleContent.tsx` (and mirrored in `ArticlePreview.tsx`). Table styles live in `globals.css` because they apply to both editor and public render.
 - **Cover image** recommended: 1600 × 900 (16:9), JPG/WebP, < 500 KB. Body images square: 1200 × 1200.
 
@@ -91,9 +100,22 @@ Anything rendered via `dangerouslySetInnerHTML` from the editor (public article,
 - `x-vercel-cache: STALE` on a 200 response is normal during ISR revalidation, not an error.
 - Facebook's Sharing Debugger caches scrape results aggressively. After a fix, may need 2-3 "Re-collecter" clicks, or test with a `?v=N` cache buster, or rely on LinkedIn Post Inspector to confirm OG works.
 
+### Neon cold-start can fail `next build` (false alarm)
+Neon serverless auto-suspends. The first query after idle takes ~8 s to wake the compute, and `next build` fans static generation across 11 workers that all hit the DB at once (`/`, `/blog`, `/blog/[slug]` read projects/posts) — several time out with `PrismaClientInitializationError` / `PrismaClientKnownRequestError`. This is **not a code bug**. Warm the DB first (any quick query) then rebuild, or on Vercel just **Redeploy**. The error page reported varies between retries — a tell-tale sign it's connectivity, not logic.
+
+### Anti-bot is layered on the public forms (Contact + Kap Numérik)
+Two layers, both must be kept when editing those forms/routes:
+1. **Honeypot** — hidden `company_url` field (off-screen, `tabIndex -1`, `aria-hidden`). If filled, the API returns a *fake success* (no email / no DB write) so the bot doesn't retry. First check in `/api/contact` and `/api/kap-lead`.
+2. **Cloudflare Turnstile** — `components/ui/TurnstileWidget` posts a `turnstileToken`; `lib/turnstile.ts > verifyTurnstile()` checks it server-side *after* the honeypot. **Degrades gracefully**: if `TURNSTILE_SECRET_KEY` is unset it returns `true` (lets traffic through), so local dev without keys still works. Login is intentionally left without Turnstile (single admin + password + magic link + rate-limit).
+
 ## Auth model
 
 Single admin user, seeded via `npm run create-admin`. Credentials in `.env.local` (`ADMIN_EMAIL`, `ADMIN_PASSWORD`). NextAuth `authorized` callback (`auth.config.ts`) only blocks `/dashboard/**`; everything else is public. Sign-in at `/login`, sign-out via Server Action in dashboard layout.
+
+Two ways in, both via providers in `auth.ts`:
+- **Password** (`credentials` provider) — the normal path.
+- **Magic link** (`magic-token` provider) — recovery for forgotten passwords. `/login` has a "Mot de passe oublié ?" disclosure → `requestLoginLinkAction` emails a one-time link (token SHA-256-hashed in `LoginToken`, 15-min TTL, single-use, anti-enumeration, max 5/5min). The email lands on `/login/verify` with a **confirm button** (a GET preview/scan must not consume the single-use token). Sent through the existing nodemailer/Gmail transport (`SMTP_USER`/`SMTP_PASSWORD`).
+- **Change password** at `/dashboard/account` (`changePasswordAction`) — deliberately does **not** require the current password, so the admin can set a memorable one right after logging in via magic link. The authenticated session is the gate.
 
 ## Env vars
 
@@ -104,7 +126,8 @@ Required:
 
 Optional but expected:
 - `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`, `NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET` (without these, `ImageUpload` falls back to a URL input)
-- `RESEND_API_KEY` / SMTP for `/api/contact` and `/api/kap-lead`
+- `SMTP_USER` / `SMTP_PASSWORD` (nodemailer/Gmail) — powers `/api/contact`, `/api/kap-lead` **and** the magic-link login email
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` (Cloudflare Turnstile on the public forms; if absent, verification is skipped — see Gotchas). Add to both Vercel and `.env.local`; Vercel vars are not available to `next dev`.
 
 ## Working with this repo
 
