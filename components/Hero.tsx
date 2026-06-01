@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, MapPin, FileText, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Hero() {
@@ -38,16 +38,16 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
         >
-          Retrouvez du temps pour <br className="hidden md:block" />
-          <span 
+          Arrêtez de perdre vos <br className="hidden md:block" />
+          <span
             className="text-transparent bg-clip-text"
             style={{
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #ffa800 60%, #ffb92e 100%)"
             }}
           >
-            ce qui compte vraiment
+            soirées sur la paperasse
           </span>
-          <span 
+          <span
             className="text-transparent bg-clip-text"
             style={{
               backgroundImage: "linear-gradient(135deg, #ffffff 0%, #ffa800 60%, #ffb92e 100%)"
@@ -62,8 +62,8 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          La gestion, la vente, l'administratif... et si <strong>votre solution digitale</strong> s'en chargeait à votre place ? 
-          Je crée les outils sur-mesure qui libèrent votre agenda et développent votre activité 24h/24.
+          Je crée des outils sur-mesure qui automatisent votre <strong>gestion</strong>, vos <strong>ventes</strong> et votre <strong>administratif</strong>
+          {" "}— pour les TPE, artisans et associations de La Réunion.
         </motion.p>
 
         {/* BOUTONS D'ACTION */}
@@ -83,10 +83,10 @@ export function Hero() {
             </Link>
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-white/10 text-white hover:bg-white/5 text-lg px-8 h-14 rounded-full" 
+          <Button
+            variant="outline"
+            size="lg"
+            className="border-white/10 text-white hover:bg-white/5 text-lg px-8 h-14 rounded-full"
             asChild
           >
             <Link href="#realisations">
@@ -94,6 +94,29 @@ export function Hero() {
             </Link>
           </Button>
         </motion.div>
+
+        {/* BANDEAU DE CONFIANCE — réassurance discrète sous les CTA */}
+        <motion.ul
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-slate-400"
+        >
+          <li className="inline-flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-[#ffa800]" aria-hidden />
+            Basé à Saint-Paul (974)
+          </li>
+          <li className="hidden sm:block w-px h-4 bg-white/10" aria-hidden />
+          <li className="inline-flex items-center gap-2">
+            <FileText className="w-4 h-4 text-[#ffa800]" aria-hidden />
+            Devis gratuit
+          </li>
+          <li className="hidden sm:block w-px h-4 bg-white/10" aria-hidden />
+          <li className="inline-flex items-center gap-2">
+            <BadgeCheck className="w-4 h-4 text-[#ffa800]" aria-hidden />
+            Éligible Kap Numérik
+          </li>
+        </motion.ul>
 
       </div>
     </section>
