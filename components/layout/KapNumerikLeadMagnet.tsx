@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bell,
@@ -34,6 +34,9 @@ export function KapNumerikLeadMagnet() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Honeypot anti-bot : champ invisible que seuls les bots remplissent
+  const honeypotRef = useRef<HTMLInputElement>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -48,6 +51,7 @@ export function KapNumerikLeadMagnet() {
           phone,
           activityType,
           consentRgpd,
+          company_url: honeypotRef.current?.value ?? "",
         }),
       });
       if (!res.ok) {
@@ -166,6 +170,20 @@ export function KapNumerikLeadMagnet() {
               >
                 <div id="kap-form-title" className="sr-only">
                   Formulaire d&apos;alerte Kap Numérik
+                </div>
+
+                {/* Honeypot anti-bot — hors écran, invisible et non focusable pour les humains */}
+                <div className="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden" aria-hidden="true">
+                  <label htmlFor="kap_company_url">Ne pas remplir ce champ</label>
+                  <input
+                    ref={honeypotRef}
+                    id="kap_company_url"
+                    name="company_url"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    defaultValue=""
+                  />
                 </div>
 
                 <div className="relative">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -107,6 +107,9 @@ export function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Honeypot anti-bot : champ invisible que seuls les bots remplissent
+  const honeypotRef = useRef<HTMLInputElement>(null);
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -153,7 +156,10 @@ export function Contact() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          company_url: honeypotRef.current?.value ?? "",
+        }),
       });
 
       if (!response.ok) {
@@ -424,6 +430,20 @@ export function Contact() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot anti-bot — hors écran, invisible et non focusable pour les humains */}
+                  <div className="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <label htmlFor="company_url">Ne pas remplir ce champ</label>
+                    <input
+                      ref={honeypotRef}
+                      id="company_url"
+                      name="company_url"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      defaultValue=""
+                    />
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {config.fields.map(renderField)}
                   </div>

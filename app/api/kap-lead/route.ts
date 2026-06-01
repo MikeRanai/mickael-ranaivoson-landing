@@ -23,6 +23,13 @@ const leadSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
+    // Honeypot : champ caché jamais rempli par un humain. Si rempli => bot.
+    // On renvoie un succès factice pour ne pas révéler le filtre.
+    if (typeof body?.company_url === "string" && body.company_url.trim() !== "") {
+      return NextResponse.json({ ok: true });
+    }
+
     const parsed = leadSchema.safeParse(body);
 
     if (!parsed.success) {

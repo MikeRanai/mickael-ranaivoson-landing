@@ -117,6 +117,13 @@ export async function POST(request: NextRequest) {
 
     // Parse et validation
     const body = await request.json();
+
+    // Honeypot : un humain ne remplit jamais ce champ caché. Si rempli => bot.
+    // On renvoie un succès factice pour ne pas signaler le filtre au bot.
+    if (typeof body?.company_url === "string" && body.company_url.trim() !== "") {
+      return NextResponse.json({ success: true });
+    }
+
     const result = ContactSchema.safeParse(body);
 
     if (!result.success) {
