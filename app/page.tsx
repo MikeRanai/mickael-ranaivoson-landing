@@ -1,5 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { Solutions } from "@/components/Solutions";
+import { ClientProof } from "@/components/layout/ClientProof";
 import { TechStack } from "@/components/layout/TechStack";
 import { TechBenefits } from "@/components/layout/TechBenefits";
 import { Pricing } from "@/components/layout/Pricing";
@@ -111,6 +112,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
+      <ClientProof />
       <TechStack />
       <Solutions />
       <SectionDivider />
