@@ -62,6 +62,26 @@ model Testimonial {
   @@index([published, displayOrder])
 }
 
+model Project {
+  id           String   @id @default(cuid())
+  title        String
+  tag          String                     // "SaaS & Automatisation", "Vitrine Premium"…
+  description  String
+  imageUrl     String?                    // null = carte "Projet confidentiel" (placeholder)
+  url          String?                    // lien externe ; null = CTA "En discuter"
+  ctaLabel     String?                    // override du libellé CTA (sinon auto selon url)
+  accentColor  String   @default("gold")  // gold | blue | rose | emerald
+  featured     Boolean  @default(false)   // true = grande carte pleine largeur en tête
+  bullets      String[]                   // points "▸" listés dans la carte
+  kpis         Json?                      // [{ value, label }] — affichés sur la carte featured
+  displayOrder Int      @default(0)
+  published    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([published, displayOrder])
+}
+
 model KapNumerikLead {
   id            String   @id @default(cuid())
   firstName     String

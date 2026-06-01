@@ -2,7 +2,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { logoutAction } from "@/actions/auth.actions";
-import { ArrowLeft, FileText, LogOut, MessageSquareQuote } from "lucide-react";
+import { ArrowLeft, Briefcase, FileText, LogOut, MessageSquareQuote } from "lucide-react";
 
 export const metadata = {
   title: "Dashboard",
@@ -33,6 +33,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
           >
             <FileText className="w-4 h-4" />
             Articles
+          </Link>
+          <Link
+            href="/dashboard/projects"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-white/5 hover:text-white transition-colors"
+          >
+            <Briefcase className="w-4 h-4" />
+            Projets
           </Link>
           <Link
             href="/dashboard/testimonials"
