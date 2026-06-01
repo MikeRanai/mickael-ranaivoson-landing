@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 const leadSchema = z.object({
   firstName: z.string().min(1, "Prénom requis").max(100),
@@ -28,6 +29,19 @@ export async function POST(req: Request) {
     // On renvoie un succès factice pour ne pas révéler le filtre.
     if (typeof body?.company_url === "string" && body.company_url.trim() !== "") {
       return NextResponse.json({ ok: true });
+    }
+
+    // Turnstile : vérification serveur du token (ignorée si non configuré)
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0] ||
+      req.headers.get("x-real-ip") ||
+      undefined;
+    const humanVerified = await verifyTurnstile(body?.turnstileToken, ip);
+    if (!humanVerified) {
+      return NextResponse.json(
+        { error: "Échec de la vérification anti-robot. Rechargez la page et réessayez." },
+        { status: 400 }
+      );
     }
 
     const parsed = leadSchema.safeParse(body);

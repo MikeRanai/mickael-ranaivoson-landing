@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
 import {
@@ -109,6 +110,7 @@ export function Contact() {
 
   // Honeypot anti-bot : champ invisible que seuls les bots remplissent
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -159,6 +161,7 @@ export function Contact() {
         body: JSON.stringify({
           ...formData,
           company_url: honeypotRef.current?.value ?? "",
+          turnstileToken,
         }),
       });
 
@@ -453,6 +456,8 @@ export function Contact() {
                       {error}
                     </div>
                   )}
+
+                  <TurnstileWidget onToken={setTurnstileToken} />
 
                   <button
                     type="submit"

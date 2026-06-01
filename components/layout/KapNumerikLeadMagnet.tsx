@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import {
   Bell,
   CheckCircle2,
@@ -36,6 +37,7 @@ export function KapNumerikLeadMagnet() {
 
   // Honeypot anti-bot : champ invisible que seuls les bots remplissent
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,6 +54,7 @@ export function KapNumerikLeadMagnet() {
           activityType,
           consentRgpd,
           company_url: honeypotRef.current?.value ?? "",
+          turnstileToken,
         }),
       });
       if (!res.ok) {
@@ -267,6 +270,8 @@ export function KapNumerikLeadMagnet() {
                     {error}
                   </p>
                 )}
+
+                <TurnstileWidget onToken={setTurnstileToken} />
 
                 <button
                   type="submit"

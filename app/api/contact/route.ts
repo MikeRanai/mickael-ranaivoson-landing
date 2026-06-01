@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 import he from "he";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 // ===========================================
 // Rate Limiting (simple en mémoire)
@@ -122,6 +123,15 @@ export async function POST(request: NextRequest) {
     // On renvoie un succès factice pour ne pas signaler le filtre au bot.
     if (typeof body?.company_url === "string" && body.company_url.trim() !== "") {
       return NextResponse.json({ success: true });
+    }
+
+    // Turnstile : vérification serveur du token (ignorée si non configuré)
+    const humanVerified = await verifyTurnstile(body?.turnstileToken, ip);
+    if (!humanVerified) {
+      return NextResponse.json(
+        { error: "Échec de la vérification anti-robot. Rechargez la page et réessayez." },
+        { status: 400 }
+      );
     }
 
     const result = ContactSchema.safeParse(body);
