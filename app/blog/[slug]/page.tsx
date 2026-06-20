@@ -6,6 +6,7 @@ import {
 import ArticleContent from "@/components/blog/ArticleContent";
 import ArticleCard from "@/components/blog/ArticleCard";
 import ShareButtons from "@/components/blog/ShareButtons";
+import NewsletterSignup from "@/components/blog/NewsletterSignup";
 import { generateExcerpt } from "@/lib/blog-utils";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -109,6 +110,10 @@ export default async function ArticlePage({
       <ArticleContent post={post} shareUrl={url}>
         <ShareButtons url={url} title={post.title} />
       </ArticleContent>
+
+      <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+        <NewsletterSignup />
+      </div>
 
       {related.length > 0 && (
         <section className="border-t border-white/5 bg-slate-950 py-20">

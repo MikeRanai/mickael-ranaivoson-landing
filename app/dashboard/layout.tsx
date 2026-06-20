@@ -2,7 +2,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { logoutAction } from "@/actions/auth.actions";
-import { ArrowLeft, Briefcase, FileText, LogOut, MessageSquareQuote, UserCog } from "lucide-react";
+import { ArrowLeft, Briefcase, FileText, LogOut, Mail, MessageSquareQuote, UserCog } from "lucide-react";
 
 export const metadata = {
   title: "Dashboard",
@@ -47,6 +47,13 @@ export default async function DashboardLayout({ children }: { children: React.Re
           >
             <MessageSquareQuote className="w-4 h-4" />
             Témoignages
+          </Link>
+          <Link
+            href="/dashboard/subscribers"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-white/5 hover:text-white transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            Abonnés
           </Link>
           <Link
             href="/dashboard/account"
