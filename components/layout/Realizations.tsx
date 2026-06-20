@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TopoBackground } from "@/components/ui/topo-background";
 import { getPublishedProjects } from "@/actions/project.actions";
 
 type Kpi = { value: string; label: string };
@@ -57,8 +58,8 @@ export async function Realizations() {
 
   return (
     <section id="realisations" className="py-32 bg-slate-950 relative overflow-hidden">
-      {/* Fond décoratif (Glow subtil) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-250 h-150 bg-indigo-900/10 blur-[120px] rounded-full pointer-events-none" />
+      {/* Fond : halos cohérents (radial-gradient sans filtre de flou) */}
+      <TopoBackground lines={false} />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Titre Section */}

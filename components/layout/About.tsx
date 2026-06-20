@@ -4,15 +4,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Coffee, Heart, Lightbulb } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TopoBackground } from "@/components/ui/topo-background";
 
 export function About() {
   return (
     <section id="apropos" className="py-24 bg-slate-950 relative overflow-hidden">
 
-      {/* Fond décoratif */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-amber-500/5 blur-3xl rounded-full translate-x-1/2" />
-      </div>
+      {/* Halos cohérents (radial-gradient sans filtre de flou) */}
+      <TopoBackground lines={false} />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header Section */}
@@ -62,7 +61,7 @@ export function About() {
                 className="absolute -bottom-6 -right-6 backdrop-blur-md bg-slate-900/80 border border-white/10 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-slate-900/95 transition-colors"
               >
                 <div className="relative">
-                  <div className="absolute inset-0 bg-amber-500 blur-sm opacity-50 animate-pulse" />
+                  <div className="absolute inset-0 bg-amber-500 blur-sm opacity-50" />
                   <MapPin className="relative w-5 h-5 text-[#ffa800]" />
                 </div>
                 <div>

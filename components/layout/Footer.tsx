@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TopoBackground } from "@/components/ui/topo-background";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -17,8 +18,8 @@ export function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
       
-      {/* Fond Glow discret */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-125 h-75 bg-[#ffa800]/5 blur-[100px] rounded-full pointer-events-none" />
+      {/* Halos cohérents (radial-gradient sans filtre de flou) */}
+      <TopoBackground lines={false} />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">

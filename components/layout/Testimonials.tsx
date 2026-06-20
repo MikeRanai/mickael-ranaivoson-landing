@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Quote, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TopoBackground } from "@/components/ui/topo-background";
 import { getPublishedTestimonials } from "@/actions/testimonial.actions";
 
 export async function Testimonials() {
@@ -46,8 +47,8 @@ export async function Testimonials() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewJsonLd) }}
       />
 
-      {/* Glow ambré pour casser le visuel sombre entre Portfolio et About */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* Halos cohérents (radial-gradient sans filtre de flou) */}
+      <TopoBackground lines={false} />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader

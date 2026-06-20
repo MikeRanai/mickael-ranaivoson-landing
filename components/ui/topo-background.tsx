@@ -10,9 +10,12 @@
 export function TopoBackground({
   className = "",
   glow = true,
+  lines = true,
 }: {
   className?: string;
   glow?: boolean;
+  /** Affiche les lignes de niveau. `false` = halos seuls (sections secondaires). */
+  lines?: boolean;
 }) {
   return (
     <div
@@ -28,6 +31,7 @@ export function TopoBackground({
       )}
 
       {/* Lignes de niveau — fondu vers les bords via un mask radial */}
+      {lines && (
       <svg
         className="absolute inset-0 h-full w-full [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]"
         viewBox="0 0 1440 900"
@@ -47,6 +51,7 @@ export function TopoBackground({
           <path d="M0 505 C 360 420, 680 465, 1000 360 S 1360 295, 1520 340" />
         </g>
       </svg>
+      )}
     </div>
   );
 }
