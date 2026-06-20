@@ -23,7 +23,9 @@ const geistMono = Geist_Mono({
 const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
-  weight: "300",
+  // 300 conservé pour d'éventuels usages légers ; 600/700 indispensables aux
+  // titres (sinon le navigateur synthétise un faux-gras sur Oswald condensé).
+  weight: ["300", "500", "600", "700"],
 });
 
 const bebasNeue = Bebas_Neue({

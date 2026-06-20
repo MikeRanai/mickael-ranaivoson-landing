@@ -40,7 +40,7 @@ export function Hero() {
         </motion.div>
 
         {/* TITRE — élément LCP, peint immédiatement (pas d'animation d'entrée) */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.08]">
+        <h1 className="font-oswald text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-bold tracking-normal text-white mb-6 leading-[1.05]">
           Arrêtez de perdre vos <br className="hidden md:block" />
           <span className="text-[#ffa800]">soirées sur la paperasse.</span>
         </h1>

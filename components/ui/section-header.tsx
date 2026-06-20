@@ -42,7 +42,7 @@ export function SectionHeader({
       </div>
 
       {/* Titre principal */}
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+      <h2 className="font-oswald text-4xl md:text-5xl lg:text-6xl font-bold tracking-normal text-white leading-[1.05]">
         {title}
         {highlight && (
           <>
