@@ -65,26 +65,38 @@ export default async function ArticlePage({
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.metaDescription || post.excerpt || generateExcerpt(post.content, 160),
-    datePublished: post.publishedAt?.toISOString() ?? post.createdAt.toISOString(),
-    dateModified: post.updatedAt.toISOString(),
-    image: post.coverImage ?? `${BASE_URL}/opengraph-image.png`,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    author: {
-      "@type": "Person",
-      name: "Mickaël Ranaivoson",
-      url: BASE_URL,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Mickaël Ranaivoson",
-      logo: {
-        "@type": "ImageObject",
-        url: `${BASE_URL}/images/mr-logo-blanc.svg`,
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.metaDescription || post.excerpt || generateExcerpt(post.content, 160),
+        datePublished: post.publishedAt?.toISOString() ?? post.createdAt.toISOString(),
+        dateModified: post.updatedAt.toISOString(),
+        image: post.coverImage ?? `${BASE_URL}/opengraph-image.png`,
+        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        author: {
+          "@type": "Person",
+          name: "Mickaël Ranaivoson",
+          url: BASE_URL,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Mickaël Ranaivoson",
+          logo: {
+            "@type": "ImageObject",
+            url: `${BASE_URL}/images/mr-logo.svg`,
+          },
+        },
       },
-    },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: BASE_URL },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${BASE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ],
   };
 
   return (

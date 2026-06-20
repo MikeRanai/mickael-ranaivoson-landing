@@ -20,7 +20,7 @@ const jsonLd = {
       "@id": "https://www.mickaelranaivoson.fr/#business",
       name: "MR Digital Solutions",
       url: "https://www.mickaelranaivoson.fr",
-      logo: "https://www.mickaelranaivoson.fr/images/logo.png",
+      logo: "https://www.mickaelranaivoson.fr/images/mr-logo.svg",
       description:
         "Développeur web freelance à Saint-Paul (974). Création de sites, SaaS et automatisations métier pour artisans, commerçants et associations réunionnaises. Accompagnement aides numériques régionales.",
       telephone: "+262692342373",
