@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/data";
 import { Header, Footer } from "@/components/layout";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
@@ -113,6 +115,8 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
