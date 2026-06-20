@@ -2,6 +2,30 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jun 20, 2026)
+
+Improvement pass driven by a "what's worth adding?" audit. Recurring theme again: **proportionality** — measure before building, fix what's broken, finish or delete dead code rather than pile on features.
+
+### 1. Web analytics (commit `1640cef`)
+Added `@vercel/analytics` + `@vercel/speed-insights` in `app/layout.tsx` (`<Analytics />` + `<SpeedInsights />`). There was **no analytics at all** before — every other decision was flying blind. Must be enabled once per project in the Vercel dashboard (Analytics + Speed Insights tabs) for the data to show.
+
+### 2. CSS import type declaration (commit `17bf1c8`)
+Added `types/css.d.ts` (`declare module "*.css";`) to silence the editor's TS2882 on `import "./globals.css"`. Pre-existing latent issue, surfaced only because the analytics imports shifted the line. No build impact (Next/Turbopack handle CSS).
+
+### 3. JSON-LD audit — already present, fixed two real bugs (commit `f247d9a`)
+The structured data was **already there and thorough** (`LocalBusiness` + `Person` + `WebSite` `@graph` on home, `BlogPosting` on articles) — did not re-add it. But found two bugs while reading:
+- `LocalBusiness.logo` pointed to `/images/logo.png` which **does not exist** (404). → `mr-logo.svg`.
+- Article `publisher.logo` used `mr-logo-blanc.svg` (near-white `#fbfdff`, **invisible** on Google's light backgrounds). → `mr-logo.svg` (dark blue `#133e70`, square viewBox).
+- Added a `BreadcrumbList` to articles (Accueil › Blog › titre) for breadcrumb rich results. Converted the article JSON-LD to a `@graph`.
+
+### 4. Newsletter capture — finished the orphaned Subscriber model (commit `8ab7a51`)
+`Subscriber` had **zero code references** — dead model. Chose to finish the loop (vs delete) since the blog + nodemailer infra was already there. Built the minimal capture, cloned from the existing admin-section shape:
+- `actions/subscriber.actions.ts` — public `subscribeToNewsletter` (zod email + honeypot `company_url` + idempotent dedupe on the unique constraint, treats `P2002` as success for anti-enumeration) + admin `getSubscribers`/`deleteSubscriber`.
+- `components/blog/NewsletterSignup.tsx` — calls the server action directly (no API route), rendered at the bottom of every article.
+- `app/dashboard/subscribers/page.tsx` + `components/admin/SubscribersTable.tsx` (list, delete, **client-side CSV export**) + "Abonnés" sidebar link.
+
+**Design decisions (kept):** no Turnstile on this form — only the honeypot. Newsletter signup has near-zero abuse value (inserts an email) and a Cloudflare widget would add friction to a one-click signup; the high-stakes forms (Contact, Kap) keep both layers. And **no automated sending** — the admin owns the list and exports CSV to email on their own terms, no recurring-send commitment baked into the code.
+
 ## Session Summary (Jun 1, 2026)
 
 Extended the dashboard to make more of the landing administrable, ran a conversion pass on the funnel, hardened auth recovery, and added bot protection to the public forms. Recurring theme: **proportionality** — build CRUD only where content changes often + has a regular structure; leave bespoke/rarely-changing sections in code.

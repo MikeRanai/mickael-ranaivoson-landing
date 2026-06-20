@@ -15,6 +15,7 @@ Next.js 16 landing site + admin-managed content for Mickaël Ranaivoson (freelan
 - **Images**: Cloudinary via `next-cloudinary` (`CldUploadWidget`)
 - **Styling**: Tailwind 4, `@tailwindcss/typography`, `framer-motion`, `lucide-react`
 - **Forms**: react-hook-form + zod
+- **Analytics**: `@vercel/analytics` + `@vercel/speed-insights` (`app/layout.tsx`) — must be enabled once in the Vercel dashboard tabs
 
 ## Commands
 
@@ -32,7 +33,7 @@ Build runs Prisma generate first because Vercel needs it (see commit `f4b3d5e`).
 ```
 app/
   blog/                 public blog (list, [slug], opengraph-image.tsx)
-  dashboard/            admin (blog, projects, testimonials, account) — gated
+  dashboard/            admin (blog, projects, testimonials, subscribers, account) — gated
   login/                sign-in + "magic-link request" disclosure; login/verify confirms a link
   api/                  auth, contact, kap-lead
   globals.css           Tailwind + design tokens + tiptap table styles
@@ -41,11 +42,12 @@ actions/
   blog-public.actions.ts  public blog reads (NO noStore, see Gotchas)
   project.actions.ts    portfolio CRUD + getPublishedProjects (public read)
   testimonial.actions.ts testimonials CRUD + getPublishedTestimonials (public read)
+  subscriber.actions.ts newsletter capture: public subscribeToNewsletter (honeypot + dedupe) + admin getSubscribers/deleteSubscriber
   auth.actions.ts       login, logout, requestLoginLinkAction, verifyMagicLinkAction
   account.actions.ts    changePasswordAction (authenticated, no current pw required)
 components/
   admin/                RichTextEditor, PostForm, ProjectForm, ProjectsTable, TestimonialForm, ChangePasswordForm, ImageUpload, …
-  blog/                 ArticleContent, ArticleCard, ShareButtons, BlogGrid
+  blog/                 ArticleContent, ArticleCard, ShareButtons, BlogGrid, NewsletterSignup (bottom of each article)
   layout/               Realizations + ClientProof (DB-driven), Testimonials, Pricing, About, Contact, Footer/Header (hide on /dashboard, /login)
   ui/                   TurnstileWidget (explicit-render Cloudflare widget), …
 lib/
