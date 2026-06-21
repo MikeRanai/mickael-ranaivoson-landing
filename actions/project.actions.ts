@@ -26,34 +26,67 @@ export type ProjectInput = {
   kpis?: ProjectKpi[] | null;
   displayOrder?: number;
   published?: boolean;
+  // Étude de cas
+  slug?: string | null;
+  content?: string | null;
+  role?: string | null;
+  year?: number | null;
+  sector?: string | null;
+  techStack?: string[];
 };
+
+/** Normalise une chaîne optionnelle : "" → null. */
+function nz(v: string | null | undefined): string | null {
+  const t = v?.trim();
+  return t ? t : null;
+}
 
 function buildData(data: ProjectInput): Prisma.ProjectCreateInput {
   return {
     title: data.title,
     tag: data.tag,
     description: data.description,
-    imageUrl: data.imageUrl ?? null,
-    url: data.url ?? null,
-    ctaLabel: data.ctaLabel ?? null,
+    imageUrl: nz(data.imageUrl),
+    url: nz(data.url),
+    ctaLabel: nz(data.ctaLabel),
     accentColor: data.accentColor ?? "gold",
     featured: data.featured ?? false,
     bullets: data.bullets ?? [],
     kpis: (data.kpis ?? null) as Prisma.InputJsonValue | undefined,
     displayOrder: data.displayOrder ?? 0,
     published: data.published ?? false,
+    slug: nz(data.slug),
+    content: nz(data.content),
+    role: nz(data.role),
+    year: data.year ?? null,
+    sector: nz(data.sector),
+    techStack: data.techStack ?? [],
   };
 }
 
-function revalidateAll() {
+function revalidateAll(slug?: string | null) {
   revalidatePath("/dashboard/projects");
   revalidatePath("/");
+  revalidatePath("/realisations");
+  revalidatePath("/sitemap.xml");
+  if (slug) revalidatePath(`/realisations/${slug}`);
+}
+
+/** Vérifie l'unicité du slug (hors projet courant en édition). */
+async function assertSlugFree(slug: string | null, exceptId?: string) {
+  if (!slug) return;
+  const conflict = await prisma.project.findFirst({
+    where: { slug, ...(exceptId ? { NOT: { id: exceptId } } : {}) },
+    select: { id: true },
+  });
+  if (conflict) throw new Error("Ce slug est déjà utilisé par un autre projet");
 }
 
 export async function createProject(data: ProjectInput) {
   await requireAdmin();
+  await assertSlugFree(nz(data.slug));
   await prisma.project.create({ data: buildData(data) });
-  revalidateAll();
+  revalidateAll(nz(data.slug));
   redirect("/dashboard/projects");
 }
 
@@ -62,16 +95,21 @@ export async function updateProject(id: string, data: ProjectInput) {
 
   const existing = await prisma.project.findUnique({ where: { id } });
   if (!existing) throw new Error("Projet introuvable");
+  await assertSlugFree(nz(data.slug), id);
 
   await prisma.project.update({ where: { id }, data: buildData(data) });
-  revalidateAll();
+  revalidateAll(nz(data.slug));
+  // Si le slug a changé, purger aussi l'ancienne URL
+  if (existing.slug && existing.slug !== nz(data.slug)) {
+    revalidatePath(`/realisations/${existing.slug}`);
+  }
   redirect("/dashboard/projects");
 }
 
 export async function deleteProject(id: string) {
   await requireAdmin();
-  await prisma.project.delete({ where: { id } });
-  revalidateAll();
+  const p = await prisma.project.delete({ where: { id } });
+  revalidateAll(p.slug);
 }
 
 export async function toggleProjectPublished(id: string) {
@@ -82,7 +120,7 @@ export async function toggleProjectPublished(id: string) {
     where: { id },
     data: { published: !p.published },
   });
-  revalidateAll();
+  revalidateAll(p.slug);
 }
 
 export async function getAdminProjects() {
@@ -102,5 +140,32 @@ export async function getPublishedProjects() {
   return prisma.project.findMany({
     where: { published: true },
     orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
+  });
+}
+
+export type PublicProject = Awaited<
+  ReturnType<typeof getPublishedProjects>
+>[number];
+
+/**
+ * Études de cas publiables : un projet publié, avec un slug ET un corps narratif
+ * non vide. Sert de source unique pour generateStaticParams, le sitemap, la page
+ * index et les liens internes des cartes (principe « pas de page creuse »).
+ */
+export async function getPublishedCaseStudies() {
+  return prisma.project.findMany({
+    where: {
+      published: true,
+      slug: { not: null },
+      content: { not: null },
+    },
+    orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
+  });
+}
+
+/** Page détail : un projet publié par son slug (ou null). */
+export async function getProjectBySlug(slug: string) {
+  return prisma.project.findFirst({
+    where: { slug, published: true },
   });
 }

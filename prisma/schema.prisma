@@ -85,7 +85,14 @@ model Project {
   accentColor  String   @default("gold")  // gold | blue | rose | emerald
   featured     Boolean  @default(false)   // true = grande carte pleine largeur en tête
   bullets      String[]                   // points "▸" listés dans la carte
-  kpis         Json?                      // [{ value, label }] — affichés sur la carte featured
+  kpis         Json?                      // [{ value, label }] — affichés sur la carte featured + page étude de cas
+  // --- Étude de cas (page /realisations/[slug]) ---
+  slug         String?  @unique           // null tant qu'il n'y a pas d'étude de cas rédigée
+  content      String?                    // corps narratif HTML (TipTap) — non vide = étude de cas publiable
+  role         String?                    // ex: "Conception & développement full-stack"
+  year         Int?                       // année de réalisation
+  sector       String?                    // ex: "Association sportive", "Artisan SAV"
+  techStack    String[] @default([])      // technos affichées en chips sur la page détail
   displayOrder Int      @default(0)
   published    Boolean  @default(false)
   createdAt    DateTime @default(now())
