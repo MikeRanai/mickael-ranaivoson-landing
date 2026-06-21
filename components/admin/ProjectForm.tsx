@@ -6,7 +6,9 @@ import { z } from "zod";
 import { useState } from "react";
 import { Loader2, Save, Plus, X } from "lucide-react";
 import { createProject, updateProject } from "@/actions/project.actions";
+import { slugify } from "@/lib/blog-utils";
 import ImageUpload from "./ImageUpload";
+import RichTextEditor from "./RichTextEditor";
 
 const ACCENT_OPTIONS = [
   { value: "gold", label: "Or (#ffa800)" },
@@ -14,6 +16,13 @@ const ACCENT_OPTIONS = [
   { value: "rose", label: "Rose" },
   { value: "emerald", label: "Émeraude" },
 ] as const;
+
+// Gabarit pré-rempli en création — guide la structure d'une étude de cas
+// sans imposer de champs. L'admin remplace simplement le texte.
+const CASE_STUDY_TEMPLATE =
+  "<h2>Le défi</h2><p>Quel problème concret le client rencontrait-il ?</p>" +
+  "<h2>La solution</h2><p>Ce que j'ai conçu et construit, et comment.</p>" +
+  "<h2>Les résultats</h2><p>Les bénéfices mesurés (complète aussi les chiffres clés).</p>";
 
 const projectSchema = z.object({
   title: z.string().min(1, "Le titre est obligatoire").max(120),
@@ -41,6 +50,23 @@ const projectSchema = z.object({
     .max(4, "4 KPIs maximum"),
   displayOrder: z.number().int().min(0).max(999),
   published: z.boolean(),
+  // --- Étude de cas ---
+  slug: z
+    .string()
+    .max(120)
+    .regex(/^[a-z0-9-]*$/, "Minuscules, chiffres et tirets uniquement")
+    .or(z.literal("")),
+  content: z.string().max(50000),
+  role: z.string().max(120).or(z.literal("")),
+  year: z
+    .number()
+    .int()
+    .min(2000)
+    .max(2100)
+    .nullable()
+    .or(z.nan().transform(() => null)),
+  sector: z.string().max(120).or(z.literal("")),
+  techStackText: z.string().max(1000),
 });
 
 type ProjectFormValues = z.infer<typeof projectSchema>;
@@ -59,6 +85,12 @@ export type ExistingProject = {
   kpis: { value: string; label: string }[] | null;
   displayOrder: number;
   published: boolean;
+  slug: string | null;
+  content: string | null;
+  role: string | null;
+  year: number | null;
+  sector: string | null;
+  techStack: string[];
 };
 
 export default function ProjectForm({ project }: { project?: ExistingProject }) {
@@ -69,6 +101,7 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
     handleSubmit,
     control,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
@@ -86,6 +119,12 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
           kpis: project.kpis ?? [],
           displayOrder: project.displayOrder,
           published: project.published,
+          slug: project.slug ?? "",
+          content: project.content ?? "",
+          role: project.role ?? "",
+          year: project.year ?? null,
+          sector: project.sector ?? "",
+          techStackText: (project.techStack ?? []).join("\n"),
         }
       : {
           title: "",
@@ -100,23 +139,35 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
           kpis: [],
           displayOrder: 0,
           published: false,
+          slug: "",
+          content: "",
+          role: "",
+          year: null,
+          sector: "",
+          techStackText: "",
         },
   });
 
   const { fields, append, remove } = useFieldArray({ control, name: "kpis" });
-  const isFeatured = watch("featured");
+  const slugValue = watch("slug");
+
+  // Auto-slug depuis le titre tant que le slug n'a pas été saisi manuellement
+  // (uniquement en création — on ne change pas l'URL d'un projet existant).
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!project && !slugValue) {
+      setValue("slug", slugify(e.target.value));
+    }
+  };
 
   const onSubmit = async (data: ProjectFormValues) => {
     setError(null);
     try {
-      const bullets = data.bulletsText
-        .split("\n")
-        .map((b) => b.trim())
-        .filter(Boolean);
+      const splitLines = (s: string) =>
+        s.split("\n").map((b) => b.trim()).filter(Boolean);
 
-      const kpis = isFeatured
-        ? data.kpis.filter((k) => k.value.trim() || k.label.trim())
-        : [];
+      const bullets = splitLines(data.bulletsText);
+      const techStack = splitLines(data.techStackText);
+      const kpis = data.kpis.filter((k) => k.value.trim() || k.label.trim());
 
       const payload = {
         title: data.title,
@@ -131,6 +182,12 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
         kpis: kpis.length ? kpis : null,
         displayOrder: data.displayOrder,
         published: data.published,
+        slug: data.slug || null,
+        content: data.content || null,
+        role: data.role || null,
+        year: data.year ?? null,
+        sector: data.sector || null,
+        techStack,
       };
 
       if (project) await updateProject(project.id, payload);
@@ -151,7 +208,7 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Field label="Titre du projet" error={errors.title?.message}>
             <input
-              {...register("title")}
+              {...register("title", { onChange: onTitleChange })}
               type="text"
               placeholder="NoutAsso"
               className={inputClass}
@@ -171,6 +228,19 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
             />
           </Field>
         </div>
+
+        <Field
+          label="Slug (URL de l'étude de cas)"
+          error={errors.slug?.message}
+          hint={`/realisations/${slugValue || "…"}`}
+        >
+          <input
+            {...register("slug")}
+            type="text"
+            placeholder="noutasso"
+            className={inputClass}
+          />
+        </Field>
 
         <Field label="Description" error={errors.description?.message}>
           <textarea
@@ -222,14 +292,13 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
           </Field>
         </div>
 
-        {/* KPIs — uniquement pour la carte mise en avant */}
-        {isFeatured && (
-          <div className="rounded-xl border border-[#ffa800]/20 bg-[#ffa800]/5 p-5 space-y-4">
+        {/* Chiffres clés — grande carte (si en avant) ET page étude de cas */}
+        <div className="rounded-xl border border-[#ffa800]/20 bg-[#ffa800]/5 p-5 space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-semibold text-white">Chiffres clés (KPIs)</h3>
                 <p className="text-xs text-slate-400">
-                  Affichés en grille sur la grande carte — 4 maximum
+                  Grande carte + page étude de cas — 4 maximum
                 </p>
               </div>
               {fields.length < 4 && (
@@ -271,8 +340,77 @@ export default function ProjectForm({ project }: { project?: ExistingProject }) 
                 </button>
               </div>
             ))}
+        </div>
+
+        {/* --- ÉTUDE DE CAS --- */}
+        <div className="rounded-xl border border-white/10 bg-slate-900/40 p-5 space-y-5">
+          <div>
+            <h3 className="text-sm font-semibold text-white">Étude de cas</h3>
+            <p className="text-xs text-slate-400">
+              Remplis le récit ci-dessous pour générer la page{" "}
+              <code className="text-[#ffb92e]">/realisations/{slugValue || "…"}</code>.
+              Tant qu&apos;il est vide, le projet reste une simple carte.
+            </p>
           </div>
-        )}
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <Field label="Rôle" error={errors.role?.message}>
+              <input
+                {...register("role")}
+                type="text"
+                placeholder="Conception & dev full-stack"
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Année" error={errors.year?.message}>
+              <input
+                {...register("year", { setValueAs: (v) => (v === "" ? null : Number(v)) })}
+                type="number"
+                min={2000}
+                max={2100}
+                placeholder="2025"
+                className={inputClass}
+              />
+            </Field>
+            <Field label="Secteur" error={errors.sector?.message}>
+              <input
+                {...register("sector")}
+                type="text"
+                placeholder="Association sportive"
+                className={inputClass}
+              />
+            </Field>
+          </div>
+
+          <Field
+            label="Stack technique"
+            error={errors.techStackText?.message}
+            hint="Une techno par ligne (affichées en chips)"
+          >
+            <textarea
+              {...register("techStackText")}
+              rows={3}
+              placeholder={"Next.js\nPostgreSQL\nTailwind"}
+              className={inputClass}
+            />
+          </Field>
+
+          <Field
+            label="Récit (contexte → solution → résultats)"
+            error={errors.content?.message}
+          >
+            <Controller
+              control={control}
+              name="content"
+              render={({ field }) => (
+                <RichTextEditor
+                  value={field.value || (project ? "" : CASE_STUDY_TEMPLATE)}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+          </Field>
+        </div>
       </div>
 
       <aside className="space-y-5">

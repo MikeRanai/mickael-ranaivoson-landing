@@ -39,12 +39,29 @@ function accent(color: string) {
   return ACCENTS[color] ?? ACCENTS.gold;
 }
 
-function ctaHref(url: string | null) {
-  return url || "?type=projet#contact";
+// Un projet « prêt » (slug + contenu rédigé) renvoie vers son étude de cas interne.
+function hasCaseStudy(p: { slug: string | null; content: string | null }) {
+  return Boolean(p.slug && p.content);
 }
 
-function ctaLabelFor(url: string | null, ctaLabel: string | null) {
-  return ctaLabel || (url ? "Voir le site" : "En discuter");
+function ctaHref(p: { slug: string | null; content: string | null; url: string | null }) {
+  if (hasCaseStudy(p)) return `/realisations/${p.slug}`;
+  return p.url || "?type=projet#contact";
+}
+
+function ctaLabelFor(p: {
+  slug: string | null;
+  content: string | null;
+  url: string | null;
+  ctaLabel: string | null;
+}) {
+  if (hasCaseStudy(p)) return "Voir l'étude de cas";
+  return p.ctaLabel || (p.url ? "Voir le site" : "En discuter");
+}
+
+// Lien interne → pas de target/rel ; lien externe → nouvel onglet sécurisé.
+function ctaIsInternal(p: { slug: string | null; content: string | null; url: string | null }) {
+  return hasCaseStudy(p) || !p.url;
 }
 
 export async function Realizations() {
@@ -55,6 +72,7 @@ export async function Realizations() {
 
   const featured = projects.find((p) => p.featured);
   const rest = projects.filter((p) => p.id !== featured?.id);
+  const hasAnyCaseStudy = projects.some(hasCaseStudy);
 
   return (
     <section id="realisations" className="py-32 bg-slate-950 relative overflow-hidden">
@@ -119,10 +137,11 @@ export async function Realizations() {
                     className="bg-white text-black hover:bg-slate-200 font-bold rounded-full px-8"
                   >
                     <Link
-                      href={ctaHref(featured.url)}
-                      target={featured.url ? "_blank" : undefined}
+                      href={ctaHref(featured)}
+                      target={ctaIsInternal(featured) ? undefined : "_blank"}
+                      rel={ctaIsInternal(featured) ? undefined : "noopener noreferrer"}
                     >
-                      {ctaLabelFor(featured.url, featured.ctaLabel)}{" "}
+                      {ctaLabelFor(featured)}{" "}
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                   </Button>
@@ -200,17 +219,30 @@ export async function Realizations() {
                       </ul>
                     )}
                     <Link
-                      href={ctaHref(p.url)}
-                      target={p.url ? "_blank" : undefined}
+                      href={ctaHref(p)}
+                      target={ctaIsInternal(p) ? undefined : "_blank"}
+                      rel={ctaIsInternal(p) ? undefined : "noopener noreferrer"}
                       className={`inline-flex items-center text-white font-medium ${a.hoverText} transition-colors`}
                     >
-                      {ctaLabelFor(p.url, p.ctaLabel)}{" "}
+                      {ctaLabelFor(p)}{" "}
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                   </div>
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {/* Lien vers le hub d'études de cas (uniquement si au moins une existe) */}
+        {hasAnyCaseStudy && (
+          <div className="mt-16 text-center">
+            <Link
+              href="/realisations"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-[#ffa800] transition-colors"
+            >
+              Voir toutes les réalisations <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         )}
       </div>

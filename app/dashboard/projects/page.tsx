@@ -6,6 +6,16 @@ import { Plus } from "lucide-react";
 export default async function AdminProjectsPage() {
   const projects = await getAdminProjects();
   const publishedCount = projects.filter((p) => p.published).length;
+  const rows = projects.map((p) => ({
+    id: p.id,
+    title: p.title,
+    tag: p.tag,
+    url: p.url,
+    featured: p.featured,
+    published: p.published,
+    displayOrder: p.displayOrder,
+    isCaseStudy: Boolean(p.slug && p.content),
+  }));
 
   return (
     <div className="space-y-8">
@@ -26,7 +36,7 @@ export default async function AdminProjectsPage() {
         </Link>
       </div>
 
-      <ProjectsTable projects={projects} />
+      <ProjectsTable projects={rows} />
     </div>
   );
 }

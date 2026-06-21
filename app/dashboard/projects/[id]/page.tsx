@@ -27,6 +27,12 @@ export default async function EditProjectPage({
     kpis: (project.kpis as ExistingProject["kpis"]) ?? null,
     displayOrder: project.displayOrder,
     published: project.published,
+    slug: project.slug,
+    content: project.content,
+    role: project.role,
+    year: project.year,
+    sector: project.sector,
+    techStack: project.techStack ?? [],
   };
 
   return (

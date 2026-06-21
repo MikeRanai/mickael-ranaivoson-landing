@@ -13,6 +13,7 @@ type ProjectRow = {
   featured: boolean;
   published: boolean;
   displayOrder: number;
+  isCaseStudy: boolean;
 };
 
 export default function ProjectsTable({ projects }: { projects: ProjectRow[] }) {
@@ -69,6 +70,11 @@ export default function ProjectsTable({ projects }: { projects: ProjectRow[] }) 
                     />
                   )}
                   {p.title}
+                  {p.isCaseStudy && (
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#ffa800]/15 text-[#ffb92e] border border-[#ffa800]/30">
+                      Étude de cas
+                    </span>
+                  )}
                 </div>
               </td>
               <td className="px-4 py-3 text-slate-400">{p.tag}</td>
