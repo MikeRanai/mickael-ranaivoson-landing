@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TopoBackground } from "@/components/ui/topo-background";
 import Link from "next/link";
 import { KapNumerikLeadMagnet } from "./KapNumerikLeadMagnet";
 
@@ -11,6 +12,9 @@ export function Pricing() {
       className="py-24 bg-slate-950 relative overflow-hidden"
       aria-labelledby="tarifs-title"
     >
+      {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
+      <TopoBackground lines={false} />
+
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* En-tête */}
         <div className="text-center space-y-6 max-w-3xl mx-auto mb-16">

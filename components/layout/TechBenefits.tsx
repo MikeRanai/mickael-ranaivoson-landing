@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Gauge, ShieldCheck, BugOff } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TopoBackground } from "@/components/ui/topo-background";
 
 const pillars = [
   {
@@ -31,6 +32,9 @@ const pillars = [
 export function TechBenefits() {
   return (
     <section className="py-24 bg-slate-950 relative overflow-hidden">
+      {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
+      <TopoBackground lines={false} />
+
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader
           label="Sous le capot"

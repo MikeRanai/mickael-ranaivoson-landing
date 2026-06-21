@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { TechScreenshot3D } from "./ui/tech-screenshot-3d";
 import { SectionHeader } from "./ui/section-header";
+import { TopoBackground } from "./ui/topo-background";
 import { ShoppingBag, TrendingUp, ArrowRight, Zap, Lock, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -29,11 +30,8 @@ export function Solutions() {
   return (
     <section id="solutions" className="py-24 px-6 w-full bg-slate-950 text-white overflow-hidden relative">
       
-      {/* Fond d'ambiance (Glows corrigés avec classes standards) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-900/20 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 blur-3xl rounded-full -translate-x-1/2 translate-y-1/2" />
-      </div>
+      {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
+      <TopoBackground lines={false} />
 
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         

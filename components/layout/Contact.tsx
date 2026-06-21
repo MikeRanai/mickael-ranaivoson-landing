@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TopoBackground } from "@/components/ui/topo-background";
 import {
   Send,
   User,
@@ -338,11 +339,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-24 bg-slate-950 relative overflow-hidden">
-      {/* Background Glows */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-600/10 blur-3xl rounded-full -translate-y-1/2" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 blur-3xl rounded-full translate-y-1/2" />
-      </div>
+      {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
+      <TopoBackground lines={false} />
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Header */}
