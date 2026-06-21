@@ -11,7 +11,7 @@ export function About() {
     <section id="apropos" className="py-24 bg-slate-950 relative overflow-hidden">
 
       {/* Halos cohérents (radial-gradient sans filtre de flou) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="b" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Header Section */}

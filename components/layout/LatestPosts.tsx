@@ -33,7 +33,7 @@ export async function LatestPosts() {
       />
 
       {/* Halos cohérents (radial-gradient sans filtre de flou) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="c" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">

@@ -13,7 +13,7 @@ export function Pricing() {
       aria-labelledby="tarifs-title"
     >
       {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="d" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* En-tête */}

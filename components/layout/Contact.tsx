@@ -340,7 +340,7 @@ export function Contact() {
   return (
     <section id="contact" className="py-24 bg-slate-950 relative overflow-hidden">
       {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="a" />
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Header */}

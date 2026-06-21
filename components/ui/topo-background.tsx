@@ -7,16 +7,50 @@
  * Purement décoratif → `aria-hidden`. Aucune animation (neutre pour le LCP
  * et le budget CPU/GPU). Réutilisable section par section via `className`.
  */
+/**
+ * Variantes de position des halos. On décale gold/bleu sur les 4 diagonales
+ * pour casser l'effet répétitif quand plusieurs sections s'enchaînent au scroll.
+ * Les chaînes `bg-[radial-gradient(...)]` sont écrites en toutes lettres pour
+ * que le JIT Tailwind les détecte (pas de concaténation dynamique de classes).
+ */
+const GLOW_VARIANTS = {
+  // gold haut-droite · bleu bas-gauche (disposition d'origine)
+  a: [
+    "bg-[radial-gradient(60%_55%_at_75%_15%,rgba(255,168,0,0.10),transparent_70%)]",
+    "bg-[radial-gradient(55%_50%_at_10%_85%,rgba(37,99,235,0.10),transparent_70%)]",
+  ],
+  // miroir horizontal : gold haut-gauche · bleu bas-droite
+  b: [
+    "bg-[radial-gradient(60%_55%_at_25%_15%,rgba(255,168,0,0.10),transparent_70%)]",
+    "bg-[radial-gradient(55%_50%_at_90%_85%,rgba(37,99,235,0.10),transparent_70%)]",
+  ],
+  // miroir vertical : gold bas-droite · bleu haut-gauche
+  c: [
+    "bg-[radial-gradient(60%_55%_at_75%_85%,rgba(255,168,0,0.10),transparent_70%)]",
+    "bg-[radial-gradient(55%_50%_at_10%_15%,rgba(37,99,235,0.10),transparent_70%)]",
+  ],
+  // double miroir : gold bas-gauche · bleu haut-droite
+  d: [
+    "bg-[radial-gradient(60%_55%_at_25%_85%,rgba(255,168,0,0.10),transparent_70%)]",
+    "bg-[radial-gradient(55%_50%_at_90%_15%,rgba(37,99,235,0.10),transparent_70%)]",
+  ],
+} as const;
+
 export function TopoBackground({
   className = "",
   glow = true,
   lines = true,
+  variant = "a",
 }: {
   className?: string;
   glow?: boolean;
   /** Affiche les lignes de niveau. `false` = halos seuls (sections secondaires). */
   lines?: boolean;
+  /** Disposition des halos (a/b/c/d) — alterner d'une section à l'autre. */
+  variant?: keyof typeof GLOW_VARIANTS;
 }) {
+  const [goldGlow, blueGlow] = GLOW_VARIANTS[variant];
+
   return (
     <div
       aria-hidden="true"
@@ -25,8 +59,8 @@ export function TopoBackground({
       {/* Halos statiques (dégradés radiaux, sans filtre de flou) */}
       {glow && (
         <>
-          <div className="absolute inset-0 bg-[radial-gradient(60%_55%_at_75%_15%,rgba(255,168,0,0.10),transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(55%_50%_at_10%_85%,rgba(37,99,235,0.10),transparent_70%)]" />
+          <div className={`absolute inset-0 ${goldGlow}`} />
+          <div className={`absolute inset-0 ${blueGlow}`} />
         </>
       )}
 

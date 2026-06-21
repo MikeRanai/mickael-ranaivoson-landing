@@ -48,7 +48,7 @@ export async function Testimonials() {
       />
 
       {/* Halos cohérents (radial-gradient sans filtre de flou) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="d" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader

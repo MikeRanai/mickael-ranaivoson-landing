@@ -33,7 +33,7 @@ export function TechBenefits() {
   return (
     <section className="py-24 bg-slate-950 relative overflow-hidden">
       {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="a" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader

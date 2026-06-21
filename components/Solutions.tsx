@@ -31,7 +31,7 @@ export function Solutions() {
     <section id="solutions" className="py-24 px-6 w-full bg-slate-950 text-white overflow-hidden relative">
       
       {/* Fond d'ambiance unifié — halos radiaux (cf. TopoBackground) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="b" />
 
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         

@@ -59,7 +59,7 @@ export async function Realizations() {
   return (
     <section id="realisations" className="py-32 bg-slate-950 relative overflow-hidden">
       {/* Fond : halos cohérents (radial-gradient sans filtre de flou) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="c" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Titre Section */}

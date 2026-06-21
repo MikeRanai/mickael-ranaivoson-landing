@@ -19,7 +19,7 @@ export function Footer() {
     <footer className="bg-slate-950 border-t border-white/5 pt-16 pb-8 relative overflow-hidden">
       
       {/* Halos cohérents (radial-gradient sans filtre de flou) */}
-      <TopoBackground lines={false} />
+      <TopoBackground lines={false} variant="b" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
