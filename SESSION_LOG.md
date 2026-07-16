@@ -18,6 +18,9 @@ La carte « Gain de temps » (offre star) avait pour CTA principal *« M'alerter
 ### 3. Témoignages (hors code — action Mickaël)
 Le module admin est prêt ; la section s'affiche dès 1 témoignage publié. Reste à collecter 3-4 retours clients (HCO, LRH, NoutAsso, FD Informatique) — message type fourni en session.
 
+### 4. Étude de cas HCO chiffrée (même session, suite — SQL exécuté par Mickaël + commit `ad6dcf2`)
+Méthode : mesures PageSpeed réelles sur hcouest.fr (via pagespeed.web.dev) + archive Wayback de sept. 2024 pour le « avant » (WordPress + thème Divi 4.27.1). Première mesure : **68 mobile** — l'ancien claim « 95+ mobile » était faux (LCP 6,6 s : logo animé = élément LCP retardé de ~1,9 s par l'hydratation + 252 Kio JS inutilisé). Mickaël a corrigé le site HCO → re-mesuré **92-99 mobile / 100 desktop**. Contenu + KPIs mis à jour en base (SQL via `!`, pattern habituel) : claim prudent « 90+ mobile (100 desktop) » (variance Lighthouse), 100/100 accessibilité/BP/SEO, 12 inscriptions en ligne 1ʳᵉ saison, 1ʳᵉ page Google « hockey réunion ». Leçons : ne jamais publier un score au-dessus du pire run observé ; inviter le lecteur à re-tester lui-même (preuve > affirmation) ; la home est statique → un changement DB seul exige un redeploy (d'où le commit vide `ad6dcf2`).
+
 
 
 Visual identity overhaul (landed after the Jun 20 log was written) + a security header. Goal stated by the user on the hero: **"moins générique"** — kill the interchangeable blurred-blob SaaS look and root the design in La Réunion.
