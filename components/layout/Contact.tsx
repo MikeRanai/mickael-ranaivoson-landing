@@ -42,8 +42,8 @@ const formTypes = {
     submitText: "Recevoir mon estimation",
   },
   eligibilite: {
-    title: "Préparer mon dossier Kap Numérik 2026",
-    subtitle: "Le dispositif rouvre prochainement. On prépare votre pré-dossier ensemble pour passer en priorité.",
+    title: "Préparer mon dossier Kap Numérik",
+    subtitle: "Le dispositif est en pause. On prépare votre pré-dossier maintenant pour passer en priorité dès la réouverture.",
     icon: HelpCircle,
     color: "emerald",
     fields: ["name", "email", "phone", "company", "siret", "message"],
@@ -375,7 +375,7 @@ export function Contact() {
                 <span className="hidden sm:inline">
                   {type === "projet" && "Projet"}
                   {type === "devis" && "Devis"}
-                  {type === "eligibilite" && "Dossier Kap 2026"}
+                  {type === "eligibilite" && "Dossier Kap"}
                   {type === "audit" && "Audit SEO"}
                 </span>
               </button>

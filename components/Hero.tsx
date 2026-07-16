@@ -98,7 +98,7 @@ export function Hero() {
           <li className="hidden sm:block w-px h-4 bg-white/10" aria-hidden />
           <li className="inline-flex items-center gap-2">
             <BadgeCheck className="w-4 h-4 text-[#ffa800]" aria-hidden />
-            Éligible Kap Numérik · jusqu&apos;à 3200&nbsp;€ d&apos;aides
+            Kap Numérik : jusqu&apos;à 3&nbsp;200&nbsp;€ d&apos;aides à la réouverture
           </li>
         </motion.ul>
       </div>

@@ -80,7 +80,7 @@ export function Pricing() {
                 <span className="text-sm text-slate-400">HT</span>
               </div>
               <p className="text-xs text-[#ffa800]/80 mt-1">
-                À partir de — éligible aide Kap Numérik (réouverture 2026)
+                À partir de — éligible Kap Numérik dès la réouverture du dispositif
               </p>
             </div>
             <ul className="space-y-4 mb-8 flex-1">
@@ -101,8 +101,13 @@ export function Pricing() {
               </li>
             </ul>
             <Button className="w-full bg-[#ffa800] text-black hover:bg-[#ffb92e] font-bold shadow-lg shadow-[#ffa800]/20" asChild>
-              <Link href="#kap-numerik-veille">M&apos;alerter à la réouverture</Link>
+              <Link href="?type=devis#contact">Obtenir mon estimation gratuite</Link>
             </Button>
+            <p className="mt-3 text-center text-xs text-slate-500">
+              <Link href="#kap-numerik-veille" className="hover:text-[#ffa800] underline underline-offset-2 transition-colors">
+                Kap Numérik en pause ? M&apos;alerter à la réouverture
+              </Link>
+            </p>
           </div>
 
           {/* OFFRE 3 : SUR MESURE */}
