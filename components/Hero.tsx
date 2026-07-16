@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, FileText, BadgeCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { TopoBackground } from "@/components/ui/topo-background";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -64,7 +65,10 @@ export function Hero() {
             className="bg-[#ffa800] text-slate-950 hover:bg-[#ffb92e] text-lg px-8 font-bold h-14 rounded-xl shadow-[0_0_24px_-6px_rgba(255,168,0,0.45)] transition-all hover:scale-[1.03]"
             asChild
           >
-            <Link href="/liberer-mon-potentiel">
+            <Link
+              href="/liberer-mon-potentiel"
+              onClick={() => trackEvent(EVENTS.ctaClick, { cta: "liberer-mon-potentiel", location: "hero" })}
+            >
               Libérer mon potentiel <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
@@ -75,7 +79,10 @@ export function Hero() {
             className="border-white/15 text-white hover:bg-white/5 hover:border-white/25 text-lg px-8 h-14 rounded-xl"
             asChild
           >
-            <Link href="#realisations">
+            <Link
+              href="#realisations"
+              onClick={() => trackEvent(EVENTS.ctaClick, { cta: "voir-les-resultats", location: "hero" })}
+            >
               Voir les résultats
             </Link>
           </Button>

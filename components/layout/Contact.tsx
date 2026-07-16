@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeader } from "@/components/ui/section-header";
 import { TopoBackground } from "@/components/ui/topo-background";
@@ -171,6 +172,7 @@ export function Contact() {
       }
 
       setIsSuccess(true);
+      trackEvent(EVENTS.contactSubmit, { formType: activeType });
       setFormData({
         name: "",
         email: "",

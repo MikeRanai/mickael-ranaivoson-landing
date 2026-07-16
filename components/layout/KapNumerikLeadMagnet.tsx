@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 import {
   Bell,
   CheckCircle2,
@@ -62,6 +63,7 @@ export function KapNumerikLeadMagnet() {
         throw new Error(data.error ?? "Erreur lors de l'inscription");
       }
       setIsSuccess(true);
+      trackEvent(EVENTS.kapLeadSubmit, { activityType });
       setFirstName("");
       setEmail("");
       setPhone("");

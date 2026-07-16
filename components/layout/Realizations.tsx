@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -136,14 +136,20 @@ export async function Realizations() {
                     asChild
                     className="bg-white text-black hover:bg-slate-200 font-bold rounded-full px-8"
                   >
-                    <Link
+                    <TrackedLink
                       href={ctaHref(featured)}
                       target={ctaIsInternal(featured) ? undefined : "_blank"}
                       rel={ctaIsInternal(featured) ? undefined : "noopener noreferrer"}
+                      event="cta_click"
+                      eventProps={{
+                        cta: hasCaseStudy(featured) ? "case-study" : "project-link",
+                        location: "realisations",
+                        project: featured.slug ?? featured.title,
+                      }}
                     >
                       {ctaLabelFor(featured)}{" "}
                       <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
+                    </TrackedLink>
                   </Button>
                 </div>
               </div>
@@ -218,15 +224,21 @@ export async function Realizations() {
                         ))}
                       </ul>
                     )}
-                    <Link
+                    <TrackedLink
                       href={ctaHref(p)}
                       target={ctaIsInternal(p) ? undefined : "_blank"}
                       rel={ctaIsInternal(p) ? undefined : "noopener noreferrer"}
+                      event="cta_click"
+                      eventProps={{
+                        cta: hasCaseStudy(p) ? "case-study" : "project-link",
+                        location: "realisations",
+                        project: p.slug ?? p.title,
+                      }}
                       className={`inline-flex items-center text-white font-medium ${a.hoverText} transition-colors`}
                     >
                       {ctaLabelFor(p)}{" "}
                       <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
+                    </TrackedLink>
                   </div>
                 </div>
               );
@@ -237,12 +249,14 @@ export async function Realizations() {
         {/* Lien vers le hub d'études de cas (uniquement si au moins une existe) */}
         {hasAnyCaseStudy && (
           <div className="mt-16 text-center">
-            <Link
+            <TrackedLink
               href="/realisations"
+              event="cta_click"
+              eventProps={{ cta: "toutes-les-realisations", location: "realisations" }}
               className="inline-flex items-center gap-2 text-white font-medium hover:text-[#ffa800] transition-colors"
             >
               Voir toutes les réalisations <ArrowRight className="w-4 h-4" />
-            </Link>
+            </TrackedLink>
           </div>
         )}
       </div>

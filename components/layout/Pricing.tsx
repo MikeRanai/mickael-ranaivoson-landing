@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
 import { TopoBackground } from "@/components/ui/topo-background";
 import Link from "next/link";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { KapNumerikLeadMagnet } from "./KapNumerikLeadMagnet";
 
 export function Pricing() {
@@ -61,7 +62,13 @@ export function Pricing() {
               </li>
             </ul>
             <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 hover:text-white" asChild>
-              <Link href="?type=devis#contact">On en discute</Link>
+              <TrackedLink
+                href="?type=devis#contact"
+                event="cta_click"
+                eventProps={{ cta: "pricing-vitrine", location: "pricing" }}
+              >
+                On en discute
+              </TrackedLink>
             </Button>
           </div>
 
@@ -101,12 +108,23 @@ export function Pricing() {
               </li>
             </ul>
             <Button className="w-full bg-[#ffa800] text-black hover:bg-[#ffb92e] font-bold shadow-lg shadow-[#ffa800]/20" asChild>
-              <Link href="?type=devis#contact">Obtenir mon estimation gratuite</Link>
+              <TrackedLink
+                href="?type=devis#contact"
+                event="cta_click"
+                eventProps={{ cta: "pricing-gain-de-temps", location: "pricing" }}
+              >
+                Obtenir mon estimation gratuite
+              </TrackedLink>
             </Button>
             <p className="mt-3 text-center text-xs text-slate-500">
-              <Link href="#kap-numerik-veille" className="hover:text-[#ffa800] underline underline-offset-2 transition-colors">
+              <TrackedLink
+                href="#kap-numerik-veille"
+                event="cta_click"
+                eventProps={{ cta: "pricing-kap-alerte", location: "pricing" }}
+                className="hover:text-[#ffa800] underline underline-offset-2 transition-colors"
+              >
                 Kap Numérik en pause ? M&apos;alerter à la réouverture
-              </Link>
+              </TrackedLink>
             </p>
           </div>
 
@@ -134,7 +152,13 @@ export function Pricing() {
               </li>
             </ul>
             <Button variant="outline" className="w-full border-white/10 hover:bg-white/5 hover:text-white" asChild>
-              <Link href="?type=projet#contact">Expliquez-moi votre besoin</Link>
+              <TrackedLink
+                href="?type=projet#contact"
+                event="cta_click"
+                eventProps={{ cta: "pricing-sur-mesure", location: "pricing" }}
+              >
+                Expliquez-moi votre besoin
+              </TrackedLink>
             </Button>
           </div>
 

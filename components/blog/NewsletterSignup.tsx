@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Loader2, Mail, Send } from "lucide-react";
 import { subscribeToNewsletter } from "@/actions/subscriber.actions";
+import { trackEvent, EVENTS } from "@/lib/analytics";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ export default function NewsletterSignup() {
         return;
       }
       setIsSuccess(true);
+      trackEvent(EVENTS.newsletterSignup);
       setEmail("");
     } catch {
       setError("Une erreur est survenue. Réessayez.");
