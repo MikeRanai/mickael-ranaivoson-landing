@@ -2,7 +2,23 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
-## Session Summary (Jun 21, 2026)
+## Session Summary (Jul 16, 2026)
+
+Audit SEO/conversion complet de la landing, puis exécution du « trio semaine 1 » de la roadmap conversion. Constat central de l'audit : le socle technique est bon ; ce qui bloque, c'est le positionnement (site orienté TPE/artisans 974 vs cible élargie PME/SaaS/tourisme), la preuve (0 témoignage, 1 étude de cas sans chiffres) et la mesure (aucun événement de conversion).
+
+### 1. CTA pricing débloqué + wording Kap Numérik « standby » (commit `1a08667`)
+La carte « Gain de temps » (offre star) avait pour CTA principal *« M'alerter à la réouverture »* du Kap Numérik — un cul-de-sac tant que le dispositif est suspendu. Le CTA principal devient **« Obtenir mon estimation gratuite »** (`?type=devis#contact`) ; l'alerte Kap passe en lien secondaire sous le bouton. Tous les textes qui promettaient une réouverture datée (« réouverture 2026 », « rouvre prochainement ») sont passés à un wording honnête « dès la réouverture » / « en pause » (Hero badge, Pricing, formulaire éligibilité du Contact).
+
+### 2. Tracking de conversion Vercel Analytics (commit `f79ec04`)
+- `lib/analytics.ts` : helper client `trackEvent()` + constantes `EVENTS` (noms figés : `cta_click`, `contact_submit`, `kap_lead_submit`, `newsletter_signup`).
+- `components/ui/tracked-link.tsx` : `<Link>` client qui track au clic — nécessaire pour instrumenter les Server Components (Pricing, Realizations). **Piège RSC** : un Server Component ne peut pas importer les constantes du module client → il passe le nom d'événement en littéral.
+- Instrumenté : 2 CTA Hero, 4 CTA Pricing, liens études de cas/projets de Realizations (+ « toutes les réalisations »), succès des 3 formulaires (contact avec `formType`, lead Kap avec `activityType`, newsletter).
+- À vérifier côté dashboard Vercel : les custom events doivent apparaître dans l'onglet Web Analytics (quota d'événements limité sur plan Hobby).
+
+### 3. Témoignages (hors code — action Mickaël)
+Le module admin est prêt ; la section s'affiche dès 1 témoignage publié. Reste à collecter 3-4 retours clients (HCO, LRH, NoutAsso, FD Informatique) — message type fourni en session.
+
+
 
 Visual identity overhaul (landed after the Jun 20 log was written) + a security header. Goal stated by the user on the hero: **"moins générique"** — kill the interchangeable blurred-blob SaaS look and root the design in La Réunion.
 
