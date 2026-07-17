@@ -4,7 +4,15 @@ This document summarizes the development session and establishes key rules for f
 
 ## Session Summary (Jul 17, 2026)
 
-Suite de la roadmap conversion (M1) : vérifications post-redeploy + backlinks footer sur les sites clients livrés.
+Suite de la roadmap conversion : fin de M1 (vérifs post-redeploy + backlinks footer 5/5) et début de M2 (page segment `/tourisme`).
+
+### 0. Bullets HCO corrigés + backlinks finalisés (suite de session)
+- SQL `scripts/sql/2026-07-17-hco-bullets.sql` exécuté par Mickaël via `!` + redeploy (commit vide `4d65cb4`) → la home affiche les claims vérifiés. ✅ prod.
+- **NoutAsso 5/5** : la codebase de noutasso.fr = repo `MikeRanai/asso-finance`, cloné localement sous `hco-finance/` (nom trompeur). Crédit ajouté dans `src/components/marketing/Footer.tsx` (commit `bf31142` — le hook lint-staged/prettier reformate au commit). ✅ prod.
+- **LRH : push OK mais pas déployé** — après ~20 min, lrh.re ne sert toujours pas le commit `0262fcd`. Le projet Vercel de lrh.re est sous un autre compte (lié à `siteweblrh`), invisible depuis la team `mickael-ranaivosons-projects`. → Vérifier dans le dashboard Vercel du compte LRH que l'intégration Git a bien buildé (ou lancer un deploy manuel).
+
+### 0bis. Page segment `/tourisme` (M2, commit `cce2adf`)
+Cible : gîtes/chambres d'hôtes/locations saisonnières 974. Construite sur le modèle d'`aides-digitales-reunion` (layout serveur avec metadata + breadcrumb JSON-LD, page cliente) mais avec le design system actuel (TopoBackground variants a→d, SectionHeader/Oswald, gold). Contenu : hero « jusqu'à 25 % », 3 pains de la dépendance plateformes, **calculateur de commissions interactif** (CA mensuel / taux 15-25 % / part basculée en direct → commissions annuelles, économie, mois d'amortissement d'un site à 1 600 €), grille features, bandeau preuve sobre (PageSpeed 90+ + lien étude de cas HCO ; **Refuge des Étoiles mentionné comme « en cours », sans lien** — pas encore sorti, décision Mickaël), bandeau tarifs (1 600 € / 0 % / Kap 3 200 €), FAQ (6 questions, JSON-LD FAQPage), CTA final. CTAs trackés `cta_click` avec `location: tourisme-*`. Ajoutée au sitemap (priority 0.8) + lien footer « Gîtes & Tourisme ». Vérifiée en local (`next build` ○ static + `next start` : 200, calculateur, JSON-LD, sitemap OK).
 
 ### 1. Vérif post-redeploy `ad6dcf2` — incohérence détectée sur la carte HCO
 La page étude de cas `/realisations/hockey-club-de-louest` affiche bien les claims vérifiés (90+ mobile / 100 desktop, 100/100 a11y-BP-SEO, 1ʳᵉ page « hockey réunion », 12 inscriptions). **Mais la carte HCO de la home affiche encore « Score PageSpeed 95+ (mobile) »** — le claim invalidé le 16/07. Cause : le SQL du 16/07 a mis à jour `kpis` + `content`, or la carte non-featured affiche `bullets` (les `kpis` ne s'affichent que sur la carte featured + la page étude de cas). Correctif écrit dans `scripts/sql/2026-07-17-hco-bullets.sql` — à exécuter via `!` (pattern habituel), puis redeploy (home statique).
