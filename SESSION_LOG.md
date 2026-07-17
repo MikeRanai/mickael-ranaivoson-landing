@@ -2,6 +2,20 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jul 17, 2026)
+
+Suite de la roadmap conversion (M1) : vérifications post-redeploy + backlinks footer sur les sites clients livrés.
+
+### 1. Vérif post-redeploy `ad6dcf2` — incohérence détectée sur la carte HCO
+La page étude de cas `/realisations/hockey-club-de-louest` affiche bien les claims vérifiés (90+ mobile / 100 desktop, 100/100 a11y-BP-SEO, 1ʳᵉ page « hockey réunion », 12 inscriptions). **Mais la carte HCO de la home affiche encore « Score PageSpeed 95+ (mobile) »** — le claim invalidé le 16/07. Cause : le SQL du 16/07 a mis à jour `kpis` + `content`, or la carte non-featured affiche `bullets` (les `kpis` ne s'affichent que sur la carte featured + la page étude de cas). Correctif écrit dans `scripts/sql/2026-07-17-hco-bullets.sql` — à exécuter via `!` (pattern habituel), puis redeploy (home statique).
+
+### 2. Backlinks footer « Site réalisé par Mickaël Ranaivoson » — 3/5 sites faits
+- **hco-website** (commit `b888f1e`) : lien ajouté dans la bottom bar, pointe vers l'étude de cas `/realisations/hockey-club-de-louest`.
+- **culture-afro** (commit `2259484`) : le crédit existant « MR Digital Solutions » (mickaelranaivoson.fr sans www) devient « Site réalisé par Mickaël Ranaivoson » → `https://www.mickaelranaivoson.fr`.
+- **fd-sav-2026** (commit `d07b735`) : lien ajouté dans `site-footer.tsx` → home.
+- **Piège évité** : CA et FD pointent vers la home, pas vers leurs études de cas — leurs slugs existent en base mais sans `content`, donc `/realisations/[slug]` répond 404 (`notFound()` si `!project.content`). Upgrader en deep links quand les études de cas seront rédigées.
+- **Restent LRH et NoutAsso** : les dossiers locaux `lrh-website/` et `nout-asso/` ne contiennent que des assets (pas de code), et aucun repo GitHub correspondant sous MikeRanai. Demander à Mickaël où vivent ces codebases.
+
 ## Session Summary (Jul 16, 2026)
 
 Audit SEO/conversion complet de la landing, puis exécution du « trio semaine 1 » de la roadmap conversion. Constat central de l'audit : le socle technique est bon ; ce qui bloque, c'est le positionnement (site orienté TPE/artisans 974 vs cible élargie PME/SaaS/tourisme), la preuve (0 témoignage, 1 étude de cas sans chiffres) et la mesure (aucun événement de conversion).
