@@ -9,12 +9,13 @@ Suite de la roadmap conversion (M1) : vérifications post-redeploy + backlinks f
 ### 1. Vérif post-redeploy `ad6dcf2` — incohérence détectée sur la carte HCO
 La page étude de cas `/realisations/hockey-club-de-louest` affiche bien les claims vérifiés (90+ mobile / 100 desktop, 100/100 a11y-BP-SEO, 1ʳᵉ page « hockey réunion », 12 inscriptions). **Mais la carte HCO de la home affiche encore « Score PageSpeed 95+ (mobile) »** — le claim invalidé le 16/07. Cause : le SQL du 16/07 a mis à jour `kpis` + `content`, or la carte non-featured affiche `bullets` (les `kpis` ne s'affichent que sur la carte featured + la page étude de cas). Correctif écrit dans `scripts/sql/2026-07-17-hco-bullets.sql` — à exécuter via `!` (pattern habituel), puis redeploy (home statique).
 
-### 2. Backlinks footer « Site réalisé par Mickaël Ranaivoson » — 3/5 sites faits
-- **hco-website** (commit `b888f1e`) : lien ajouté dans la bottom bar, pointe vers l'étude de cas `/realisations/hockey-club-de-louest`.
-- **culture-afro** (commit `2259484`) : le crédit existant « MR Digital Solutions » (mickaelranaivoson.fr sans www) devient « Site réalisé par Mickaël Ranaivoson » → `https://www.mickaelranaivoson.fr`.
-- **fd-sav-2026** (commit `d07b735`) : lien ajouté dans `site-footer.tsx` → home.
-- **Piège évité** : CA et FD pointent vers la home, pas vers leurs études de cas — leurs slugs existent en base mais sans `content`, donc `/realisations/[slug]` répond 404 (`notFound()` si `!project.content`). Upgrader en deep links quand les études de cas seront rédigées.
-- **Restent LRH et NoutAsso** : les dossiers locaux `lrh-website/` et `nout-asso/` ne contiennent que des assets (pas de code), et aucun repo GitHub correspondant sous MikeRanai. Demander à Mickaël où vivent ces codebases.
+### 2. Backlinks footer « Site réalisé par Mickaël Ranaivoson » — 4/5 sites faits, vérifiés en prod
+- **hco-website** (commit `b888f1e`) : lien dans la bottom bar → étude de cas `/realisations/hockey-club-de-louest`. ✅ prod.
+- **culture-afro** (commits `2259484` + `d899876`) : **piège** — le crédit de la home n'est pas dans `Footer.tsx` mais dans un bloc footer inline de `src/app/(public)/page.tsx` (composant `FooterEditorial`). Le 1ᵉʳ commit ne changeait rien en prod ; diagnostiqué en comparant le HTML servi au code local. ✅ prod.
+- **fd-sav-2026** (commit `d07b735`) : lien dans `site-footer.tsx` → home. ✅ prod (fd-sav-2026.vercel.app — pas de domaine custom, valeur SEO moindre).
+- **LRH = dossier local `siteweb/`** (commit `0262fcd`) : remote `git@github-lrh:siteweblrh/siteweb.git` (compte GitHub séparé `siteweblrh`, alias SSH `github-lrh`), domaine `lrh.re`. Lien uppercase dans la barre du bas de `components/lrh/sections/Footer.tsx`.
+- **Piège évité** : CA, FD et LRH pointent vers la home, pas vers leurs études de cas — leurs slugs existent en base mais sans `content`, donc `/realisations/[slug]` répond 404 (`notFound()` si `!project.content`). Upgrader en deep links quand les études de cas seront rédigées.
+- **Reste NoutAsso** : projet Vercel `nout-asso` (noutasso.fr) existe dans la team, mais la codebase est introuvable en local (le dossier `nout-asso/` = assets seulement) et sur les 3 comptes GitHub (MikeRanai, mr-digital-solutions-974, mickaelranaivoson-tech). Demander à Mickaël où vit ce code. (`money-az/` = gestion-finances → gereaou.noutasso.fr, produit, pas le site vitrine.)
 
 ## Session Summary (Jul 16, 2026)
 
