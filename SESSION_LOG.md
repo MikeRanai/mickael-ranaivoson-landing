@@ -2,6 +2,16 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jul 18, 2026)
+
+Études de cas des 4 sites restants, méthode HCO (claims vérifiés uniquement) — SQL `scripts/sql/2026-07-18-etudes-de-cas.sql` à exécuter via `!` puis redeploy.
+
+- **Mesures Lighthouse du 18/07** (2 runs mobile + 1 desktop par site, claim ≤ pire run) : NoutAsso 92/95 mobile, 98 desktop ; Culture Afro 93/94 mobile, 99 desktop ; les deux 100/100 BP & SEO, CLS 0 (a11y 95/97 → pas de claim 100 a11y). **LRH : 69-76 mobile (LCP ~5,1-5,6 s, ~135 KiB JS inutilisé)** mais 100/100 a11y-BP-SEO — le bullet home « +90 mobile » était invalide, même piège que le « 95+ » HCO. API PSI keyless en quota dépassé → mesures via `npx lighthouse` local (même throttling simulé).
+- **Décisions Mickaël (18/07)** : les 4 KPIs NoutAsso sont réels et défendables (confirmés) ; LRH → corriger le site d'abord, étude de cas après re-mesure ; FD → étude de cas « projet confidentiel » OK (anonymiser si besoin) ; pas d'autres chiffres métier → études CA/FD qualitatives + chiffres techniques.
+- **Le SQL** : content + kpis + role/sector/techStack/year pour NoutAsso (kpis visibles sur la carte featured de la home), Culture Afro, FD (pas de kpis — app en prod depuis juil. 2026, trop tôt pour des chiffres, dit honnêtement dans le texte) ; correctif bullets + description LRH (claims vérifiés seulement). Années tirées des historiques git des repos locaux (tous livrés 2026 ; NoutAsso démarré déc. 2025).
+- **Stacks relevées dans les package.json locaux** : NoutAsso (`hco-finance/`) = Next 16 + Prisma 5 + Stripe + Resend ; LRH (`siteweb/`) et FD (`fd-sav-2026/`) = Next 16 + Prisma 7 + Resend ; CA (`culture-afro/`) = Next 16 + Prisma 7 + nodemailer.
+- **Reste à faire** : exécuter le SQL (`!` psql) + redeploy → les 3 nouvelles pages `/realisations/[slug]` sortent du 404 (upgrade possible des backlinks footer CA/FD en deep links) ; optimiser lrh.re puis re-mesurer (⚠ le déploiement lrh.re dépend du compte Vercel séparé `siteweblrh`, dernier push toujours pas déployé au 17/07) ; sitemap inclut déjà les études de cas via `getPublishedCaseStudies`.
+
 ## Session Summary (Jul 17, 2026)
 
 Suite de la roadmap conversion : fin de M1 (vérifs post-redeploy + backlinks footer 5/5) et début de M2 (page segment `/tourisme`).
