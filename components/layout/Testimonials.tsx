@@ -54,9 +54,12 @@ export async function Testimonials() {
         <SectionHeader
           label="Preuve sociale"
           title="Ils ont"
-          highlight="retrouvé du temps."
+          highlight="vu la différence."
           highlightColor="gold"
-          subtitle="Pas de jargon, pas de promesse en l'air. Des résultats mesurés, signés."
+          /* Cadre volontairement large : les gains clients ne sont pas tous du
+             temps gagné (HCO = visibilité et recrutement). "mesurés" retiré :
+             on ne promet pas des chiffres qu'on n'a pas sur tous les cas. */
+          subtitle="Pas de jargon, pas de promesse en l'air. Des résultats concrets, signés."
         />
 
         <div
