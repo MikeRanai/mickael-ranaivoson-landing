@@ -167,8 +167,8 @@ export function Pricing() {
         {/* Note de bas de page rassurante */}
         <div className="mt-12 text-center">
           <p className="text-slate-500 text-sm max-w-2xl mx-auto">
-            <span className="text-[#ffa800]">*</span> L&apos;aide régionale Kap Numérik (version 2024–2027) est en cours de finalisation par la Région Réunion.
-            Le pré-dossier offert vous garantit d&apos;être prêt dès la réouverture.{" "}
+            <span className="text-[#ffa800]">*</span> L&apos;aide régionale Kap Numérik est actuellement suspendue et n&apos;a pas été renouvelée à ce jour.
+            Le pré-dossier offert vous garantit d&apos;être prêt si le dispositif rouvre.{" "}
             <Link href="/aides-digitales-reunion" className="text-[#ffa800] hover:underline">
               En savoir plus →
             </Link>

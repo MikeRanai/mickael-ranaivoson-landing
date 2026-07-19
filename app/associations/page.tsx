@@ -123,7 +123,7 @@ const faqs = [
   {
     question: "Notre association a-t-elle droit à une aide pour financer ça ?",
     answer:
-      "Cela dépend de votre situation : le dispositif régional Kap Numérik vise les TPE réunionnaises, et l'éligibilité d'une association dépend notamment de son activité économique et de son immatriculation. Le dispositif est par ailleurs en cours de renouvellement par la Région. Je regarde votre cas avec vous avant tout devis, et je vous le dis franchement si vous n'êtes pas éligible — plutôt que de vous faire espérer une aide qui ne viendra pas.",
+      "Soyons clairs : le dispositif régional Kap Numérik est actuellement arrêté et n'a pas été renouvelé à ce jour. Il ne faut donc pas compter dessus pour financer un projet maintenant. S'il rouvre, il vise les TPE réunionnaises et l'éligibilité d'une association dépend notamment de son activité économique et de son immatriculation — je regarderai votre cas avec vous à ce moment-là. En attendant, le budget se construit sans aide, et je préfère vous le dire avant le devis plutôt qu'après.",
   },
   {
     question: "En combien de temps le site est-il en ligne ?",

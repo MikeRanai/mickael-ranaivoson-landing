@@ -30,7 +30,32 @@
       "Bash(curl -sv http://localhost:3000/blog/non-existant)",
       "Bash(curl -s -o /dev/null -w \"GET /blog/non-existant retry : %{http_code}\\\\n\" http://localhost:3000/blog/non-existant)",
       "Bash(curl -s http://localhost:3000/blog/non-existant)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(git push *)",
+      "Bash(npx kill-port *)",
+      "Bash(curl -s -o /dev/null -w \"/ : %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"/blog : %{http_code}\\\\n\" http://localhost:3000/blog)",
+      "Bash(curl -s -o /dev/null -w \"/login : %{http_code}\\\\n\" http://localhost:3000/login)",
+      "Bash(curl -s -o /dev/null -w \"/dashboard/blog \\(anon\\) : %{http_code}\\\\n\" http://localhost:3000/dashboard/blog)",
+      "Bash(curl -s -o /dev/null -w \"/blog/xyz \\(404\\) : %{http_code}\\\\n\" http://localhost:3000/blog/xyz)",
+      "Bash(npx eslint *)",
+      "Bash(curl -sS -A \"facebookexternalhit/1.1\" -o /dev/null -w \"HTTP %{http_code}\\\\nServer: %{header_json}\" -I \"https://www.mickaelranaivoson.fr/blog/ia-a-t-elle-tue-le-graphiste-en-2026-le-vrai-cout-dune-identite-visuelle\")",
+      "Bash(curl *)",
+      "Read(//tmp/**)",
+      "Bash(identify app/opengraph-image.png)",
+      "WebFetch(domain:www.mickaelranaivoson.fr)",
+      "Bash(xxd /tmp/og-test.png)",
+      "Bash(xxd /tmp/blog-og.png)",
+      "mcp__Neon__list_projects",
+      "mcp__Neon__run_sql",
+      "mcp__Neon__list_organizations",
+      "Bash(psql --version)",
+      "Bash(npm i *)",
+      "mcp__ide__getDiagnostics",
+      "Bash(grep -oiE \"fill=\\\\\"[^\\\\\"]*\\\\\"|#[0-9a-f]{3,6}\" public/images/mr-logo.svg)",
+      "Bash(grep -oiE \"fill=\\\\\"[^\\\\\"]*\\\\\"|#[0-9a-f]{3,6}\" public/images/mr-logo-blanc.svg)",
+      "Bash(grep -rniE 'queryRaw|executeRaw|\\\\$queryRawUnsafe' actions lib app)",
+      "Read(//c/Users/miker/Desktop/Projets/siteweb/**)"
     ]
   }
 }

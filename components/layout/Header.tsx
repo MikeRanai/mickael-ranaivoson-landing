@@ -21,6 +21,7 @@ const navLinks = [
   { href: "/#realisations", label: "Mes projets" },
   { href: "/#apropos", label: "Qui suis-je" },
   { href: "/#tarifs", label: "Tarifs" },
+  { href: "/associations", label: "Associations" },
   { href: "/blog", label: "Blog" },
 ];
 

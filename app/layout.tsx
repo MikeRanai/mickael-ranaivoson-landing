@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   
   description:
-    "Développeur web freelance à La Réunion (974). Je crée des sites internet rapides et des outils d'automatisation sur-mesure pour artisans, TPE et associations. Gagnez du temps. Accompagnement aide Kap Numérik (réouverture 2026).",
+    "Développeur web freelance à La Réunion (974). Je crée des sites internet rapides et des outils d'automatisation sur-mesure pour artisans, TPE et associations. Gagnez du temps. Accompagnement aides numériques régionales.",
 
   openGraph: {
     title: SITE_CONFIG.title,
