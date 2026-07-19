@@ -2,6 +2,23 @@
 
 This document summarizes the development session and establishes key rules for future implementations to ensure consistency and quality.
 
+## Session Summary (Jul 19, 2026)
+
+Verdict PSI mobile lrh.re + diagnostic du plafond : erreur d'hydratation React #418 en prod.
+
+### Verdict score mobile (chantier ISR d'hier) — TRANCHÉ : pas de claim mobile
+- 2 runs PSI mobile (pagespeed.web.dev, l'API keyless est toujours en 429) : **73 puis 75** — stables, cohérents avec les 73 d'hier. Le 99 (LCP 2,0 s) d'hier soir était l'exception, pas la règle. Décision appliquée : l'étude de cas LRH et le bullet home restent SANS claim mobile (ils sont déjà honnêtes, rien à changer en base). A11y 100 / SEO 100 confirmés (le fix noindex est bien pris en compte par PSI) ; **BP 96** (était 100) à cause d'une erreur console — voir ci-dessous.
+- Anatomie du 73 : FCP 1,8 s, LCP 6,0 s, TBT 100 ms, CLS 0. Répartition LCP (élément = `div.lrh-hero-bg`) : TTFB 10 ms, image dispo à ~250 ms (le preload d'hier fonctionne), puis **« délai d'affichage de l'élément » 1,1–2,1 s observé** (×4 en CPU mobile simulé → LCP 5-6 s). L'image n'est plus le problème ; c'est le re-paint du héro après le bootup JS.
+
+### Cause identifiée : React #418 (hydration mismatch) sur www.lrh.re, / ET /m, à chaque chargement
+- Vu dans le rapport PSI (audit « erreurs console », d'où le BP 96) et reproduit dans Chrome sur la prod. Conséquence React 19 : l'arbre ENTIER est régénéré côté client → le héro repeint après l'hydratation → le « délai d'affichage » ci-dessus. Un seul bug = le plafond perf mobile + le BP 96.
+- **Le nœud fautif en prod n'est pas encore identifié** (erreur minifiée). Éliminés par sondes directes sur la prod : dates du Match Choc (SSR « SAM 30 17:00 » = client, TZ épinglée Indian/Reunion OK), WeatherBadge / SponsorsBar / CookieConsent (tous en useEffect, légitimes), useIsMobile (ssrIsMobile OK). Le DOM final prod est correct (le re-rendu retombe sur les bonnes valeurs) — le mismatch est transitoire, à l'hydratation seulement.
+- **Build prod local (`next build` + `next start`, même code, même DB) : AUCUN #418** (2 chargements propres). Le facteur déclencheur est donc lié à l'environnement Vercel (SSR UTC/en-US vs client, ICU, ou entrée ISR STALE), pas au code seul → intestable en local tel quel.
+- **Piège rencontré en dev local (à connaître)** : `next dev` affiche un mismatch verbose sur le temps de lecture des NewsCard (« 01 » client vs « 03 » serveur) MÊME après purge de `.next`. Sondes contradictoires (payload RSC = [3,3,1] correct, props des fibers = 3, DOM = 01 partout, logs client muets) → ressemble à un artefact de désérialisation RSC/Turbopack en dev (Next 16.2.6), PAS forcément le nœud de la prod. Ne pas s'y fier aveuglément.
+- **Prochaine étape (2 pistes, dans l'ordre)** : ① regarder le projet Sentry de lrh.re — les événements #418 y sont probablement capturés avec componentStack (les SDK récents joignent même le diff d'hydratation) = diagnostic sans redéploiement ; ② sinon, logger `onRecoverableError` (componentStack) via `instrumentation-client.ts`, redéployer, lire le stack. Ensuite corriger le nœud, vérifier la disparition du #418 en prod, ré-mesurer PSI mobile (espérer 90+), et SEULEMENT alors ajouter le claim mobile (SQL ré-exécutable + redeploy).
+- Reste aussi (mineur) : canonical non-www vs www à harmoniser un jour ; ~164 KiB JS inutilisé si on vise plus haut après le fix.
+- **Témoignages toujours à 0** — plus gros levier restant côté landing.
+
 ## Session Summary (Jul 18, 2026)
 
 Études de cas des 4 sites restants, méthode HCO (claims vérifiés uniquement) — SQL `scripts/sql/2026-07-18-etudes-de-cas.sql` à exécuter via `!` puis redeploy.
