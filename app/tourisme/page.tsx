@@ -112,7 +112,7 @@ const faqs = [
   {
     question: "Mon gîte est-il éligible à une aide régionale ?",
     answer:
-      "Les TPE réunionnaises (dont les hébergements touristiques) sont éligibles au dispositif Kap Numérik quand il est actif — jusqu'à 3 200 € remboursés. Le dispositif est actuellement en pause ; vous pouvez vous inscrire sur la liste d'attente pour être prévenu dès la réouverture.",
+      "Les TPE réunionnaises, dont les hébergements touristiques, sont éligibles au dispositif Kap Numérik quand il est actif. Deux précisions importantes : le dépôt de nouvelles demandes est actuellement suspendu, la Région ayant mis le dispositif à jour sans annoncer de date de réouverture ; et le plafond de 3 200 € est un maximum cumulé, la création d'un site vitrine étant plafonnée à 1 200 €. Vous pouvez vous inscrire sur la liste d'alerte pour être prévenu dès le lancement de la nouvelle version.",
   },
   {
     question: "En combien de temps le site est-il en ligne ?",
@@ -533,10 +533,10 @@ export default function TourismePage() {
             <div>
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Landmark className="w-5 h-5 text-[#ffa800]" />
-                <span className="text-3xl md:text-4xl font-bold text-white">3 200 €</span>
+                <span className="text-3xl md:text-4xl font-bold text-white">1 200 €</span>
               </div>
               <div className="text-sm text-slate-400">
-                d&apos;aide Kap Numérik possible dès la réouverture —{" "}
+                d&apos;aide Kap Numérik sur un site vitrine, dès la nouvelle version —{" "}
                 <Link href="/aides-digitales-reunion" className="text-[#ffa800] hover:underline">
                   en savoir plus
                 </Link>

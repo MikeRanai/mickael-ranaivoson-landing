@@ -108,9 +108,11 @@ export function Hero() {
           <li className="hidden sm:block w-px h-4 bg-white/10" aria-hidden />
           <li className="inline-flex items-center gap-2">
             <BadgeCheck className="w-4 h-4 text-[#ffa800]" aria-hidden />
-            Kap Numérik : jusqu&apos;à 3&nbsp;200&nbsp;€ d&apos;aides
+            {/* Le dispositif est suspendu (cf. lib/kap-numerik.ts) : on ne
+                promet plus de montant en héro. */}
+            Accompagnement aides régionales
             {/* Mobile : tronqué pour tenir sur une ligne, le sens reste entier */}
-            <span className="hidden sm:inline">&nbsp;à la réouverture</span>
+            <span className="hidden sm:inline">&nbsp;(Kap Numérik)</span>
           </li>
         </motion.ul>
       </div>

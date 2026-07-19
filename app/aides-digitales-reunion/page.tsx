@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { KAP_NUMERIK } from "@/lib/kap-numerik";
 
 // ---------------------------------------------------------------------------
 // Animations
@@ -138,12 +139,17 @@ const faqs = [
   {
     question: "Qu'est-ce que le Kap Numérik exactement ?",
     answer:
-      "Le Kap Numérik est un dispositif d'aide de la Région Réunion qui rembourse jusqu'à 80% des dépenses liées à la transformation digitale des TPE (site web, e-commerce, appli mobile, etc.), dans la limite de 3 200 € par entreprise.",
+      "Le Kap Numérik est un dispositif de la Région Réunion, cofinancé par l'Union Européenne dans le cadre du programme FEDER 2021-2027. Il rembourse jusqu'à 80% des dépenses HT liées à la transformation digitale des petites structures réunionnaises, dans la limite de 3 200 € au total. Attention : ce plafond global se décompose en plafonds par action — 1 200 € pour un site vitrine, 2 000 € pour un site marchand ou une application mobile, par exemple.",
   },
   {
     question: "Le dispositif est-il encore actif en ce moment ?",
     answer:
-      "Le dispositif Kap Numérik initial couvrait la période 2021-2023. Nous sommes actuellement en attente d'une confirmation officielle de la Région Réunion concernant son renouvellement. C'est pourquoi nous vous proposons de vous inscrire sur notre liste d'attente pour être prévenu dès la réouverture.",
+      "Non, pas pour de nouvelles demandes. La Région indique que le dispositif est en cours de mise à jour et que le dépôt de nouvelles demandes est temporairement suspendu jusqu'au lancement de la nouvelle version. Les dossiers déposés avant le 31 décembre 2025 continuent d'être instruits. Aucune date de réouverture n'a été communiquée à ce jour — je préfère vous le dire clairement plutôt que de vous laisser bâtir un budget dessus. Inscrivez-vous sur la liste d'alerte pour être prévenu dès le lancement de la nouvelle version.",
+  },
+  {
+    question: "Une association peut-elle en bénéficier ?",
+    answer:
+      "Oui. Les associations de moins de 10 salariés domiciliées à La Réunion font explicitement partie des bénéficiaires du dispositif. Le dossier demande quelques pièces spécifiques : statuts à jour, récépissé de déclaration en préfecture ou publication au Journal Officiel, délibération du conseil d'administration en faveur du projet numérique, liste des membres du CA et bilans des deux derniers exercices clos.",
   },
   {
     question: "Combien vais-je payer de ma poche pour un site web ?",
@@ -158,7 +164,7 @@ const faqs = [
   {
     question: "Mon entreprise est dans le numérique, suis-je éligible ?",
     answer:
-      "Malheureusement non. Les entreprises des secteurs du numérique, de l'agriculture et de la pêche sont exclues du dispositif Kap Numérik.",
+      "Malheureusement non. Sont exclus du dispositif les secteurs du numérique, de l'agriculture, de la pêche, de la promotion immobilière et des activités financières.",
   },
   {
     question: "Quel est le rôle de votre agence dans ce processus ?",
@@ -266,9 +272,13 @@ export default function AidesDigitalesPage() {
 
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
               Le dispositif <strong className="text-white">Kap Numérik</strong>{" "}
-              de la Région Réunion permet aux TPE de se faire rembourser
-              jusqu&apos;à <strong className="text-emerald-400">3 200 €</strong>{" "}
-              sur leurs dépenses de transformation digitale.
+              de la Région Réunion permet aux TPE et associations réunionnaises
+              de se faire rembourser jusqu&apos;à{" "}
+              <strong className="text-emerald-400">3 200 €</strong> sur leurs
+              dépenses de transformation digitale — plafonds fixés par action.{" "}
+              <strong className="text-amber-400">
+                Le dépôt de nouvelles demandes est suspendu à ce jour.
+              </strong>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -309,14 +319,24 @@ export default function AidesDigitalesPage() {
             <AlertTriangle className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
             <div>
               <p className="text-white font-medium text-sm mb-1">
-                Dispositif en attente de renouvellement
+                Dépôt de nouvelles demandes suspendu
               </p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Le Kap Numérik couvrait initialement la période 2021-2023.
-                Nous attendons la confirmation officielle de la Région Réunion
-                pour le renouvellement de cette aide. Inscrivez-vous sur notre
-                liste d&apos;attente pour être prévenu en priorité dès sa
-                réactivation.
+                La Région Réunion indique que le dispositif est en cours de
+                mise à jour et que le dépôt de nouvelles demandes est
+                temporairement suspendu jusqu&apos;au lancement de la nouvelle
+                version ; les dossiers déposés avant le 31 décembre 2025
+                continuent d&apos;être instruits. Aucune date de réouverture
+                n&apos;a été communiquée. Inscrivez-vous sur la liste
+                d&apos;alerte pour être prévenu en priorité.{" "}
+                <a
+                  href={KAP_NUMERIK.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-400 hover:underline"
+                >
+                  Source : Région Réunion
+                </a>
               </p>
             </div>
           </motion.div>
@@ -548,12 +568,12 @@ export default function AidesDigitalesPage() {
             className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl border border-emerald-500/20 p-8 md:p-12"
           >
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Soyez prêt dès la réouverture
+              Soyez prêt dès la nouvelle version
             </h2>
             <p className="text-slate-400 mb-8 max-w-xl mx-auto">
               Inscrivez-vous pour être prévenu en priorité dès que la Région
-              Réunion confirmera le renouvellement du Kap Numérik. Je
-              préparerai votre dossier en amont pour un dépôt immédiat.
+              Réunion lancera la nouvelle version du Kap Numérik. Je préparerai
+              votre dossier en amont pour un dépôt immédiat.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

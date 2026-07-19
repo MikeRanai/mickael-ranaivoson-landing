@@ -167,8 +167,9 @@ export function Pricing() {
         {/* Note de bas de page rassurante */}
         <div className="mt-12 text-center">
           <p className="text-slate-500 text-sm max-w-2xl mx-auto">
-            <span className="text-[#ffa800]">*</span> L&apos;aide régionale Kap Numérik est actuellement suspendue et n&apos;a pas été renouvelée à ce jour.
-            Le pré-dossier offert vous garantit d&apos;être prêt si le dispositif rouvre.{" "}
+            <span className="text-[#ffa800]">*</span> Le dépôt de nouvelles demandes Kap Numérik est temporairement suspendu, le dispositif étant en cours de mise à jour par la Région.
+            Les plafonds sont fixés par action (1&nbsp;200&nbsp;€ pour un site vitrine), dans la limite de 3&nbsp;200&nbsp;€ cumulés.
+            Le pré-dossier offert vous garantit d&apos;être prêt dès le lancement de la nouvelle version.{" "}
             <Link href="/aides-digitales-reunion" className="text-[#ffa800] hover:underline">
               En savoir plus →
             </Link>

@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kap Numérik : Aide Création Site Web à La Réunion",
   description:
-    "Découvrez le dispositif Kap Numérik de la Région Réunion : jusqu'à 3 200€ remboursés pour la création de votre site web, e-commerce ou application mobile. Vérifiez votre éligibilité.",
+    "Le dispositif Kap Numérik de la Région Réunion rembourse jusqu'à 80% de vos dépenses digitales : 1 200€ pour un site vitrine, 2 000€ pour un site marchand, 3 200€ maximum cumulés. Dépôt de nouvelles demandes suspendu à ce jour — conditions d'éligibilité et liste d'alerte.",
   openGraph: {
     title: "Kap Numérik : Financez votre projet digital à La Réunion",
     description:
-      "Aide régionale jusqu'à 3 200€ pour les TPE réunionnaises. Site web, e-commerce, application mobile, stratégie digitale. Vérifiez votre éligibilité.",
+      "Aide régionale pour les TPE et associations réunionnaises : 80% des dépenses HT, jusqu'à 3 200€ cumulés. Dépôt de nouvelles demandes suspendu à ce jour.",
     url: "/aides-digitales-reunion",
     type: "website",
     locale: "fr_FR",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kap Numérik : Aide Création Site Web à La Réunion",
     description:
-      "Jusqu'à 3 200€ remboursés pour votre transformation digitale. Découvrez les conditions d'éligibilité.",
+      "80% de vos dépenses digitales remboursées, jusqu'à 3 200€ cumulés. Dispositif suspendu à ce jour : découvrez les conditions et rejoignez la liste d'alerte.",
   },
   alternates: {
     canonical: "/aides-digitales-reunion",

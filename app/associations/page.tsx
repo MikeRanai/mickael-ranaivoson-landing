@@ -123,7 +123,7 @@ const faqs = [
   {
     question: "Notre association a-t-elle droit à une aide pour financer ça ?",
     answer:
-      "Soyons clairs : le dispositif régional Kap Numérik est actuellement arrêté et n'a pas été renouvelé à ce jour. Il ne faut donc pas compter dessus pour financer un projet maintenant. S'il rouvre, il vise les TPE réunionnaises et l'éligibilité d'une association dépend notamment de son activité économique et de son immatriculation — je regarderai votre cas avec vous à ce moment-là. En attendant, le budget se construit sans aide, et je préfère vous le dire avant le devis plutôt qu'après.",
+      "Sur le principe oui : les associations de moins de 10 salariés domiciliées à La Réunion font explicitement partie des bénéficiaires du Kap Numérik, le dispositif régional cofinancé par l'Europe. Mais soyons clairs sur le calendrier : le dépôt de nouvelles demandes est actuellement suspendu, la Région ayant mis le dispositif à jour sans annoncer de date de réouverture. Ne construisez donc pas votre budget dessus aujourd'hui. À titre indicatif, quand le dispositif est actif, une création de site vitrine est remboursée à 80 % dans la limite de 1 200 € — le plafond de 3 200 € souvent cité correspond à plusieurs prestations cumulées. Je peux vous inscrire sur la liste d'alerte et préparer votre dossier en amont.",
   },
   {
     question: "En combien de temps le site est-il en ligne ?",

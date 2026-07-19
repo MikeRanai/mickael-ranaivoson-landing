@@ -104,9 +104,9 @@ export function KapNumerikLeadMagnet() {
           </h3>
 
           <p className="text-slate-400 text-sm leading-relaxed mb-6">
-            Le dispositif régional (version 2021–2023) est suspendu, en attente
-            de la nouvelle mouture portée par la Région Réunion. Pas
-            d&apos;inquiétude :{" "}
+            Le dépôt de nouvelles demandes est suspendu : la Région Réunion met
+            le dispositif à jour et n&apos;a pas communiqué de date de
+            réouverture. Pas d&apos;inquiétude :{" "}
             <span className="text-white font-medium">
               je veille pour vous
             </span>{" "}
