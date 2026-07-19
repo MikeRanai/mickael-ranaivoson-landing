@@ -113,7 +113,6 @@ export default function Home() {
       />
       <Hero />
       <ClientProof />
-      <TechStack />
       <Solutions />
       <SectionDivider />
       <Realizations />
@@ -121,7 +120,10 @@ export default function Home() {
       {/* Server component — ne s'affiche que si au moins 1 témoignage publié en DB */}
       <Testimonials />
       <SectionDivider />
-      {/* Déplacé après Portfolio + Témoignages : on rassure techniquement APRÈS avoir prouvé le bénéfice */}
+      {/* Bloc de réassurance technique, groupé et placé APRÈS Portfolio + Témoignages :
+          la preuve client passe en premier, la techno (audience dev) ne fait plus
+          écran entre le héro et les réalisations. */}
+      <TechStack />
       <TechBenefits />
       <SectionDivider />
       <About />
