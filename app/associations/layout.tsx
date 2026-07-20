@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Site Internet pour Associations & Clubs Sportifs à La Réunion",
+  title: "Site Internet pour Associations & Clubs à La Réunion",
   description:
-    "Votre club existe, mais personne ne le trouve. Site internet pour associations et clubs sportifs à La Réunion : être visible sur Google, afficher horaires et entraînements, recevoir des demandes d'inscription. À partir de 1 600 € HT.",
+    "Votre association existe, mais personne ne la trouve. Site internet pour associations culturelles, sportives, environnementales et sociales à La Réunion : être visible sur Google, afficher vos activités, recevoir des adhésions. À partir de 1 600 € HT.",
   openGraph: {
-    title: "Votre club existe. Encore faut-il qu'on le trouve.",
+    title: "Votre association existe. Encore faut-il qu'on la trouve.",
     description:
-      "Sites internet pour associations et clubs sportifs à La Réunion. Un club de hockey a reçu 2 demandes d'inscription grâce à des parents qui l'ont trouvé sur Google.",
+      "Sites internet pour associations et clubs à La Réunion : culturelles, sportives, environnementales, sociales. Être trouvé sur Google et recevoir des adhésions.",
     url: "/associations",
     type: "website",
     locale: "fr_FR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Site Internet pour Associations & Clubs Sportifs à La Réunion",
+    title: "Site Internet pour Associations & Clubs à La Réunion",
     description:
-      "Être trouvé sur Google, afficher vos horaires, recevoir des inscriptions. À partir de 1 600 € HT.",
+      "Être trouvé sur Google, afficher vos activités, recevoir des adhésions. À partir de 1 600 € HT.",
   },
   alternates: {
     canonical: "/associations",
@@ -36,7 +36,7 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Associations & Clubs Sportifs",
+      name: "Associations & Clubs",
       item: "https://www.mickaelranaivoson.fr/associations",
     },
   ],

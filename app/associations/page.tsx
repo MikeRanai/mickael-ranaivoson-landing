@@ -7,10 +7,10 @@ import {
   CalendarClock,
   ChevronDown,
   Facebook,
+  Megaphone,
   Quote,
   Search,
   Smartphone,
-  Trophy,
   Users,
   UserPlus,
   Wand2,
@@ -30,13 +30,13 @@ const painPoints = [
     icon: Search,
     titre: "On ne vous trouve pas",
     description:
-      "Un parent tape « club de hockey La Réunion » ou « handball Saint-Paul » sur son téléphone. Si vous n'apparaissez pas, vous n'existez pas — et c'est un adhérent qui va ailleurs.",
+      "Quelqu'un cherche « association randonnée Saint-Denis », « atelier créatif pour enfants » ou « club de handball Saint-Paul » depuis son téléphone. Si vous n'apparaissez pas, vous n'existez pas — et c'est un adhérent qui va ailleurs.",
   },
   {
     icon: Facebook,
     titre: "Une page Facebook n'est pas un site",
     description:
-      "Vos horaires d'entraînement publiés en mars sont introuvables en septembre : ils ont disparu dans le fil. Et Google, lui, indexe très mal ce qui se passe à l'intérieur d'un réseau social.",
+      "L'information publiée en mars est introuvable en septembre : elle a disparu dans le fil. Et Google indexe très mal ce qui se passe à l'intérieur d'un réseau social.",
   },
   {
     icon: Users,
@@ -49,27 +49,27 @@ const painPoints = [
 const features = [
   {
     icon: CalendarClock,
-    titre: "Horaires et lieux d'entraînement",
+    titre: "Vos informations pratiques, à jour",
     description:
-      "Affichés clairement, par catégorie d'âge, à jour. C'est la première chose que cherche un parent — et la plus difficile à trouver aujourd'hui.",
+      "Horaires de permanence, dates d'ateliers, créneaux d'entraînement, lieux : ce que les gens cherchent en premier, affiché clairement plutôt qu'à demander par téléphone.",
   },
   {
     icon: Search,
     titre: "Visible sur Google",
     description:
-      "Être trouvé sur les recherches de votre discipline et de votre commune, plutôt que d'espérer que le bouche-à-oreille suffise.",
+      "Être trouvé sur les recherches liées à votre activité et à votre commune, plutôt que d'espérer que le bouche-à-oreille suffise.",
   },
   {
     icon: UserPlus,
-    titre: "Demandes d'inscription",
+    titre: "Adhésions et demandes de contact",
     description:
-      "Un formulaire simple qui arrive dans votre boîte mail, au lieu d'un numéro de téléphone que personne ne compose.",
+      "Un formulaire simple qui arrive dans votre boîte mail — inscription, bénévolat, partenariat — au lieu d'un numéro que personne ne compose.",
   },
   {
-    icon: Trophy,
-    titre: "Actualités, résultats, classements",
+    icon: Megaphone,
+    titre: "La vie de l'association",
     description:
-      "Vos matchs, vos résultats et la vie du club, sur une page qui vous appartient et que vous mettez à jour vous-même.",
+      "Événements, comptes rendus, galeries, résultats sportifs si vous êtes un club : sur une page qui vous appartient et que vous mettez à jour vous-même.",
   },
   {
     icon: Smartphone,
@@ -81,12 +81,22 @@ const features = [
     icon: Wand2,
     titre: "Autonome après la livraison",
     description:
-      "Une interface d'administration pensée pour des bénévoles, pas pour des développeurs. Vous ne me rappelez pas pour changer un horaire.",
+      "Une interface d'administration pensée pour des bénévoles, pas pour des développeurs. Vous ne me rappelez pas pour changer une date.",
   },
 ];
 
 // Références réelles, toutes publiées et vérifiables sur le site.
 const references = [
+  {
+    nom: "NoutAsso",
+    detail: "Plateforme de gestion associative · La Réunion",
+    slug: "noutasso",
+  },
+  {
+    nom: "Association Culture Afro",
+    detail: "Association culturelle · La Réunion",
+    slug: "association-culture-afro",
+  },
   {
     nom: "Hockey Club de l'Ouest",
     detail: "Club sportif · Saint-Paul",
@@ -94,31 +104,31 @@ const references = [
   },
   {
     nom: "Ligue Réunionnaise de Hockey",
-    detail: "Ligue sportive · La Réunion",
+    detail: "Fédération sportive · La Réunion",
     slug: "ligue-reunionnaise-de-hockey",
-  },
-  {
-    nom: "Association Culture Afro",
-    detail: "Association culturelle · La Réunion",
-    slug: "association-culture-afro",
   },
 ];
 
 const faqs = [
   {
+    question: "Nous ne sommes pas un club sportif. Est-ce que ça vaut aussi pour nous ?",
+    answer:
+      "Oui. Culturelle, environnementale, sociale, de loisirs, sportive : le besoin de fond est le même — être trouvée, expliquer ce qu'on fait, recevoir des adhésions sans y passer ses soirées. Seul le contenu change : là où un club affiche ses créneaux d'entraînement, une association d'ateliers affiche son calendrier, et une association d'action sociale ses permanences et ses appels à bénévoles. Je construis la structure autour de votre fonctionnement réel, pas l'inverse.",
+  },
+  {
     question: "On a déjà une page Facebook. Pourquoi un site en plus ?",
     answer:
-      "Facebook est très bien pour animer une communauté déjà acquise. Mais il est mauvais pour être découvert : un parent qui cherche « club de hockey La Réunion » sur Google tombe rarement sur une publication Facebook, et vos horaires d'entraînement se perdent dans le fil au bout de quelques semaines. Le site répond à la question « qui sont-ils et comment je m'inscris ? » ; Facebook entretient le lien avec ceux qui vous connaissent déjà. Les deux se complètent.",
+      "Facebook est très bien pour animer une communauté déjà acquise. Mais il est mauvais pour être découvert : quelqu'un qui cherche votre activité sur Google tombe rarement sur une publication Facebook, et vos informations pratiques se perdent dans le fil au bout de quelques semaines. Le site répond à la question « qui sont-ils et comment je les rejoins ? » ; Facebook entretient le lien avec ceux qui vous connaissent déjà. Les deux se complètent.",
   },
   {
     question: "Combien coûte un site pour une association ?",
     answer:
-      "À partir de 1 600 € HT pour un site vitrine complet : présentation du club, page école avec horaires et catégories, actualités, formulaire de contact et d'inscription, référencement local. À partir de 3 200 € HT si vous avez besoin de fonctionnalités de gestion (espace adhérents, résultats et classements automatisés, automatisations). C'est un coût unique, pas un abonnement.",
+      "À partir de 1 600 € HT pour un site vitrine complet : présentation de l'association et de ses actions, page dédiée à vos activités avec dates et lieux, actualités, formulaire de contact et d'adhésion, référencement local. À partir de 3 200 € HT si vous avez besoin de fonctionnalités de gestion (espace adhérents, agenda, automatisations, résultats et classements pour un club). C'est un coût unique, pas un abonnement.",
   },
   {
     question: "Qui met à jour le site après la livraison ?",
     answer:
-      "Vous. C'est un point sur lequel je ne transige pas : une association ne doit pas dépendre d'un prestataire pour changer un horaire d'entraînement ou publier un résultat. Chaque site est livré avec une interface d'administration simple, et je forme la ou les personnes du bureau qui s'en occuperont.",
+      "Vous. C'est un point sur lequel je ne transige pas : une association ne doit pas dépendre d'un prestataire pour annoncer un événement ou changer une date. Chaque site est livré avec une interface d'administration simple, et je forme la ou les personnes du bureau qui s'en occuperont.",
   },
   {
     question: "Notre association a-t-elle droit à une aide pour financer ça ?",
@@ -128,7 +138,7 @@ const faqs = [
   {
     question: "En combien de temps le site est-il en ligne ?",
     answer:
-      "Comptez 3 à 5 semaines entre le premier échange et la mise en ligne. Le facteur limitant n'est presque jamais le développement : c'est le temps qu'il vous faut pour rassembler vos contenus (photos, textes, horaires à jour). Je vous envoie une liste claire de ce dont j'ai besoin dès le départ.",
+      "Comptez 3 à 5 semaines entre le premier échange et la mise en ligne. Le facteur limitant n'est presque jamais le développement : c'est le temps qu'il vous faut pour rassembler vos contenus (photos, textes, dates et horaires à jour). Je vous envoie une liste claire de ce dont j'ai besoin dès le départ.",
   },
   {
     question: "Peut-on gérer les adhésions et encaisser les cotisations en ligne ?",
@@ -208,18 +218,19 @@ export default function AssociationsPage() {
             className="text-center space-y-6"
           >
             <span className="inline-flex items-center gap-2 bg-[#ffa800]/10 text-[#ffa800] text-sm font-medium px-4 py-2 rounded-full border border-[#ffa800]/20">
-              <Trophy className="w-4 h-4" />
-              Associations &amp; clubs sportifs · La Réunion
+              <Users className="w-4 h-4" />
+              Associations &amp; clubs · La Réunion
             </span>
 
             <h1 className="font-oswald text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.05]">
-              Votre club existe.{" "}
-              <span className="text-[#ffa800]">Encore faut-il qu&apos;on le trouve.</span>
+              Votre association existe.{" "}
+              <span className="text-[#ffa800]">Encore faut-il qu&apos;on la trouve.</span>
             </h1>
 
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
-              Chaque semaine, des parents cherchent une activité pour leurs enfants sur
-              Google. S&apos;ils ne tombent pas sur vous,{" "}
+              Culturelle, sportive, environnementale ou sociale : chaque semaine, des
+              gens cherchent sur Google exactement ce que vous proposez. S&apos;ils ne
+              tombent pas sur vous,{" "}
               <strong className="text-white">ils tombent sur quelqu&apos;un d&apos;autre</strong>.
             </p>
 
@@ -237,7 +248,7 @@ export default function AssociationsPage() {
                   hover:bg-[#ffb92e] transition-all duration-300
                   shadow-[0_0_25px_-5px_rgba(255,168,0,0.4)]"
               >
-                Parler de notre club
+                Parler de notre association
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
@@ -290,6 +301,13 @@ export default function AssociationsPage() {
               place. »
             </blockquote>
 
+            <p className="text-slate-500 text-sm leading-relaxed mb-6">
+              C&apos;est ici un club sportif, mais le mécanisme ne lui appartient pas :
+              une page claire, trouvable sur Google, qui répond aux questions qu&apos;on
+              vous pose au téléphone. Un atelier, une école de musique ou une association
+              d&apos;entraide obtiennent le même effet avec un contenu différent.
+            </p>
+
             <footer className="border-t border-white/5 pt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
               <div className="flex-1 min-w-0">
                 <p className="text-white font-semibold text-sm">Fabien Paulo</p>
@@ -324,7 +342,7 @@ export default function AssociationsPage() {
           <div className="mb-12">
             <SectionHeader
               label="Ce qui bloque"
-              title="Le problème n'est pas votre club,"
+              title="Le problème n'est pas votre association,"
               highlight="c'est sa visibilité."
               subtitle="Trois constats que je retrouve dans presque toutes les associations réunionnaises."
             />
@@ -362,7 +380,7 @@ export default function AssociationsPage() {
               title="Un site pensé pour"
               highlight="une association."
               highlightColor="gold"
-              subtitle="Pas une vitrine d'entreprise repeinte aux couleurs du club."
+              subtitle="Pas une vitrine d'entreprise repeinte aux couleurs de l'association."
             />
           </div>
 
@@ -395,13 +413,13 @@ export default function AssociationsPage() {
           <div className="mb-12">
             <SectionHeader
               label="Déjà accompagnés"
-              title="Des clubs et associations"
-              highlight="d'ici."
-              subtitle="Chaque projet est documenté, avec ce qui a été fait et ce que ça a changé."
+              title="Des associations d'ici,"
+              highlight="de tous horizons."
+              subtitle="Culturelle, sportive, plateforme mutualisée : chaque projet est documenté, avec ce qui a été fait et ce que ça a changé."
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {references.map((ref) => (
               <Link
                 key={ref.slug}
@@ -458,8 +476,8 @@ export default function AssociationsPage() {
         <TopoBackground variant="d" />
         <div className="max-w-3xl mx-auto relative z-10 text-center space-y-6">
           <h2 className="font-oswald text-3xl md:text-4xl font-bold text-white leading-tight">
-            Parlons de votre club{" "}
-            <span className="text-[#ffa800]">avant la prochaine saison.</span>
+            Parlons de votre association{" "}
+            <span className="text-[#ffa800]">avant votre prochaine saison.</span>
           </h2>
           <p className="text-slate-400 text-lg">
             Un échange de trente minutes, sans engagement, pour savoir si un site
