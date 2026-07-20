@@ -1,9 +1,18 @@
 import { ImageResponse } from "next/og";
+import sharp from "sharp";
 import { getPostBySlug } from "@/actions/blog-public.actions";
 
 export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
+// Le type déclaré ici devient `og:image:type`. Il doit correspondre à ce que la
+// route renvoie réellement, sinon les scrapers stricts (LinkedIn) refusent
+// l'image — la route sert `X-Content-Type-Options: nosniff`, donc ils ne
+// peuvent pas deviner le vrai type. On reste en JPEG : les covers sont des
+// photos, où le PNG pèse ~7× plus lourd. Le fallback est converti plus bas.
 export const contentType = "image/jpeg";
+
+const CACHE_HEADER =
+  "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800";
 
 function ogCoverUrl(url: string): string {
   if (!url.includes("res.cloudinary.com") || !url.includes("/upload/")) return url;
@@ -25,20 +34,26 @@ export default async function OgImage({
     const upstream = await fetch(ogCoverUrl(post.coverImage), {
       cache: "force-cache",
     });
-    if (upstream.ok && upstream.body) {
+    // On ne relaie que du JPEG : une cover non-Cloudinary passe par `fetch`
+    // sans transformation et pourrait renvoyer du PNG ou du WebP, ce qui
+    // contredirait le type déclaré. Dans ce cas on préfère le fallback.
+    if (
+      upstream.ok &&
+      upstream.body &&
+      upstream.headers.get("Content-Type")?.startsWith("image/jpeg")
+    ) {
       return new Response(upstream.body, {
         status: 200,
         headers: {
-          "Content-Type": upstream.headers.get("Content-Type") ?? "image/jpeg",
-          "Cache-Control":
-            "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+          "Content-Type": "image/jpeg",
+          "Cache-Control": CACHE_HEADER,
         },
       });
     }
   }
 
   const title = post?.title ?? "Blog";
-  return new ImageResponse(
+  const fallback = new ImageResponse(
     (
       <div
         style={{
@@ -104,4 +119,19 @@ export default async function OgImage({
     ),
     size
   );
+
+  // `ImageResponse` ne sait produire que du PNG : on convertit pour honorer le
+  // `contentType` déclaré. Si sharp échoue, on renvoie le PNG tel quel — une
+  // image au type imprécis reste préférable à une 500.
+  try {
+    const jpeg = await sharp(Buffer.from(await fallback.arrayBuffer()))
+      .jpeg({ quality: 88 })
+      .toBuffer();
+    return new Response(new Uint8Array(jpeg), {
+      status: 200,
+      headers: { "Content-Type": "image/jpeg", "Cache-Control": CACHE_HEADER },
+    });
+  } catch {
+    return fallback;
+  }
 }
