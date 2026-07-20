@@ -3,14 +3,34 @@ import { getProjectBySlug } from "@/actions/project.actions";
 
 export const runtime = "nodejs";
 export const size = { width: 1200, height: 630 };
-export const contentType = "image/jpeg";
+// PNG et non JPEG : le fallback `ImageResponse` ci-dessous ne sait produire que
+// du PNG. Déclarer "image/jpeg" ici faisait émettre `og:image:type=image/jpeg`
+// sur une réponse `image/png`, et les scrapers stricts (LinkedIn) refusaient
+// l'image — d'autant que la route renvoie `X-Content-Type-Options: nosniff`.
+// Toutes les branches doivent donc servir du PNG.
+export const contentType = "image/png";
 
-function ogCoverUrl(url: string): string {
-  if (!url.includes("res.cloudinary.com") || !url.includes("/upload/")) return url;
-  return url.replace(
-    "/upload/",
-    "/upload/f_jpg,q_auto:good,w_1200,h_630,c_fill,g_auto/"
-  );
+const BASE_URL = "https://www.mickaelranaivoson.fr";
+const CACHE_HEADER =
+  "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800";
+
+/**
+ * Résout la cover en une URL absolue servant du PNG, ou null si on ne peut pas
+ * le garantir (cover absente, ou format local non-PNG comme .webp que Facebook
+ * ne sait de toute façon pas afficher).
+ */
+function ogCoverUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (url.includes("res.cloudinary.com") && url.includes("/upload/")) {
+    return url.replace(
+      "/upload/",
+      "/upload/f_png,q_auto:good,w_1200,h_630,c_fill,g_auto/"
+    );
+  }
+  if (url.startsWith("/") && url.toLowerCase().endsWith(".png")) {
+    return `${BASE_URL}${url}`;
+  }
+  return null;
 }
 
 export default async function OgImage({
@@ -21,19 +41,20 @@ export default async function OgImage({
   const { slug } = await params;
   const project = await getProjectBySlug(slug);
 
-  // Une cover Cloudinary → on la proxifie aux dimensions OG. Les chemins locaux
-  // (/images/…) ne sont pas proxifiables ici → on retombe sur l'image brandée.
-  if (project?.imageUrl?.includes("res.cloudinary.com")) {
-    const upstream = await fetch(ogCoverUrl(project.imageUrl), {
-      cache: "force-cache",
-    });
-    if (upstream.ok && upstream.body) {
+  const coverUrl = ogCoverUrl(project?.imageUrl);
+  if (coverUrl) {
+    const upstream = await fetch(coverUrl, { cache: "force-cache" });
+    // On ne relaie que si l'amont confirme du PNG, sinon le type déclaré ment.
+    if (
+      upstream.ok &&
+      upstream.body &&
+      upstream.headers.get("Content-Type")?.startsWith("image/png")
+    ) {
       return new Response(upstream.body, {
         status: 200,
         headers: {
-          "Content-Type": upstream.headers.get("Content-Type") ?? "image/jpeg",
-          "Cache-Control":
-            "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+          "Content-Type": "image/png",
+          "Cache-Control": CACHE_HEADER,
         },
       });
     }
@@ -104,6 +125,8 @@ export default async function OgImage({
         </div>
       </div>
     ),
-    size
+    // Sans ces headers la route repart en `max-age=0, must-revalidate` : chaque
+    // scrape régénère l'image (1 à 3 s), au risque du timeout côté scraper.
+    { ...size, headers: { "Cache-Control": CACHE_HEADER } }
   );
 }
